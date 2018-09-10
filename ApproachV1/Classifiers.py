@@ -9,9 +9,9 @@ from sklearn.model_selection import train_test_split
 """Performing Feature Engineering"""
 print("Training the classifier, please wait ...")
 print("\n")
-filePath = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/kaggle_data/'
-file = open(filePath + 'training_data_2_csv_UTF.csv', mode='r', encoding='utf-8', errors='ignore')
-training_data = pd.read_csv(file)
+filePath = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data/' \
+           'training_data_2_csv_UTF.csv'
+training_data = pd.read_csv(filePath, encoding='utf-8')
 
 bag_of_words_bot = r'bot|b0t|cannabis|tweet me|mishear|follow me|updates every|gorilla|yes_ofc|forget' \
                    r'expos|kill|clit|bbb|butt|fuck|XXX|sex|truthe|fake|anony|free|virus|funky|RNA|kuck|jargon' \
@@ -23,6 +23,7 @@ training_data['name_binary'] = training_data.name.str.contains(bag_of_words_bot,
 training_data['description_binary'] = training_data.description.str.contains(bag_of_words_bot, case=False, na=False)
 training_data['status_binary'] = training_data.status.str.contains(bag_of_words_bot, case=False, na=False)
 
+"""Extracting Features"""
 training_data['listed_count_binary'] = (training_data.listed_count > 20000) == False
 features = ['screen_name_binary', 'name_binary', 'description_binary', 'status_binary', 'verified', 'followers_count',
             'friends_count', 'statuses_count', 'listed_count_binary', 'bot']

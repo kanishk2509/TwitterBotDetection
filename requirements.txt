@@ -1,3 +1,7 @@
 pandas
 sklearn
 scipy
+numpy
+matplotlib
+seaborn
+requests
