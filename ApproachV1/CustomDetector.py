@@ -44,7 +44,8 @@ class TwitterBot(object):
         if train_df.shape[0] > 600:
             # bag_of_words_for_bot
             bag_of_words_bot = r'bot|b0t|cannabis|tweet me|mishear|follow me|updates every|gorilla|yes_ofc|forget' \
-                               r'expos|kill|clit|bbb|butt|fuck|XXX|sex|truthe|fake|anony|free|virus|funky|RNA|kuck|jargon' \
+                               r'expos|kill|clit|bbb|butt|fuck|XXX|sex|truthe|fake|anony|free|virus|funky|RNA|kuck' \
+                               r'|jargon' \
                                r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|dunia|clone|genie|bbb' \
                                r'ffd|onlyman|emoji|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
         else:
@@ -111,7 +112,7 @@ class TwitterBot(object):
 
     def get_predicted_and_true_values(features, target):
         y_pred, y_true = TwitterBot.bot_prediction_algorithm(features).bot.tolist(), target.tolist()
-        return (y_pred, y_true)
+        return y_pred, y_true
 
     def get_accuracy_score(df):
         (X_train, y_train, X_test, y_test) = TwitterBot.perform_train_test_split(df)
