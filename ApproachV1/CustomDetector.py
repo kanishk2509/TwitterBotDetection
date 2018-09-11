@@ -34,13 +34,13 @@ class TwitterBot(object):
     def bot_prediction_algorithm(df):
         # creating copy of dataframe
         train_df = df.copy()
-        # performing feature engineering on id and verfied columns
+        # performing feature engineering on id and verified columns
         # converting id to int
         train_df['id'] = train_df.id.apply(lambda x: int(x))
         # train_df['friends_count'] = train_df.friends_count.apply(lambda x: int(x))
         train_df['followers_count'] = train_df.followers_count.apply(lambda x: 0 if x == 'None' else int(x))
         train_df['friends_count'] = train_df.friends_count.apply(lambda x: 0 if x == 'None' else int(x))
-        # We created two bag of words because more bow is stringent on test data, so on all small dataset we check less
+        # We created two bag of words because more bow is stringent on test data, so on all small data-set we check less
         if train_df.shape[0] > 600:
             # bag_of_words_for_bot
             bag_of_words_bot = r'bot|b0t|cannabis|tweet me|mishear|follow me|updates every|gorilla|yes_ofc|forget' \
