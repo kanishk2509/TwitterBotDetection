@@ -127,14 +127,14 @@ def mine_data(user_id, api):
         avg_tpd = np.average(tweets_per_day)
         print("avg_tpd: ", avg_tpd)
         # Get ratio of malicious urls to total urls posted
-        if len(urls) > 0:
+        '''if len(urls) > 0:
             mal_urls_ratio = num_malicious_urls(urls) / len(urls)
-            print("mal_urls_ratio: ", mal_urls_ratio)
+            print("mal_urls_ratio: ", mal_urls_ratio)'''
 
         tbl.append(avg_tpd)
         tbl.append(hashtags_ratio)
         tbl.append(user_mentions_ratio)
-        tbl.append(mal_urls_ratio)
+        tbl.append(0.0)
         tbl.append(0)
         return tbl
 

@@ -1,7 +1,6 @@
 import csv
-from get_api import get_api
-from get_tweet_ratios import get_data
-import numpy as np
+from GetApi import get_api
+from GetAccountProperties import get_data
 
 '''Twitter Account Keys'''
 key = ['L5UQsE4pIb9YUJvP7HjHuxSvW',
@@ -18,8 +17,14 @@ def lookup(user_id):
 
 def main():
     with \
-            open('training_dataset_cleaned.csv', 'r+', encoding="utf-8") as inp, \
-            open('training_dataset_final2.csv', 'w+', encoding="utf-8") as out:
+            open('/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/datasets'
+                 '/training_dataset_cleaned.csv',
+                 'r+',
+                 encoding="utf-8") as inp, \
+            open('/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/datasets'
+                 '/training_dataset_final2.csv',
+                 'w+', 
+                 encoding="utf-8") as out:
 
         reader = csv.DictReader(inp)
         my_fields = ['id', 'id_str', 'screen_name', 'location', 'age', 'in_out_ratio', 'favorites_ratio',
