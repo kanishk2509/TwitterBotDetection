@@ -18,7 +18,7 @@ Bag of words approach, input a user id and the program will mine real time
 twitter data, send it to classifier and the classifier will tell if its a bot or not.
 
 #ApproachV3
-(Kanishk)
+(Kanishk + Christopher)
 
 **One of the final approaches**
 
