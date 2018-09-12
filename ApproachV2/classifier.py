@@ -1,5 +1,4 @@
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 import numpy as np
 import pickle
@@ -26,7 +25,7 @@ class Classifier:
         """
         self.forest = RandomForestClassifier(criterion='entropy', n_estimators=n_trees, random_state=42, n_jobs=2,
                                              max_features=None)
-        self.forest.fit(x_train, y_train)
+        self.forest.fit(x_train.values.reshape(-1, 1), y_train)
 
     def predict(self, x):
         """

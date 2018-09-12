@@ -31,6 +31,8 @@ features = ['screen_name_binary', 'name_binary', 'description_binary', 'status_b
 X = training_data[features].iloc[:, :-1]
 y = training_data[features].iloc[:, -1]
 
+print(X, y)
+
 """Decision Tree Classifier"""
 dt = DecisionTreeClassifier(criterion='entropy', min_samples_leaf=50, min_samples_split=10)
 

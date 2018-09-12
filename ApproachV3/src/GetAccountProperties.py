@@ -1,5 +1,4 @@
 import tweepy
-from get_api import get_api
 import datetime as dt
 import numpy as np
 import requests
@@ -13,6 +12,18 @@ Calculating Account Properties Component
 
 
 def get_data(user_id, api):
+    tbl = []
+    try:
+        tbl = mine_data(user_id, api)
+        return tbl
+    except tweepy.TweepError as e:
+        print(e)
+        return tbl
+
+
+def mine_data(user_id, api):
+
+    tbl = []
     tweets_parsed = 0
     hashtags_recorded = 0
     user_mentions_recorded = 0
@@ -44,6 +55,12 @@ def get_data(user_id, api):
 
     user_data = [age, in_out_ratio, favourites_ratio,
                  status_ratio, acct_rep, ]
+    tbl.append(user_id)
+    tbl.append(age)
+    tbl.append(in_out_ratio)
+    tbl.append(favourites_ratio)
+    tbl.append(status_ratio)
+    tbl.append(acct_rep)
 
     # If this account is protected we cannot see their tweets and should skip
     # Once further progress is made, this check will likely be done at a higher level,
@@ -114,9 +131,12 @@ def get_data(user_id, api):
             mal_urls_ratio = num_malicious_urls(urls) / len(urls)
             print("mal_urls_ratio: ", mal_urls_ratio)
 
-        return (user_data + [avg_tpd, hashtags_ratio, user_mentions_ratio, mal_urls_ratio])
-
-
+        tbl.append(avg_tpd)
+        tbl.append(hashtags_ratio)
+        tbl.append(user_mentions_ratio)
+        tbl.append(mal_urls_ratio)
+        tbl.append(0)
+        return tbl
 
     else:
         print("Protected Account: {}".format(user_id))

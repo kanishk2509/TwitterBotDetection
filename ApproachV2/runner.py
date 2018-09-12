@@ -27,7 +27,8 @@ def get_training_data():
     bag_of_words_bot = r'bot|b0t|cannabis|tweet me|mishear|follow me|updates every|gorilla|yes_ofc|forget' \
                        r'expos|kill|clit|bbb|butt|fuck|XXX|sex|truthe|fake|anony|free|virus|funky|RNA|kuck|jargon' \
                        r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|dunia|clone|genie|bbb' \
-                       r'ffd|onlyman|emoji|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
+                       r'ffd|onlyman|emoji|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face' \
+                       r'thief|hate|black|nigga|killman'
 
     training_data['screen_name_binary'] = training_data.screen_name.str.contains(bag_of_words_bot, case=False, na=False)
     training_data['name_binary'] = training_data.name.str.contains(bag_of_words_bot, case=False, na=False)
@@ -76,16 +77,18 @@ def main():
 
     # run user input through classifier
     print("Mining twitter data...")
-    input_data = np.array(lookup(twitter_user_name)).reshape(1, -1)
+    input_data = np.array(lookup(twitter_user_name)).reshape(-1, 1)
+    # input_data = [[0, 0, 0, 0, 0, 0, 0, 0, 0]]
     print(input_data)
     print("Done!")
     print("Predicting...")
     result = rfc.predict(input_data)
+    print(result)
     print("Done!\n")
     if result[0] == 1:
-        print("Your account is a bot!\n")
+        print("This account is a bot!\n")
     else:
-        print("Your account is a human!\n")
+        print("This account is a human!\n")
 
 
 if __name__ == '__main__':
