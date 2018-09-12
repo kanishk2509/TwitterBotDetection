@@ -29,7 +29,7 @@ ApproachV3
 
 **Kanishk's Progress Details**
 
-1. Implementation of Step 3 and Step 4 of 1st paper mentioned in the proposal document.
+1. Implemented Step 3 and Step 4 of 1st paper mentioned in the proposal document.
 2. Took the already labelled (bot or not) training dataset [a]. This is not the final training dataset.
 3. For each twitter id, mined real time data with account properties component to generate a final training dataset [b].
 4. Extracted features for training dataset [b].
