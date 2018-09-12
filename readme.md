@@ -6,26 +6,28 @@ There is no need to make separate branches to implement a technique. Make a new 
 
 1. Please do not modify any other ApproachVn directory apart from your own to avoid merge conflicts :D.
 
-#ApproachV1
+ApproachV1
+----------
 (Kanishk)
 
 Bag of words approach, Sample implementation of Classifiers on some data.
 
-#ApproachV2 
+ApproachV2 
+----------
 (Kanishk)
 
 Bag of words approach, input a user id and the program will mine real time 
 twitter data, send it to classifier and the classifier will tell if its a bot or not.
 
-#ApproachV3
+ApproachV3
+----------
 (Kanishk + Christopher)
 
 **Implementation of Paper 1 of the proposal**
 
 **One of the final approaches**
 
-Kanishk's Progress Details
---------------------------
+**Kanishk's Progress Details**
 
 1. Implementation of Step 3 and Step 4 of 1st paper mentioned in the proposal document.
 2. Took the already labelled (bot or not) training dataset [a]. This is not the final training dataset.
@@ -56,8 +58,8 @@ python3 BotClassifier.py 16712547 rf
 This will train the Classifier with Random Forest technique, if not already trained. Then it will mine 
 the test user id provided and predict if its a bot or not. So far, its working fine with approx 89% accuracy.
 
-What Christopher needs to do now
---------------------------------
+**What Christopher needs to do now**
+
 1. Step 1 and Step 2 of the 1st paper of the proposal.
 2. I have made a directory with your name in the ApproachV3 dir. You can work in that easily or just paste your code there if you already did it.
 3. Don't use any training or test dataset right now [1]
