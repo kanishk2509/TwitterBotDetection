@@ -78,10 +78,62 @@ I will take your component and will simply attach it with my Account Property Co
 to generate a proper training dataset once you are done.
 
 
-#ApproachV4 : TBD
-Sentiment approach of classifying bots as mentioned in 2nd paper of our proposal.
- 
-Please update this part with the progress, whenever started.
+ApproachVx - Sentiment and Semantics
+----------
+(Kanishk + TBD)
+
+1. Similar to ApproachV3
+2. Computed these feature vectors (additional to the ones in ApproachV3) to feed into classifier
+        
+           a. "Average Tweet Sentiment" for all tweets belonging to a user
+           b. "Average Tweet Similarity" between all tweets belonging to a user
+           c. "Average frequency of URLs" in all tweets belonging to a user
+           
+   After Christopher is done in ApproachV3, we will add these 2 features as well
+           
+           a. Corrected Conditional Entropy
+           b. Average Spam Probability
+                  
+3. However, we still need to add more semantic and sentiment features to improve accuracy, like.
+            
+           a. Standard deviation of user's following
+           b. Standard deviation of user's followers
+           c. Change rate of number of user's following obtained by a user’s temporal and historical information
+           d. Average Frequency of @username mentioned in all the tweets
+           e. Average number of "unique" urls in all the tweets, since bots tend to share similar urls over time.
+           f. Length of user description
+           g. Sentiment of user's description
+           h. Total number of tweets
+           
+    For now, Don't use any training or test dataset 
+    
+    Just make a component that takes as input a twitter user id and computes the above features 
+
+    This component will be simply appended with component mentioned in Point #2 to generate a proper training dataset.
+
+
+Right now, accuracy of ApproachV3 is slightly better than this one.
+
+For this approach, 2 papers have been consulted :
+
+           a. Paper 2 of our proposal - "Using Sentiment to Detect Bots on Twitter: Are Humans more Opinionated than Bots?"
+           b. A new paper - "Seven Months with the Devils: A Long-Term Study of Content Polluters on Twitter" 
+                              Link: https://pdfs.semanticscholar.org/b433/9952a73914dc7eacf3b8e4c78ce9a5aa9502.pdf
+
+This approach inclines towards implementation of Paper(b)
+because exactly implementing and testing Paper(a) is too complicated 
+since their dataset is huge and was collected for more than a month. 
+Also, we don't have access to that dataset.
+
+
+The approach mentioned in Paper(b) is good and implementable but 
+we need few more features than what we already have (point #3 of this para).
+
+Please update in this section, at the top, whoever is going to compute additional features 
+as mentioned above.
+
+If needed, go through Paper(b) and decide on other features if 
+computing the ones mentioned above is proving tricky.
 
 	
 

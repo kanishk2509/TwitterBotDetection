@@ -6,3 +6,6 @@ matplotlib
 seaborn
 requests
 tweepy
+gensim
+nltk
+textblob
