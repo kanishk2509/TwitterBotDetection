@@ -21,7 +21,7 @@ twitter data, send it to classifier and the classifier will tell if its a bot or
 
 ApproachV3
 ----------
-(Kanishk + Christopher)
+(Kanishk + Christofer)
 
 **Implementation of Paper 1 of the proposal**
 
@@ -58,7 +58,7 @@ python3 BotClassifier.py 16712547 rf
 This will train the Classifier with Random Forest technique, if not already trained. Then it will mine 
 the test user id provided and predict if its a bot or not. So far, its working fine with approx 89% accuracy.
 
-**What Christopher needs to do now**
+**What Christofer needs to do now**
 
 1. Step 1 and Step 2 of the 1st paper of the proposal.
 2. I have made a directory with your name in the ApproachV3 dir. You can work in that easily or just paste your code there if you already did it.
@@ -89,7 +89,7 @@ ApproachVx - Sentiment and Semantics
            b. "Average Tweet Similarity" between all tweets belonging to a user
            c. "Average frequency of URLs" in all tweets belonging to a user
            
-   After Christopher is done in ApproachV3, we will add these 2 features as well
+   After Christofer is done in ApproachV3, we will add these 2 features as well
            
            a. Corrected Conditional Entropy
            b. Average Spam Probability
