@@ -14,6 +14,7 @@ def generate_binned_array(tweet_times):
 
     :return: An array containing a vector of binned tweet times
     """
+
     # The number of bins to be created for the whole array
     num_bins = 100
 
@@ -44,9 +45,12 @@ def compute_time_difference_between_tweets(tweet_times):
 
     :return: Time interval between two tweets
     """
+    import datetime
 
     intervals = list()
     for idx in range(0, len(tweet_times) - 1):
-        intervals[idx] = tweet_times[idx] - tweet_times[idx+1]
+        # Convert to epoch time and find the difference
+        intervals[idx] = datetime.datetime(tweet_times[idx]).timestamp() - \
+                         datetime.datetime(tweet_times[idx+1]).timestamp()
 
     return intervals

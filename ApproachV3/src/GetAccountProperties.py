@@ -2,6 +2,7 @@ import tweepy
 import datetime as dt
 import numpy as np
 import requests
+import copy
 
 dow_ratios = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
 
@@ -28,6 +29,7 @@ def mine_data(user_id, api):
     hashtags_recorded = 0
     user_mentions_recorded = 0
     urls = []
+    tweet_times = []
     mal_urls_ratio = 0
     tweets_per_day = [-1]
     cur_date = dt.datetime.today()
@@ -102,6 +104,8 @@ def mine_data(user_id, api):
             else:
                 tweets_per_day[date_count] += 1
 
+            tweet_times.append(tweet.created_at)
+
             tweets_parsed += 1
 
         if tweets_parsed == 0:
@@ -136,7 +140,8 @@ def mine_data(user_id, api):
         tbl.append(user_mentions_ratio)
         tbl.append(0.0)
         tbl.append(0)
-        return tbl
+        tbl.append(tweet_times)
+        return copy.deepcopy(tbl)
 
     else:
         print("Protected Account: {}".format(user_id))
