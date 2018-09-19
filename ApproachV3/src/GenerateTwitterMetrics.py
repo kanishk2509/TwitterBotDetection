@@ -54,3 +54,12 @@ def compute_time_difference_between_tweets(tweet_times):
                          datetime.datetime(tweet_times[idx+1]).timestamp()
 
     return intervals
+
+
+def compute_least_entropy_length(array):
+    """
+    This function constructs sequences of different lengths and finds the sequence with the least entropy
+
+    :param array:
+    :return:
+    """
