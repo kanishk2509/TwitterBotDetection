@@ -1,13 +1,13 @@
 import csv
-import itertools
 from GetApi import get_api
-from CosineSentenceSimilarity import compute_similarity
 import numpy as np
 from nltk import word_tokenize, PorterStemmer
 from nltk.corpus import stopwords
 import tweepy
 import re
 from textblob import TextBlob
+from ApproachVx.CosineSentenceSimilarity import get_avg_cosine_similarity
+from ApproachVx.AverageSentenceSentiment import get_avg_sentiment
 
 '''
 A text mining and pre-processing module extracting features from a user's first 200 tweets such as
@@ -23,10 +23,10 @@ key = ['L5UQsE4pIb9YUJvP7HjHuxSvW',
        'MJ17S1uhCaI1zS3NBWksMaWdwjvAjn7cpji5vyhknfcUe']
 
 
-def get_all_tweets(user_id):
+api = get_api(key[0], key[1], key[2], key[3])
 
-    # authorize twitter, initialize tweepy
-    api = get_api(key[0], key[1], key[2], key[3])
+
+def get_all_tweets(user_id):
 
     # initialize a list to hold all the tweepy Tweets, urls, parsed tweet count
     all_tweets = []
@@ -53,43 +53,6 @@ def get_all_tweets(user_id):
     except tweepy.TweepError as e:
         print(e)
         return [], 0.0
-
-
-def clean_tweet(tweet):
-    """
-    Utility function to clean tweet text by removing links, special characters
-    using simple regex statements.
-    """
-    return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+://\S+)", " ", tweet).split())
-
-
-def get_avg_cosine_similarity_and_sentiment(data):
-    data_list = list(data)
-    data_list_len = len(data_list)
-    # Split the data into pairs
-    pair_list = list(itertools.combinations(data, 2))
-    cosine_sim = 0.0
-    total_sentiment = 0.0
-
-    # Compute Average Content Similarity between pairs of tweets over a given range
-    # Summation of [similarity(one pair)/(total pairs in list)]
-    for pair in pair_list:
-        cosine_sim = cosine_sim + compute_similarity(pair[0], pair[1])
-
-    try:
-        avg_cosine_sim = cosine_sim / len(pair_list)
-    except ZeroDivisionError as e:
-        print(e)
-        avg_cosine_sim = 1.0
-
-    # Compute Average Tweet Sentiment
-    for i in data_list:
-        txt = re.sub(r'^http?://.*[\r\n]*', '', i, flags=re.MULTILINE)
-        analysis = TextBlob(clean_tweet(txt))
-        total_sentiment = total_sentiment + analysis.sentiment.polarity
-
-    avg_sentiment = total_sentiment / data_list_len
-    return avg_cosine_sim, avg_sentiment
 
 
 def main():
@@ -134,7 +97,8 @@ def main():
 
                     sent_array.append(filtered_sentence)
 
-                cos_sim, avg_sentiment = get_avg_cosine_similarity_and_sentiment(sent_array)
+                cos_sim = get_avg_cosine_similarity(sent_array)
+                avg_sentiment = get_avg_sentiment(sent_array)
 
                 writer.writerow({'id': row['id'],
                                  'id_str': row['id_str'],

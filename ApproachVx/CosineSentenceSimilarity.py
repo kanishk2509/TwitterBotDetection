@@ -1,4 +1,6 @@
-import re, math
+import itertools
+import math
+import re
 from collections import Counter
 
 WORD = re.compile(r'\w+')
@@ -25,3 +27,24 @@ def get_cosine(vec1, vec2):
         return 0.0
     else:
         return float(numerator) / denominator
+
+
+def get_avg_cosine_similarity(data):
+    # Split the data into pairs
+    pair_list = list(itertools.combinations(data, 2))
+    cosine_sim = 0.0
+
+    # Compute Average Content Similarity between pairs of tweets over a given range
+    # Summation of [similarity(one pair)/(total pairs in list)]
+    for pair in pair_list:
+        cosine_sim = cosine_sim + compute_similarity(pair[0], pair[1])
+
+    try:
+        avg_cosine_sim = cosine_sim / len(pair_list)
+    except ZeroDivisionError as e:
+        print(e)
+        avg_cosine_sim = 1.0
+
+    print('Average Similarity in tweets :: ', avg_cosine_sim)
+
+    return avg_cosine_sim
