@@ -66,11 +66,10 @@ def compute_least_entropy_length(array):
     """
 
     from nltk import ngrams
+    from copy import deepcopy
+    import math
 
-    max_prob = 0
     max_length = 0
-    curr_length = 0
-    curr_prob = 0
 
     # Extract the last value as a predictor
     test_value = array[-1]
@@ -78,81 +77,109 @@ def compute_least_entropy_length(array):
     # Move the rest of the array to construct a training array
     train_array = array
 
+    # Count the number of unique sequences
+    processed_indices = [False] * len(train_array)
+
+    unique_grams = []
+    unique_grams_occurence_count = []
+    unique_grams_occurence_total = len(array)
+    unique_grams_idx = 0
+
+    # An arbitrarily sufficiently large initial value
+    min_entropy = 1000000000000.0
+
+    curr_unique_gram_count = 0
+    max_unique_gram_count = 10000000000
+
+    eps = 0.00001
+    # Could use a counter and a loop to insert it
+    for idx in range(0, len(array)):
+
+        if processed_indices[idx]:
+            continue
+
+        print(train_array[idx])
+
+        unique_grams.append(train_array[idx])
+        unique_grams_occurence_count.append(1)
+
+        for search_idx in range(idx + 1, len(train_array)):
+            #print(train_array[search_idx])
+            if processed_indices[search_idx] is False and train_array[idx] == train_array[search_idx]:
+                unique_grams_occurence_count[unique_grams_idx] += 1
+                processed_indices[search_idx] = 1
+
+        unique_grams_idx += 1
+
+
     # Try sequences from length 2 up to length of array - 1
-    for curr_length in range(2, len(train_array)-1):
-        '''
-        # Transform the array into n grams
-        #ngrams_prev = ngrams(train_array, curr_length - 1)
-        #ngrams_curr = ngrams(train_array, curr_length)
+    for curr_length in range(2, len(train_array) - 3):
 
-        grams_condition = [train_array[i:i + curr_length - 1] for i in range(len(train_array) - curr_length)]
-        grams = [train_array[i:i + curr_length] for i in range(len(train_array) - curr_length + 1)]
-
-        # find the most common occurence in the array for computing the probability
-        conditional_variables = train_array[curr_length - 1:]
-
-        occurence_count = dict(Counter(conditional_variables))
-
-        max_items_key = []
-        max_occurence = 0
-        for item in occurence_count:
-            count = occurence_count.get(item)
-            if count > max_occurence:
-                max_occurence = count
-                max_items_key.clear()
-                max_items_key.append(item)
-
-            elif count == max_occurence:
-                max_items_key.append(item)
-
-        # Compute the probability for elements in the max occurence list
-        # Probability is computed by counting the number of conditional sequences / t
-
-        #Find the occurences of all sequences [train_array, test_value] to the probability of occurences of test value
-
-        # Predict the probability value using the test_value
-        '''
         grams_condition = [train_array[i:i + curr_length - 1] for i in range(len(train_array) - curr_length)]
         grams = [train_array[i:i + curr_length] for i in range(len(train_array) - curr_length + 1)]
 
         # Count the number of unique sequences
         processed_indices = [False] * len(grams)
+
+        # Copy the previous unique grams as the unique grams condition of this iteration
+        unique_grams_condition = deepcopy(unique_grams)
+        unique_grams_condition_occurence_count = deepcopy(unique_grams_occurence_count)
+        unique_grams_condition_idx = unique_grams
+        unique_grams_condition_occurence_total = unique_grams_occurence_total
+
         unique_grams = []
         unique_grams_occurence_count = []
         unique_grams_idx = 0
+        unique_grams_occurence_total= len(grams)
+
+        curr_entropy = 0.0
 
         for idx in range(0, len(grams)):
 
             if processed_indices[idx]:
                 continue
 
-            print(grams[idx])
+            #print(grams[idx])
 
             unique_grams.append(grams[idx])
             unique_grams_occurence_count.append(1)
 
             for search_idx in range(idx+1, len(grams)):
-                print(grams[search_idx])
+                #print(grams[search_idx])
                 if processed_indices[search_idx] is False and grams[idx] == grams[search_idx]:
                     unique_grams_occurence_count[unique_grams_idx] += 1
                     processed_indices[search_idx] = 1
 
             unique_grams_idx += 1
 
-        # Find the conditions of each of the unique sequences and count them.
-
         # Find the conditional probability of each of the sequence
+        for prob_idx in range(0, len(unique_grams)):
+            unique_gram = unique_grams[prob_idx]
+            condition_gram = unique_grams[:-1]
+            pos = 0
+            for search_idx in range(0, len(unique_grams_condition)):
+                if unique_grams_condition[search_idx] == condition_gram:
+                    pos = search_idx
+                    break
+            #print('Unique :' + str(unique_grams_occurence_count[prob_idx]) + 'Condition :' + str(unique_grams_condition_occurence_count[pos]))
+            # Find the entropy
+            prob_val = (unique_grams_occurence_count[prob_idx] / unique_grams_condition_occurence_total )/ (unique_grams_condition_occurence_count[prob_idx] / unique_grams_condition_occurence_total)
+            curr_entropy += -1 * prob_val * math.log(prob_val)
 
-        # Find the entropy
-
-
-        if curr_prob > max_prob:
-            max_prob = curr_prob
+        curr_unique_gram_count = len(unique_grams)
+        # Save the sequence that produces the least entropy
+        print(curr_entropy)
+        print(min_entropy)
+        if curr_entropy < min_entropy or (curr_entropy - min_entropy < eps and curr_unique_gram_count > max_unique_gram_count):
+            min_entropy = curr_entropy
             max_length = curr_length
+            max_unique_gram_count = curr_unique_gram_count
+
+            print(unique_grams)
 
             # Compute the number of unique sequences too
 
-    return max_length, max_prob
+    return max_length, min_entropy
 
 def main():
      array = [1, 2, 3, 4, 1 , 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]
