@@ -3,10 +3,10 @@ import tweepy
 from nltk import PorterStemmer, word_tokenize, re
 from nltk.corpus import stopwords
 from collections import Counter
-from ApproachVx.CosineSentenceSimilarity import get_avg_cosine_similarity
-from ApproachVx.AverageSentenceSentiment import get_avg_sentiment, get_avg_sentiment_single
-from ApproachVx.StdDeviationFollowers import compute_std_deviation_followers
-from ApproachVx.StdDeviationFriends import compute_std_deviation_friends
+from CosineSentenceSimilarity import get_avg_cosine_similarity
+from AverageSentenceSentiment import get_avg_sentiment, get_avg_sentiment_single
+from StdDeviationFollowers import compute_std_deviation_followers
+from StdDeviationFriends import compute_std_deviation_friends
 
 '''
 Returns 7 tweet properties listed below
@@ -22,7 +22,7 @@ Returns 7 tweet properties listed below
 '''
 
 
-def get_tweet_properties(user_id, api, user, bot_flag):
+def get_tweet_properties(user_id, api, user):
     # initialize a list to hold all the tweepy Tweets, urls, parsed tweet count
     global cur_date
     tbl = []
@@ -124,7 +124,6 @@ def get_tweet_properties(user_id, api, user, bot_flag):
 
             tbl.append(cos_sim)
             tbl.append(avg_sentiment)
-            tbl.append(bot_flag)
 
             return tbl
 
