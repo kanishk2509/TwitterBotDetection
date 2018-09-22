@@ -181,9 +181,197 @@ def compute_least_entropy_length(array):
 
     return max_length, min_entropy
 
+
+def compute_least_entropy_length_non_overlapping(array):
+    """
+    This function constructs sequences of different lengths and finds the sequence with the least entropy
+
+    :param array: The array containing the sequences
+
+    :return: The length of the sequence and the value of the least entropy
+    """
+
+    from nltk import ngrams
+    from copy import deepcopy
+    import math
+
+    max_length = 0
+
+    # Extract the last value as a predictor
+    test_value = array[-1]
+
+    # Move the rest of the array to construct a training array
+    train_array = array
+
+    # Count the number of unique sequences
+    processed_indices = [False] * len(train_array)
+
+    unique_grams = []
+    unique_grams_occurence_count = []
+    unique_grams_occurence_total = len(array)
+    unique_grams_idx = 0
+
+    # An arbitrarily sufficiently large initial value
+    min_entropy = 1000000000000.0
+
+    curr_unique_gram_count = 0
+    max_unique_gram_count = 10000000000
+
+    eps = 0.00001
+    # Could use a counter and a loop to insert it
+    for idx in range(0, len(array)):
+
+        if processed_indices[idx]:
+            continue
+
+        print(train_array[idx])
+
+        unique_grams.append(train_array[idx])
+        unique_grams_occurence_count.append(1)
+
+        for search_idx in range(idx + 1, len(train_array)):
+            #print(train_array[search_idx])
+            if processed_indices[search_idx] is False and train_array[idx] == train_array[search_idx]:
+                unique_grams_occurence_count[unique_grams_idx] += 1
+                processed_indices[search_idx] = 1
+
+        unique_grams_idx += 1
+
+
+    # Try sequences from length 2 up to length of array - 1
+    for curr_length in range(2, int(len(train_array)/2)):
+
+        for length_shift in range(0, curr_length):
+
+            grams_condition = [train_array[i:i + curr_length - 1] for i in range(len(train_array) - curr_length)]
+
+            grams = []
+            i = length_shift
+            while i <= len(train_array) - curr_length:
+                grams.append(train_array[i: i + curr_length])
+                i += curr_length
+
+            #grams = [train_array[i:i + curr_length] for i in range(len(train_array) - curr_length + 1)]
+
+            # Count the number of unique sequences
+            processed_indices = [False] * len(grams)
+
+            '''
+            # Copy the previous unique grams as the unique grams condition of this iteration
+            unique_grams_condition = deepcopy(unique_grams)
+            unique_grams_condition_occurence_count = deepcopy(unique_grams_occurence_count)
+            unique_grams_condition_idx = unique_grams
+            unique_grams_condition_occurence_total = unique_grams_occurence_total
+            '''
+
+            grams_dict = generate_unique_ngrams(array, curr_length - 1)
+            unique_grams_condition = grams_dict.get('grams')
+            unique_grams_condition_occurence_count = grams_dict.get('occurence_count')
+            unique_grams_condition_occurence_total = grams_dict.get('total')
+
+            unique_grams = []
+            unique_grams_occurence_count = []
+            unique_grams_idx = 0
+            unique_grams_occurence_total= len(grams)
+
+            curr_entropy = 0.0
+
+            for idx in range(0, len(grams)):
+
+                if processed_indices[idx]:
+                    continue
+
+                #print(grams[idx])
+
+                unique_grams.append(grams[idx])
+                unique_grams_occurence_count.append(1)
+
+                for search_idx in range(idx+1, len(grams)):
+                    #print(grams[search_idx])
+                    if processed_indices[search_idx] is False and grams[idx] == grams[search_idx]:
+                        unique_grams_occurence_count[unique_grams_idx] += 1
+                        processed_indices[search_idx] = 1
+
+                unique_grams_idx += 1
+
+            # Find the conditional probability of each of the sequence
+            for prob_idx in range(0, len(unique_grams)):
+                unique_gram = unique_grams[prob_idx]
+                condition_gram = unique_grams[:-1]
+                pos = 0
+                for search_idx in range(0, len(unique_grams_condition)):
+                    if unique_grams_condition[search_idx] == condition_gram:
+                        pos = search_idx
+                        break
+                #print('Unique :' + str(unique_grams_occurence_count[prob_idx]) + 'Condition :' + str(unique_grams_condition_occurence_count[pos]))
+                # Find the entropy
+                prob_val = (unique_grams_occurence_count[prob_idx] / unique_grams_condition_occurence_total )/ (unique_grams_condition_occurence_count[prob_idx] / unique_grams_condition_occurence_total)
+                curr_entropy += -1 * prob_val * math.log(prob_val)
+
+            curr_unique_gram_count = len(unique_grams)
+            # Save the sequence that produces the least entropy
+            print(curr_entropy)
+            print(min_entropy)
+            if curr_entropy < min_entropy or (curr_entropy - min_entropy < eps and curr_unique_gram_count < max_unique_gram_count):
+                min_entropy = curr_entropy
+                max_length = curr_length
+                max_unique_gram_count = curr_unique_gram_count
+
+                print(unique_grams)
+
+
+    return max_length, min_entropy
+
+
+def generate_unique_ngrams(array, n):
+    """
+    Generates a n grams of length n, finds the unique ngrams and the count of each occurence
+
+    :param array: The array to be computed
+    :param n: Length of n gram
+
+    :return: A dictionary containing all the required metrics
+    """
+    from copy import deepcopy
+
+    grams = [array[i:i + n] for i in range(len(array) - n + 1)]
+
+    processed_indices = [False] * len(grams)
+    unique_grams = []
+    unique_grams_occurence_count = []
+    unique_grams_idx = 0
+
+    for idx in range(0, len(grams)):
+
+        if processed_indices[idx]:
+            continue
+
+        # print(grams[idx])
+
+        unique_grams.append(grams[idx])
+        unique_grams_occurence_count.append(1)
+
+        for search_idx in range(idx + 1, len(grams)):
+            # print(grams[search_idx])
+            if processed_indices[search_idx] is False and grams[idx] == grams[search_idx]:
+                unique_grams_occurence_count[unique_grams_idx] += 1
+                processed_indices[search_idx] = 1
+
+        unique_grams_idx += 1
+
+    gram_return_values = dict()
+
+    gram_return_values['grams'] = deepcopy(unique_grams)
+    gram_return_values['occurence_count'] = deepcopy(unique_grams_occurence_count)
+    gram_return_values['total'] = len(grams)
+
+    return deepcopy(gram_return_values)
+
+
+
 def main():
      array = [1, 2, 3, 4, 1 , 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]
-     m, prob = compute_least_entropy_length(array)
+     m, prob = compute_least_entropy_length_non_overlapping(array)
      print(m)
      print(prob)
 
