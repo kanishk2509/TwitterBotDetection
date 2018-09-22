@@ -1,33 +1,20 @@
 The project contains different approaches as mentioned in the proposal. Each ApproachVn directory is a stand alone implementation.
 
-There is no need to make separate branches to implement a technique. Make a new ApproachVn directory and try to implement your logic there itself. We will decide what to merge and what to keep separated when we finalise the project. 
-
-#Things to note :
-
-1. Please do not modify any other ApproachVn directory apart from your own to avoid merge conflicts :D.
-
 ApproachV1
 ----------
-(Kanishk)
 
 Bag of words approach, Sample implementation of Classifiers on some data.
 
 ApproachV2 
 ----------
-(Kanishk)
 
 Bag of words approach, input a user id and the program will mine real time 
 twitter data, send it to classifier and the classifier will tell if its a bot or not.
 
 ApproachV3
 ----------
-(Kanishk + Christopher)
 
 **Implementation of Paper 1 of the proposal**
-
-**One of the final approaches**
-
-**Kanishk's Progress Details**
 
 1. Implemented Step 3 and Step 4 of 1st paper mentioned in the proposal document.
 2. Took the already labelled (bot or not) training dataset [a]. This is not the final training dataset.
