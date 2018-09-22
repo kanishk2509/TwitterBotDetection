@@ -72,21 +72,21 @@ ApproachVx - Sentiment and Semantics
 1. Similar to ApproachV3
 2. Computed these feature vectors (additional to the ones in ApproachV3) to feed into classifier
         
-	a. "Average Tweet Sentiment" for all tweets belonging to a user
-	b. "Average Tweet Similarity" between all tweets belonging to a user
-	c. "Average frequency of URLs" in all tweets belonging to a user
-	d. Standard deviation of user's following
-	e. Standard deviation of user's followers
-	f. Average Frequency of @username mentioned in all the tweets
-	g. Average number of "unique" urls in all the tweets, since bots tend to share similar urls over time.
-	h. Length of user description
-	i. Sentiment of user's description
-	j. Total number of tweets
+		a. "Average Tweet Sentiment" for all tweets belonging to a user
+		b. "Average Tweet Similarity" between all tweets belonging to a user
+		c. "Average frequency of URLs" in all tweets belonging to a user
+		d. Standard deviation of user's following
+		e. Standard deviation of user's followers
+		f. Average Frequency of @username mentioned in all the tweets
+		g. Average number of "unique" urls in all the tweets, since bots tend to share similar urls over time.
+		h. Length of user description
+		i. Sentiment of user's description
+		j. Total number of tweets
            
    After Christopher is done in ApproachV3, we will add these 2 features as well
            
-           k. Corrected Conditional Entropy
-           l. Average Spam Probability
+	   k. Corrected Conditional Entropy
+	   l. Average Spam Probability
                   
 
    For now, Don't use any training or test dataset 
