@@ -74,9 +74,8 @@ ApproachVx - Sentiment and Semantics
         
            a. "Average Tweet Sentiment" for all tweets belonging to a user
            b. "Average Tweet Similarity" between all tweets belonging to a user
-           c. "Average frequency of URLs" in all tweets belonging to a user
-	   
-	   d. Standard deviation of user's following
+	   c. "Average frequency of URLs" in all tweets belonging to a user
+	  	d. Standard deviation of user's following
            e. Standard deviation of user's followers
            f. Average Frequency of @username mentioned in all the tweets
            g. Average number of "unique" urls in all the tweets, since bots tend to share similar urls over time.
