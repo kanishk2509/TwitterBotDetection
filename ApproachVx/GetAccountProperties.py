@@ -81,7 +81,7 @@ def mine_data(user_id, api):
     tbl.append(user_desc_sentiment)
     tbl.append(special_char_count)
     tbl.append(tweet_count)
-    tbl.append(0)
+    tbl.append(bot_flag)
 
     return tbl
 
