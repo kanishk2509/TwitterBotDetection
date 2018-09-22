@@ -408,8 +408,8 @@ def main():
     print(prob)
     print(perc)
     binned_array = generate_binned_array(array)
-    entropy = calculate_entropy(binned_array)
-    print(entropy)
+    #entropy = calculate_entropy(binned_array)
+    #print(entropy)
 
 
 if __name__ ==  '__main__':
