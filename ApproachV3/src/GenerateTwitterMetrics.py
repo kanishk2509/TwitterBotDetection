@@ -48,6 +48,7 @@ def compute_time_difference_between_tweets(tweet_times):
     import datetime
 
     intervals = list()
+
     for idx in range(0, len(tweet_times) - 1):
         # Convert to epoch time and find the difference
         intervals[idx] = datetime.datetime(tweet_times[idx]).timestamp() - \
@@ -170,7 +171,7 @@ def compute_least_entropy_length(array):
         # Save the sequence that produces the least entropy
         print(curr_entropy)
         print(min_entropy)
-        if curr_entropy < min_entropy or (curr_entropy - min_entropy < eps and curr_unique_gram_count > max_unique_gram_count):
+        if curr_entropy < min_entropy or (curr_entropy - min_entropy < eps and curr_unique_gram_count < max_unique_gram_count):
             min_entropy = curr_entropy
             max_length = curr_length
             max_unique_gram_count = curr_unique_gram_count
@@ -216,6 +217,7 @@ def compute_least_entropy_length_non_overlapping(array):
 
     curr_unique_gram_count = 0
     max_unique_gram_count = 10000000000
+    total_gram_count = 0
 
     eps = 0.00001
     # Could use a counter and a loop to insert it
@@ -316,11 +318,11 @@ def compute_least_entropy_length_non_overlapping(array):
                 min_entropy = curr_entropy
                 max_length = curr_length
                 max_unique_gram_count = curr_unique_gram_count
-
+                total_gram_count = len(grams)
                 print(unique_grams)
 
 
-    return max_length, min_entropy
+    return max_length, min_entropy, float(100 * max_unique_gram_count/total_gram_count)
 
 
 def generate_unique_ngrams(array, n):
@@ -368,12 +370,46 @@ def generate_unique_ngrams(array, n):
     return deepcopy(gram_return_values)
 
 
+def calculate_entropy(binned_array):
+    """
+    This function calculates the total entropy of the array
+
+    :param binned_array: A binned array containing Q bins
+
+    :return: The total entropy of the array
+    """
+    from collections import Counter
+    import math
+
+    if len(binned_array) <= 1:
+        return 0
+
+    total_count = len(binned_array)
+
+    counted_elements = dict(Counter(binned_array))
+
+    total_entropy = 0.0
+
+    for element in counted_elements:
+
+        count = counted_elements.get(element)
+
+        probability = count / total_count
+
+        total_entropy += -1 * probability * math.log(probability)
+
+    return total_entropy
+
 
 def main():
-     array = [1, 2, 3, 4, 1 , 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]
-     m, prob = compute_least_entropy_length_non_overlapping(array)
-     print(m)
-     print(prob)
+    array = [1, 2, 3, 4, 1 , 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]
+    m, prob, perc = compute_least_entropy_length_non_overlapping(array)
+    print(m)
+    print(prob)
+    print(perc)
+    binned_array = generate_binned_array(array)
+    entropy = calculate_entropy(binned_array)
+    print(entropy)
 
 
 if __name__ ==  '__main__':
