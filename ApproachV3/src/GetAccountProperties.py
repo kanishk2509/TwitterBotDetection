@@ -1,8 +1,11 @@
-import tweepy
+import copy
 import datetime as dt
+
 import numpy as np
 import requests
-import copy
+import tweepy
+
+from ApproachV3.src.metrics import GenerateTwitterMetrics as metrics
 
 dow_ratios = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
 
@@ -135,12 +138,20 @@ def mine_data(user_id, api):
             mal_urls_ratio = num_malicious_urls(urls) / len(urls)
             print("mal_urls_ratio: ", mal_urls_ratio)'''
 
+        # Compute the entropy based on the tweet times
+        binned_times, binned_sequence = metrics.generate_binned_array(tweet_times)
+        first_order_entropy = metrics.calculate_entropy(binned_array=binned_times)
+        max_length, conditional_entropy, perc_unique_strings = \
+            metrics.compute_least_entropy_length_non_overlapping(list(binned_sequence))
+
+        cce = conditional_entropy + perc_unique_strings * first_order_entropy
+
         tbl.append(avg_tpd)
         tbl.append(hashtags_ratio)
         tbl.append(user_mentions_ratio)
         tbl.append(0.0)
         tbl.append(0)
-        tbl.append(tweet_times)
+        tbl.append(cce)
         return copy.deepcopy(tbl)
 
     else:
