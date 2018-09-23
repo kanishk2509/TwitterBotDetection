@@ -1,0 +1,1 @@
+id,id_str,screen_name,age,in_out_ratio,favorites_ratio,status_ratio,account_rep,avg_tpd,hashtags_ratio,user_mentions_ratio,url_ratio,avg_cosine_sim,avg_tweet_sentiment,std_dev_friends,std_dev_followers,unique_urls_ratio,tweet_url_similarity,user_desc_len,user_desc_sentiment,special_char_count,tweet_count,bot

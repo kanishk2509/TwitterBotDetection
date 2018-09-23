@@ -17,7 +17,6 @@ key = ['L5UQsE4pIb9YUJvP7HjHuxSvW',
 
 
 def get_training_data():
-
     # Getting training data
     print("\nGetting the new Classifier data...")
 
@@ -26,17 +25,37 @@ def get_training_data():
     #             'training_dataset_final.csv'
 
     # Use the this file path when running locally from personal machine for faster access
-    file_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachVx/datasets/training_dataset_v200.csv'
+    file_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachVx/datasets/training_dataset_v200f.csv'
     training_data = pd.read_csv(file_path, encoding='utf-8')
 
     # Replacing screen_name column to a binary value
-    symbols = r'_|%|"| '
+    symbols = r'_|%|"| |nan'
     training_data['screen_name_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
 
     # Extracting Features
-    features = ['id', 'screen_name_binary', 'age', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
-                'account_rep', 'avg_tpd', 'hashtags_ratio', 'user_mentions_ratio',
-                'url_ratio', 'avg_cosine_sim', 'avg_tweet_sentiment', 'bot']
+    features = ['id',
+                'screen_name_binary',
+                'age',
+                'in_out_ratio',
+                'favorites_ratio',
+                'status_ratio',
+                'account_rep',
+                'avg_tpd',
+                'hashtags_ratio',
+                'user_mentions_ratio',
+                'url_ratio',
+                'avg_cosine_sim',
+                'avg_tweet_sentiment',
+                'std_dev_friends',
+                'std_dev_followers',
+                'unique_urls_ratio',
+                'tweet_url_similarity',
+                'user_desc_len',
+                'user_desc_sentiment',
+                'special_char_count',
+                'tweet_count',
+                'bot']
+
     X = training_data[features].iloc[:, :-1]
     y = training_data[features].iloc[:, -1]
 
@@ -51,7 +70,6 @@ def lookup(user_id):
 
 
 def main():
-
     # Get 1st user input from command line. This is a twitter user id used to test the classifier
     twitter_user_name = sys.argv[1].lstrip().rstrip()
 
@@ -140,7 +158,7 @@ def main():
     # Run user input through classifier
     print("Mining twitter data...")
     data = lookup(twitter_user_name)
-    bot_flag = data[len(data)-1]
+    bot_flag = data[len(data) - 1]
     input_data = np.array(data).reshape(1, -1)
     print('========================================================')
     print("Mining Done")
