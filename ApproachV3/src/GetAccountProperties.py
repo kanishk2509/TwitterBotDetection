@@ -139,12 +139,17 @@ def mine_data(user_id, api):
             print("mal_urls_ratio: ", mal_urls_ratio)'''
 
         # Compute the entropy based on the tweet times
+        from datetime import datetime
+        #t1 = datetime.now()
         binned_times, binned_sequence = metrics.generate_binned_array(tweet_times)
         first_order_entropy = metrics.calculate_entropy(binned_array=binned_times)
         max_length, conditional_entropy, perc_unique_strings = \
             metrics.compute_least_entropy_length_non_overlapping(list(binned_sequence))
 
         cce = conditional_entropy + perc_unique_strings * first_order_entropy
+        #t2 = datetime.now() - t1
+        #print('Time elapsed:'.format(total_time=t2))
+        print('Entropy: ', cce)
 
         tbl.append(avg_tpd)
         tbl.append(hashtags_ratio)

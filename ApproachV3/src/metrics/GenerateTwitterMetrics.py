@@ -240,16 +240,21 @@ def compute_least_entropy_length_non_overlapping(array):
 
         unique_grams_idx += 1
 
+    max_upper_limit = 100
+    boundary = min(int(len(train_array)/2), max_upper_limit)
 
     # Try sequences from length 2 up to length of array - 1
-    for curr_length in range(2, int(len(train_array)/2)):
+    for curr_length in range(2, boundary):
 
-        print('Completed {curr_length}/{total}'.format(curr_length=curr_length, total=(int(len(train_array)/2))))
+        #print('Completed {curr_length}/{boundary}'.format(curr_length=curr_length+1, boundary=boundary))
 
         for length_shift in range(0, curr_length):
 
-            grams_condition = [train_array[i:i + curr_length - 1] for i in range(len(train_array) - curr_length)]
-
+            #grams_condition = [train_array[i:i + curr_length - 1] for i in range(len(train_array) - curr_length)]
+            grams_dict = generate_unique_ngrams(array, curr_length - 1)
+            unique_grams_condition = grams_dict.get('grams')
+            unique_grams_condition_occurence_count = grams_dict.get('occurence_count')
+            unique_grams_condition_occurence_total = grams_dict.get('total')
             grams = []
             i = length_shift
             while i <= len(train_array) - curr_length:
@@ -268,11 +273,6 @@ def compute_least_entropy_length_non_overlapping(array):
             unique_grams_condition_idx = unique_grams
             unique_grams_condition_occurence_total = unique_grams_occurence_total
             '''
-
-            grams_dict = generate_unique_ngrams(array, curr_length - 1)
-            unique_grams_condition = grams_dict.get('grams')
-            unique_grams_condition_occurence_count = grams_dict.get('occurence_count')
-            unique_grams_condition_occurence_total = grams_dict.get('total')
 
             unique_grams = []
             unique_grams_occurence_count = []
