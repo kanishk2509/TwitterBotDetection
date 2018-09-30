@@ -21,10 +21,15 @@ def classify(model, js):
     (docCount, wordSize, wordProb, D) = model
     Gp = Bp = 0;
     for w in getFeatures(js):
-        Gp += math.log(conditionalProbability(model, w, 'G'), 2)
-        Bp += math.log(conditionalProbability(model, w, 'B'), 2)
-    Gp += math.log(float(docCount['G']) / sum(docCount))
-    Bp += math.log(float(docCount['B']) / sum(docCount))
+        #Gp += math.log(conditionalProbability(model, w, 'G'), 2)
+        #Bp += math.log(conditionalProbability(model, w, 'B'), 2)
+        Gp += conditionalProbability(model, w, 'G')
+        Bp += conditionalProbability(model, w, 'B')
+
+    #Gp += math.log(float(docCount['G']) / sum(docCount))
+    #Bp += math.log(float(docCount['B']) / sum(docCount))
+    Gp += float(docCount['G']) / sum(docCount)
+    Bp += float(docCount['B']) / sum(docCount)
 
     # Convert to a single value between -1 to 1,
     # with -1 being completely confident that it is spam and
@@ -151,8 +156,6 @@ def learn(data_path_spam, data_path_normal):
     training_array = deepcopy(spam_tweets + normal_tweets)
     classes = deepcopy(['B'] * spam_tweet_count + ['G'] * normal_tweet_count)
 
-    print(training_array[0])
-
     D = set()
     wordProb = {'B': defaultdict(int), 'G': defaultdict(int)}
     wordSize = {'B': 0, 'G': 0}
@@ -163,7 +166,7 @@ def learn(data_path_spam, data_path_normal):
         if type(line) is float:
             continue
 
-        parts = str(line).strip().split("\t")
+        line = line.strip().split("\t")
         klass = classes[idx]
         docCount[klass] += 1
         for w in getFeatures(line):
@@ -172,6 +175,8 @@ def learn(data_path_spam, data_path_normal):
             wordSize[klass] += 1
 
         idx += 1
+        if idx % 1000 == 0:
+            print(idx)
 
     writeModel('model.json', docCount, wordSize, wordProb, D)
     print('Training completed')
@@ -184,11 +189,41 @@ def main():
     genuine_tweets_path = '/home/chris/study/Text Mining Project/corpus/cresci-2017.csv/datasets_full.csv/' \
                           'genuine_accounts.csv/tweets.csv'
 
-    learn(data_path_spam=spam_tweets_path, data_path_normal=genuine_tweets_path)
+    spam_test_path = '/home/chris/study/Text Mining Project/corpus/cresci-2017.csv/datasets_full.csv/traditional_spambots_1.csv/tweets.csv'
+
+    train = False
+
+    if train:
+        learn(data_path_spam=spam_tweets_path, data_path_normal=genuine_tweets_path)
 
 
     model = readModel('model.json')
-    print(classify(model, 'win facebook tweets good million'))
+    data_columns = {"id": int, "text": str, "source": str, "user_id": str, "truncated": str, "in_reply_to_status_id": str,
+         "in_reply_to_user_id": str, "in_reply_to_screen_name": str, "retweeted_status_id": str, "geo": str,
+         "place": str, "contributors": str, "retweet_count": int, "reply_count": str, "favorite_count": str,
+         "favorited": str, "retweeted": str, "possibly_sensitive": str, "num_hashtags": int, "num_urls": str,
+         "num_mentions": str, "created_at": str, "timestamp": str, "crawled_at": str, "updated": str}
+
+    print('Reading file:{file_name}'.format(file_name=spam_test_path))
+    test_csv = pd.read_csv(spam_test_path, dtype=data_columns)
+    spam_tweets = deepcopy(list(test_csv.get('text')))
+    print('Testing spam tweets of length:{length}'.format(length=len(spam_tweets)))
+    correctly_classified = 0
+    test_idx = 0
+    test_length = len(spam_tweets)
+    for tweet in spam_tweets:
+        test_idx += 1
+        val = classify(model, tweet)
+        if val < 0:
+            correctly_classified += 1
+
+        print(val)
+
+        if test_idx % 100 == 0:
+            print('Testing {test_idx}/{length}'.format(test_idx=test_idx, length=test_length))
+
+    print('Correctly classified: {correctly_classified}/{total}'.
+          format(correctly_classified=correctly_classified, total=test_length))
 
 
 if __name__ == '__main__':
