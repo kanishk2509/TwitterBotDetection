@@ -27,9 +27,19 @@ def main():
                  encoding="utf-8") as out:
 
         reader = csv.DictReader(inp)
-        my_fields = ['id', 'id_str', 'screen_name', 'location', 'age', 'in_out_ratio', 'favorites_ratio',
+        my_fields = ['id',
+                     'id_str',
+                     'screen_name',
+                     'location',
+                     'age',
+                     'in_out_ratio',
+                     'favorites_ratio',
                      'status_ratio',
-                     'account_rep', 'avg_tpd', 'hashtags_ratio', 'user_mentions_ratio', 'mal_url_ratio',
+                     'account_rep',
+                     'avg_tpd',
+                     'hashtags_ratio',
+                     'user_mentions_ratio',
+                     'mal_url_ratio',
                      'bot']
         writer = csv.DictWriter(out, fieldnames=my_fields)
         writer.writeheader()
