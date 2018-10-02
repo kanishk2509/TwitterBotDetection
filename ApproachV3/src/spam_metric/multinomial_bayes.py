@@ -5,7 +5,12 @@ from sklearn import metrics
 import numpy as np
 import pandas as pd
 import pickle
+import re
+import string
 import time
+
+
+table = str.maketrans({key: None for key in string.punctuation})
 
 
 def save(vectorizer, classifier):
@@ -33,6 +38,33 @@ def load_data():
     labels = list(df.get('category'))
 
     return features, labels
+
+
+def remove_url(tweet):
+    """
+    Regex based URL removed. Removes all nonwhitespace characters after http until a whitespace is reached
+    :param tweet: Tweet to be checked
+    :return: Tweet that is substituted with URL in the place of the actual URL
+    """
+    return re.sub(r"http\S+", "URL", tweet)
+
+
+def preprocess(tweet):
+    """
+    Substitures urls with the string URL. Removes leading and trailing whitespaces
+    Removes non latin characters
+    :param tweet:
+    :return:
+    """
+    # remove URL
+    line = remove_url(str(tweet.strip()))
+    # remove non Latin characters
+    stripped_text = ''
+    for c in line:
+        stripped_text += c if len(c.encode(encoding='utf_8')) == 1 else ''
+
+    return stripped_text.translate(table).strip()
+
 
 def main():
 
