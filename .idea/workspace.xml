@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ba0c19f-8fea-41a3-b20d-ec773cbcd733" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_split_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ApproachV3/src/AppendCCE.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ApproachV3/src/FileSplitter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/TwitterBotDetection.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TwitterBotDetection.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV3/src/TwitterDataMiner.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/src/TwitterDataMiner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +14,7 @@
     <session id="-1477417540">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="17" />
+          <entry key="project.closed" value="18" />
           <entry key="project.open.time.0" value="7" />
           <entry key="project.open.time.1" value="5" />
           <entry key="project.open.time.10" value="1" />
@@ -55,14 +49,14 @@
           <entry key="dummy" value="61" />
           <entry key="md" value="6335" />
           <entry key="py" value="11553" />
-          <entry key="txt" value="580" />
+          <entry key="txt" value="652" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSV" value="102" />
           <entry key="Markdown" value="6335" />
-          <entry key="PLAIN_TEXT" value="641" />
+          <entry key="PLAIN_TEXT" value="713" />
           <entry key="Python" value="11553" />
         </counts>
       </usages-collector>
@@ -205,6 +199,7 @@
       <find>15340816</find>
       <find>241202626</find>
       <find>nan</find>
+      <find>148825650</find>
     </findStrings>
     <replaceStrings>
       <replace>TwitterBot</replace>
@@ -337,19 +332,19 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/ApproachVx/datasets" />
-      <recent name="$PROJECT_DIR$/ApproachVx" />
-      <recent name="$PROJECT_DIR$/kaggle_data" />
-      <recent name="$PROJECT_DIR$/ApproachV2" />
-      <recent name="$PROJECT_DIR$/ApproachV1" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/ApproachVx/datasets" />
       <recent name="$PROJECT_DIR$/ApproachVx/src" />
       <recent name="$PROJECT_DIR$/ApproachVx" />
       <recent name="$PROJECT_DIR$/ApproachVx/classifiers" />
       <recent name="$PROJECT_DIR$/ApproachVx/RFClassifier.py" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ApproachV3/datasets" />
+      <recent name="$PROJECT_DIR$/ApproachVx/datasets" />
+      <recent name="$PROJECT_DIR$/ApproachVx" />
+      <recent name="$PROJECT_DIR$/kaggle_data" />
+      <recent name="$PROJECT_DIR$/ApproachV2" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -631,7 +626,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537619729526</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Created program to append CCE values to existing training dataset.">
+      <created>1538400779990</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1538400779990</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView">
@@ -645,6 +647,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20014094" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -657,7 +660,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32891566" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32891566" />
-      <window_info active="true" anchor="bottom" x="9" y="171" width="1419" height="533" id="Terminal" order="8" visible="true" weight="0.3759036" />
+      <window_info anchor="bottom" x="9" y="171" width="1419" height="533" id="Terminal" order="8" weight="0.3759036" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5003524" side_tool="true" weight="0.6831325" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32891566" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -679,7 +682,8 @@
     <MESSAGE value="Finalized Step 3 and 4 of ApproachV3. Update readme file with names." />
     <MESSAGE value="Added a new ApproachVx. Updated readme file." />
     <MESSAGE value="Completed ApproachVx. Updated readme file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed ApproachVx. Updated readme file." />
+    <MESSAGE value="Created program to append CCE values to existing training dataset." />
+    <option name="LAST_COMMIT_MESSAGE" value="Created program to append CCE values to existing training dataset." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/ApproachVx/datasets/tweet_data.txt" />
