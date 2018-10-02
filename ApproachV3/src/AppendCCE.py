@@ -1,7 +1,10 @@
 import csv
+
+import numpy as np
 from GetApi import get_api
 import tweepy
 from ApproachV3.src.metrics import GenerateTwitterMetrics as metrics
+from ApproachV3.src.spam_metric.multinomial_bayes import load, preprocess
 
 '''
 The purpose of this module is to append CCE to the existing training data.
@@ -69,6 +72,7 @@ def main():
                   'user_mentions_ratio',
                   'mal_url_ratio',
                   'cce',
+                  'spam_ratio',
                   'bot']
 
         writer = csv.DictWriter(out, fieldnames=fields)
@@ -88,7 +92,20 @@ def main():
                 metrics.compute_least_entropy_length_non_overlapping(list(binned_sequence))
 
             cce = conditional_entropy + perc_unique_strings * first_order_entropy
+
+            vectorizer, classifier = load()
+
+            for tweet in tweets:
+                preprocessed = preprocess(tweet)
+
+            vectorized_tweet = vectorizer.transform([preprocessed])
+            prediction = classifier.predict(vectorized_tweet)
+
+            spam_ratio = 1 - (len(np.count_nonzero(prediction, axis=1)) / len(prediction))
+
             print('Entropy: ', cce)
+            print(prediction)
+            print('Spam Ratio: ', spam_ratio)
 
             writer.writerow({'id': row['id'],
                              'id_str': row['id_str'],
@@ -104,6 +121,7 @@ def main():
                              'user_mentions_ratio': row['user_mentions_ratio'],
                              'mal_url_ratio': row['mal_url_ratio'],
                              'cce': cce,
+                             'spam_ratio': spam_ratio,
                              'bot': row['bot']})
 
             print('Row ', cnt, ' written for => ', row['screen_name'].upper())
