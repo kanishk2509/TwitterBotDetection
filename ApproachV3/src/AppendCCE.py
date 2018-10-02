@@ -19,8 +19,9 @@ key = ['L5UQsE4pIb9YUJvP7HjHuxSvW',
 api = get_api(key[0], key[1], key[2], key[3])
 
 
-def get_tweet_times(id, api_):
+def get_tweet_and_tweet_times(id, api_):
     tweet_times = []
+    tweets = []
     tweets_parsed = 0
     user = api_.get_user(id)
 
@@ -29,11 +30,13 @@ def get_tweet_times(id, api_):
         for tweet in tweepy.Cursor(api.user_timeline, id=id, tweet_mode='extended').items(1000):
             tweet_times.append(tweet.created_at)
             tweets_parsed += 1
+            txt = tweet._json['full_text']
+            tweets.append(txt)
 
         if tweets_parsed == 0:
             return []
 
-        return tweet_times
+        return tweets, tweet_times
 
     else:
         print("Protected Account: {}".format(id))
@@ -76,7 +79,8 @@ def main():
         for row in reader:
             cnt = cnt + 1
 
-            tweet_times = get_tweet_times(row['id'], api)
+            # Get all the tweets and tweet times of the user
+            tweets, tweet_times = get_tweet_and_tweet_times(row['id'], api)
 
             binned_times, binned_sequence = metrics.generate_binned_array(tweet_times)
             first_order_entropy = metrics.calculate_entropy(binned_array=binned_times)
