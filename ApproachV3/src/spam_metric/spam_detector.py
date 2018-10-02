@@ -3,13 +3,22 @@ import os
 import json
 import pandas as pd
 import functools
+import random
 from collections import defaultdict
 from copy import deepcopy
+import re
 
+data_columns = {"id": int, "text": str, "source": str, "user_id": str, "truncated": str, "in_reply_to_status_id": str,
+                "in_reply_to_user_id": str, "in_reply_to_screen_name": str, "retweeted_status_id": str, "geo": str,
+                "place": str, "contributors": str, "retweet_count": int, "reply_count": str, "favorite_count": str,
+                "favorited": str, "retweeted": str, "possibly_sensitive": str, "num_hashtags": int, "num_urls": str,
+                "num_mentions": str, "created_at": str, "timestamp": str, "crawled_at": str, "updated": str}
 
 def sum(dict):
     return functools.reduce(lambda x, y: x + y, dict.values())
 
+def remove_url(tweet):
+    return re.sub(r"http\S+", "URL", tweet)
 
 # расчитываем условную вероятность заданной feature для заданного класса
 def conditionalProbability(model, word, klass):
@@ -21,15 +30,15 @@ def classify(model, js):
     (docCount, wordSize, wordProb, D) = model
     Gp = Bp = 0;
     for w in getFeatures(js):
-        #Gp += math.log(conditionalProbability(model, w, 'G'), 2)
-        #Bp += math.log(conditionalProbability(model, w, 'B'), 2)
-        Gp += conditionalProbability(model, w, 'G')
-        Bp += conditionalProbability(model, w, 'B')
+        Gp += math.log(conditionalProbability(model, w, 'G'), 2)
+        Bp += math.log(conditionalProbability(model, w, 'B'), 2)
+        #Gp += conditionalProbability(model, w, 'G')
+        #Bp += conditionalProbability(model, w, 'B')
 
-    #Gp += math.log(float(docCount['G']) / sum(docCount))
-    #Bp += math.log(float(docCount['B']) / sum(docCount))
-    Gp += float(docCount['G']) / sum(docCount)
-    Bp += float(docCount['B']) / sum(docCount)
+    Gp += math.log(float(docCount['G']) / sum(docCount))
+    Bp += math.log(float(docCount['B']) / sum(docCount))
+    #Gp += float(docCount['G']) / sum(docCount)
+    #Bp += float(docCount['B']) / sum(docCount)
 
     # Convert to a single value between -1 to 1,
     # with -1 being completely confident that it is spam and
@@ -95,14 +104,13 @@ def learn(data_path_spam, data_path_normal):
 
     :return: None
     """
-    total_tweets_per_category = 5000
-
-    import csv
     spam_tweet_count = 0
     normal_tweet_count = 0
 
     spam_tweets = []
     normal_tweets = []
+
+    test_data_count = 200
 
     data_columns = {"id": int, "text": str, "source": str, "user_id": str, "truncated": str, "in_reply_to_status_id": str,
          "in_reply_to_user_id": str, "in_reply_to_screen_name": str, "retweeted_status_id": str, "geo": str,
@@ -117,20 +125,7 @@ def learn(data_path_spam, data_path_normal):
     spamreader = pd.read_csv(data_path_spam, dtype = data_columns)
     spam_tweets = deepcopy(list(spamreader.get('text')))
     spam_tweet_count = len(spam_tweets)
-    '''
-    #with open(data_path_spam, 'r') as csvfile:
-        #spamreader = csv.DictReader(csvfile, delimiter=',')
 
-        for row in spamreader:
-    
-            spam_tweets.append(row['text'])
-            spam_tweet_count += 1
-    
-            print('Spam Tweet Current Count{spam_tweet_count}'.format(spam_tweet_count=spam_tweet_count))
-            if spam_tweet_count >= total_tweets_per_category:
-                break
-            
-    '''
     print('Reading spam tweets completed, ')
     print('Number of spam tweets: {spam_tweet_count}'.format(spam_tweet_count=spam_tweet_count))
 
@@ -140,21 +135,18 @@ def learn(data_path_spam, data_path_normal):
     print('Reading normal tweets completed')
     print('Number of normal tweets :{normal_tweet_count}'.format(normal_tweet_count=normal_tweet_count))
 
-    #with open(data_path_normal, 'r') as csvfile:
-        #normal_tweet_reader = csv.DictReader(csvfile, delimiter=',')
-
-        #for row in normal_tweet_reader:
-
-            #normal_tweets.append(row['text'])
-            #normal_tweet_count += 1
-
-            #print('Normal Tweet Current Count{normal_tweet_count}'.format(normal_tweet_count=normal_tweet_count))
-
-            #if normal_tweet_count >= total_tweets_per_category:
-                #break
-
     training_array = deepcopy(spam_tweets + normal_tweets)
-    classes = deepcopy(['B'] * spam_tweet_count + ['G'] * normal_tweet_count)
+    labels = deepcopy(['B'] * spam_tweet_count + ['G'] * normal_tweet_count)
+
+    # Generate the random numbers for generating a test set
+    test_idx = random.sample(range(len(training_array)), test_data_count)
+    test_features = []
+    test_labels = []
+    for idx in test_idx:
+        test_features.append(training_array[idx])
+        test_labels.append(labels[idx])
+        training_array.pop(idx)
+        labels.pop(idx)
 
     D = set()
     wordProb = {'B': defaultdict(int), 'G': defaultdict(int)}
@@ -166,8 +158,9 @@ def learn(data_path_spam, data_path_normal):
         if type(line) is float:
             continue
 
-        line = line.strip().split("\t")
-        klass = classes[idx]
+        #line = str(line.strip().split("\t"))
+        line = remove_url(str(line.strip().split("\t")))
+        klass = labels[idx]
         docCount[klass] += 1
         for w in getFeatures(line):
             D.add(w)
@@ -175,12 +168,58 @@ def learn(data_path_spam, data_path_normal):
             wordSize[klass] += 1
 
         idx += 1
-        if idx % 1000 == 0:
+        if idx % 10000 == 0:
             print(idx)
 
     writeModel('model.json', docCount, wordSize, wordProb, D)
     print('Training completed')
 
+    model = readModel('model.json')
+    correctly_classified = 0
+    for idx in range(test_data_count):
+        if type(test_features[idx]) is float:
+            continue
+
+        prob = classify(model, remove_url(str(test_features[idx])))
+        class_ = "G" if prob >= 0 else "B"
+        if class_ == test_labels[idx]:
+            correctly_classified += 1
+
+        if idx % 10 == 0:
+            print('Testing {test_idx}/{length}'.format(test_idx=idx, length=test_data_count))
+
+    print('Accuracy: {correctly_classified}/{test_data_count}'.format(correctly_classified=correctly_classified,
+                                                                      test_data_count=test_data_count))
+
+def continue_training(path_to_model, train_path):
+
+    spamreader = pd.read_csv(train_path, dtype=data_columns)
+    training_array = deepcopy(list(spamreader.get('text')))
+    training_length = len(training_array)
+    labels = ['B'] * training_length
+
+
+    model = readModel(path_to_model)
+    (docCount, wordSize, wordProb, D) = model
+    D = set(D)
+    idx = 0
+    for line in training_array:
+        if type(line) is float:
+            continue
+        line = str(line.strip().split("\t"))
+        klass = labels[idx]
+        docCount[klass] += 1
+        for w in getFeatures(line):
+            print(w)
+            D.add(w)
+            wordProb[klass][w] += 1
+            wordSize[klass] += 1
+
+        idx += 1
+        if idx % 10000 == 0:
+            print(idx)
+
+    writeModel('model.json', docCount, wordSize, wordProb, D)
 
 def main():
     spam_tweets_path = '/home/chris/study/Text Mining Project/corpus/cresci-2017.csv/datasets_full.csv/' \
@@ -189,20 +228,18 @@ def main():
     genuine_tweets_path = '/home/chris/study/Text Mining Project/corpus/cresci-2017.csv/datasets_full.csv/' \
                           'genuine_accounts.csv/tweets.csv'
 
-    spam_test_path = '/home/chris/study/Text Mining Project/corpus/cresci-2017.csv/datasets_full.csv/traditional_spambots_1.csv/tweets.csv'
+    train_path = '/home/chris/study/Text Mining Project/corpus/cresci-2017.csv/datasets_full.csv/social_spambots_2.csv/tweets.csv'
 
-    train = False
+    spam_test_path = '/home/chris/study/Text Mining Project/corpus/cresci-2017.csv/datasets_full.csv/social_spambots_3.csv/tweets.csv'
+
+    train = True
 
     if train:
         learn(data_path_spam=spam_tweets_path, data_path_normal=genuine_tweets_path)
 
+    #continue_training('model.json', train_path)
 
     model = readModel('model.json')
-    data_columns = {"id": int, "text": str, "source": str, "user_id": str, "truncated": str, "in_reply_to_status_id": str,
-         "in_reply_to_user_id": str, "in_reply_to_screen_name": str, "retweeted_status_id": str, "geo": str,
-         "place": str, "contributors": str, "retweet_count": int, "reply_count": str, "favorite_count": str,
-         "favorited": str, "retweeted": str, "possibly_sensitive": str, "num_hashtags": int, "num_urls": str,
-         "num_mentions": str, "created_at": str, "timestamp": str, "crawled_at": str, "updated": str}
 
     print('Reading file:{file_name}'.format(file_name=spam_test_path))
     test_csv = pd.read_csv(spam_test_path, dtype=data_columns)
@@ -211,9 +248,10 @@ def main():
     correctly_classified = 0
     test_idx = 0
     test_length = len(spam_tweets)
+
     for tweet in spam_tweets:
         test_idx += 1
-        val = classify(model, tweet)
+        val = classify(model, remove_url(tweet))
         if val < 0:
             correctly_classified += 1
 
@@ -221,6 +259,7 @@ def main():
 
         if test_idx % 100 == 0:
             print('Testing {test_idx}/{length}'.format(test_idx=test_idx, length=test_length))
+            break
 
     print('Correctly classified: {correctly_classified}/{total}'.
           format(correctly_classified=correctly_classified, total=test_length))
