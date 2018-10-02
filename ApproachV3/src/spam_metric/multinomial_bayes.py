@@ -126,6 +126,17 @@ def main():
     print("F score {:.2f}".format(fscore))
 
 
+def test():
+    tweet_list = []
+    tweet = "hello twitter facebook congratulations"
+    tweet_list.append(str(tweet))
+    vectorizer, classifier = load()
+    preprocessed = preprocess(tweet)
+    vectorized_tweet = vectorizer.transform([preprocessed])
+    prediction = classifier.predict(vectorized_tweet)
+
+
 if __name__ == '__main__':
     main()
+    test()
 
