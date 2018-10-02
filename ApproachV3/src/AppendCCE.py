@@ -50,10 +50,10 @@ def main():
     common_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/datasets/'
 
     with \
-            open(common_path + 'training_dataset_final_split_1.csv',
+            open(common_path + 'training_dataset_final_split_2.csv',
                  'r+',
                  encoding="utf-8") as inp, \
-            open(common_path + 'training_dataset_final_cce_split_1.csv',
+            open(common_path + 'training_dataset_final_cce_split_2.csv',
                  'w+',
                  encoding="utf-8") as out:
         reader = csv.DictReader(inp)
