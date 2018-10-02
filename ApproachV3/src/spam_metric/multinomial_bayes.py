@@ -14,6 +14,7 @@ table = str.maketrans({key: None for key in string.punctuation})
 
 
 def save(vectorizer, classifier):
+
     '''
     save classifier to disk
     '''
@@ -22,10 +23,19 @@ def save(vectorizer, classifier):
 
 
 def load():
-    '''
+
+    """
     load classifier from disk
+    """
+
     '''
-    with open('model.pkl', 'rb') as file:
+    Kanishk - /Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/src/spam_metric/model.pkl
+    Christopher - model.pkl
+    '''
+
+    path = 'model.pkl'
+
+    with open(path, 'rb') as file:
         vectorizer, classifier = pickle.load(file)
     return vectorizer, classifier
 

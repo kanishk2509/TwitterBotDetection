@@ -50,10 +50,10 @@ def main():
     common_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/datasets/'
 
     with \
-            open(common_path + 'training_dataset_final_split_2.csv',
+            open(common_path + 'training_dataset_final_split_1.csv',
                  'r+',
                  encoding="utf-8") as inp, \
-            open(common_path + 'training_dataset_final_cce_split_2.csv',
+            open(common_path + 'training_dataset_final_cce_split_1.csv',
                  'w+',
                  encoding="utf-8") as out:
         reader = csv.DictReader(inp)
@@ -81,10 +81,14 @@ def main():
         cnt = 0
 
         for row in reader:
+            preprocessed = []
             cnt = cnt + 1
 
             # Get all the tweets and tweet times of the user
             tweets, tweet_times = get_tweet_and_tweet_times(row['id'], api)
+
+            if len(tweets) == 0 or len(tweet_times) == 0:
+                continue
 
             binned_times, binned_sequence = metrics.generate_binned_array(tweet_times)
             first_order_entropy = metrics.calculate_entropy(binned_array=binned_times)
@@ -93,18 +97,22 @@ def main():
 
             cce = conditional_entropy + perc_unique_strings * first_order_entropy
 
+            print('Entropy: ', cce)
+
             vectorizer, classifier = load()
 
+            cou = 0
             for tweet in tweets:
-                preprocessed = preprocess(tweet)
+                cou += 1
+                if not tweet:
+                    continue
+                preprocessed.append(preprocess(tweet))
 
-            vectorized_tweet = vectorizer.transform([preprocessed])
+            vectorized_tweet = vectorizer.transform(preprocessed)
             prediction = classifier.predict(vectorized_tweet)
 
-            spam_ratio = 1 - (len(np.count_nonzero(prediction, axis=1)) / len(prediction))
+            spam_ratio = (len(prediction) - sum(prediction)) / len(prediction)
 
-            print('Entropy: ', cce)
-            print(prediction)
             print('Spam Ratio: ', spam_ratio)
 
             writer.writerow({'id': row['id'],
