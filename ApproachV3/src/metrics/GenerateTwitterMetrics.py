@@ -324,6 +324,12 @@ def compute_least_entropy_length_non_overlapping(array):
                 total_gram_count = len(grams)
                 #print(unique_grams)
 
+    # handling cases with only one tweet
+    if len(train_array) < 2:
+        max_length = 1
+        min_entropy = 10
+        total_gram_count = 1
+        max_unique_gram_count = 1
 
     return max_length, min_entropy, float(100 * max_unique_gram_count/total_gram_count)
 
