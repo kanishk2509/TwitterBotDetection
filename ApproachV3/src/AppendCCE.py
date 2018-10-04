@@ -1,6 +1,4 @@
 import csv
-
-import numpy as np
 from GetApi import get_api
 import tweepy
 from ApproachV3.src.metrics import GenerateTwitterMetrics as metrics
@@ -37,23 +35,23 @@ def get_tweet_and_tweet_times(id, api_):
             tweets.append(txt)
 
         if tweets_parsed == 0:
-            return []
+            return [], []
 
         return tweets, tweet_times
 
     else:
         print("Protected Account: {}".format(id))
-        return []
+        return [], []
 
 
 def main():
     common_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/datasets/'
 
     with \
-            open(common_path + 'training_dataset_final_split_1.csv',
+            open(common_path + 'training_dataset_final_split_2_temp.csv',
                  'r+',
                  encoding="utf-8") as inp, \
-            open(common_path + 'training_dataset_final_cce_split_1.csv',
+            open(common_path + 'training_dataset_final_cce_split_2_temp.csv',
                  'w+',
                  encoding="utf-8") as out:
         reader = csv.DictReader(inp)
@@ -80,16 +78,25 @@ def main():
 
         cnt = 0
 
+        vectorizer, classifier = load()
+
         for row in reader:
             preprocessed = []
             cnt = cnt + 1
+            print(cnt, ')  Getting tweets for user -> ', row['screen_name'])
 
             # Get all the tweets and tweet times of the user
             tweets, tweet_times = get_tweet_and_tweet_times(row['id'], api)
 
             if len(tweets) == 0 or len(tweet_times) == 0:
+                print('Above error, skipping record...')
                 continue
 
+            if len(tweets) <= 50:
+                print('Not enough tweet data, skipping record...')
+                continue
+
+            print('Computing Entropy...')
             binned_times, binned_sequence = metrics.generate_binned_array(tweet_times)
             first_order_entropy = metrics.calculate_entropy(binned_array=binned_times)
             max_length, conditional_entropy, perc_unique_strings = \
@@ -99,19 +106,18 @@ def main():
 
             print('Entropy: ', cce)
 
-            vectorizer, classifier = load()
-
-            cou = 0
             for tweet in tweets:
-                cou += 1
                 if not tweet:
                     continue
-                preprocessed.append(preprocess(tweet))
+                preprocessed.append(preprocess(tweet).strip())
 
-            vectorized_tweet = vectorizer.transform(preprocessed)
-            prediction = classifier.predict(vectorized_tweet)
-
-            spam_ratio = (len(prediction) - sum(prediction)) / len(prediction)
+            if len(preprocessed) > 1:
+                vectorized_tweet = vectorizer.transform(preprocessed)
+                prediction = classifier.predict(vectorized_tweet)
+                spam_ratio = (len(prediction) - sum(prediction)) / len(prediction)
+            else:
+                prediction = []
+                spam_ratio = 0.5
 
             print('Spam Ratio: ', spam_ratio)
 

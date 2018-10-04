@@ -33,7 +33,7 @@ def load():
     Christopher - model.pkl
     '''
 
-    path = 'model.pkl'
+    path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/src/spam_metric/model.pkl'
 
     with open(path, 'rb') as file:
         vectorizer, classifier = pickle.load(file)
