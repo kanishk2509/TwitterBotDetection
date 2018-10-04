@@ -1,7 +1,10 @@
 import csv
+import time
+import numpy as np
 from GetApi import get_api
 import tweepy
 from ApproachV3.src.metrics import GenerateTwitterMetrics as metrics
+from ApproachV3.src.spam_metric.multinomial_bayes import load, preprocess
 
 '''
 The purpose of this module is to append CCE to the existing training data.
@@ -11,16 +14,17 @@ instead of starting from the scratch.
 '''
 
 '''Twitter Account Keys'''
-key = ['L5UQsE4pIb9YUJvP7HjHuxSvW',
-       'HdRLPYgUqME194Wi2ThbbWfRd9BNHxIr2ms612oX9Yq1QXZdH7',
-       '1039011019786342401-iDggGlhErT1KKdVGVXz4Kt7X8v0kIV',
-       'MJ17S1uhCaI1zS3NBWksMaWdwjvAjn7cpji5vyhknfcUe']
+key = ['76vFgL9yGv0sW6gdZs1IsXA6q',
+       'dTa5CdXZWoWg02HSg6tZfQEloYaGDxI4xi0Wxiyk2wiByjXqLC',
+       '127268392-PQ5EpiFdYjKodmAIvHh98hdfOrcvHLyVJm9E3tLe',
+       '4uAWJCqAqRR4JPWeZH9lN70sIuauXs5eTHKe50w2N7A16']
 
 api = get_api(key[0], key[1], key[2], key[3])
 
 
-def get_tweet_times(id, api_):
+def get_tweet_and_tweet_times(id, api_):
     tweet_times = []
+    tweets = []
     tweets_parsed = 0
     user = api_.get_user(id)
 
@@ -29,25 +33,27 @@ def get_tweet_times(id, api_):
         for tweet in tweepy.Cursor(api.user_timeline, id=id, tweet_mode='extended').items(1000):
             tweet_times.append(tweet.created_at)
             tweets_parsed += 1
+            txt = tweet._json['full_text']
+            tweets.append(txt)
 
-        if tweets_parsed == 0:
-            return []
+        #if tweets_parsed == 0:
+            #return tweets, tweet_times
 
-        return tweet_times
+        return tweets, tweet_times
 
     else:
         print("Protected Account: {}".format(id))
-        return []
+        return tweets, tweet_times
 
 
 def main():
-    common_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/datasets/'
+    common_path = '/home/chris/PycharmProjects/TwitterBotDetection/ApproachV3/datasets/'
 
     with \
             open(common_path + 'training_dataset_final_split_1.csv',
                  'r+',
                  encoding="utf-8") as inp, \
-            open(common_path + 'training_dataset_final_cce_split_1.csv',
+            open(common_path + 'training_dataset_final_cce_split_7.csv',
                  'w+',
                  encoding="utf-8") as out:
         reader = csv.DictReader(inp)
@@ -66,6 +72,7 @@ def main():
                   'user_mentions_ratio',
                   'mal_url_ratio',
                   'cce',
+                  'spam_ratio',
                   'bot']
 
         writer = csv.DictWriter(out, fieldnames=fields)
@@ -73,10 +80,30 @@ def main():
 
         cnt = 0
 
-        for row in reader:
-            cnt = cnt + 1
+        vectorizer, classifier = load()
 
-            tweet_times = get_tweet_times(row['id'], api)
+        for row in reader:
+            start = time.time()
+            cnt = cnt + 1
+            preprocessed = []
+
+            # Get all the tweets and tweet times of the user
+            id = row['id']
+            # Sometimes ID will be written in exponential form
+            if id != row['id_str'][1:-1]:
+                id = row['id_str'][1:-1]
+
+            try:
+                tweets, tweet_times = get_tweet_and_tweet_times(id, api)
+            except tweepy.TweepError as e:
+                print(e.reason) # prints 34
+                print('Error for user {name}:{reason}'.format(name=row['screen_name'], reason=e.reason))
+                continue
+
+            # If there are no tweets move to next
+            if len(tweets) <= 50 or len(tweet_times) == 0:
+                print('Not enough tweet data. skipping record id {id}'.format(id=row['screen_name']))
+                continue
 
             binned_times, binned_sequence = metrics.generate_binned_array(tweet_times)
             first_order_entropy = metrics.calculate_entropy(binned_array=binned_times)
@@ -84,7 +111,27 @@ def main():
                 metrics.compute_least_entropy_length_non_overlapping(list(binned_sequence))
 
             cce = conditional_entropy + perc_unique_strings * first_order_entropy
+
+            for tweet in tweets:
+                preprocessed_tweet = (preprocess(tweet)).strip()
+                if len(preprocessed_tweet) > 0:
+                    preprocessed.append(preprocess(tweet))
+
+            # if the user has no Latin alphabet tweets, assign a probability of 0.5 to spam ratio
+            if len(preprocessed) > 1:
+                vectorized_tweet = vectorizer.transform(preprocessed)
+                prediction = classifier.predict(vectorized_tweet)
+
+                length = len(prediction)
+                spam_ratio = (length - sum(prediction))/length
+
+            else:
+                prediction = []
+                spam_ratio = 0.5
+
             print('Entropy: ', cce)
+            #print(prediction)
+            print('Spam Ratio: ', spam_ratio)
 
             writer.writerow({'id': row['id'],
                              'id_str': row['id_str'],
@@ -100,9 +147,12 @@ def main():
                              'user_mentions_ratio': row['user_mentions_ratio'],
                              'mal_url_ratio': row['mal_url_ratio'],
                              'cce': cce,
+                             'spam_ratio': spam_ratio,
                              'bot': row['bot']})
 
             print('Row ', cnt, ' written for => ', row['screen_name'].upper())
+            end = time.time()
+            print('Elapsed time:{elapsed}'.format(elapsed = (end-start)))
 
 
 if __name__ == '__main__':

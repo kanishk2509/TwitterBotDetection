@@ -1,9 +1,9 @@
 import pandas as pd
-from GetApi import get_api
-from GetAccountProperties import get_data
-from classifiers.RForestClassifier import RFC
-from classifiers.DTreeClassifier import DTC
-from classifiers.MNBClassifier import MNB
+from ApproachV3.src.GetApi import get_api
+from ApproachV3.src.GetAccountProperties import get_data
+from ApproachV3.src.classifiers.RForestClassifier import RFC
+from ApproachV3.src.classifiers.DTreeClassifier import DTC
+from ApproachV3.src.classifiers.MNBClassifier import MNB
 from sklearn.model_selection import train_test_split
 import numpy as np
 import os

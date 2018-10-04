@@ -128,15 +128,20 @@ def main():
 
 def test():
     tweet_list = []
+    preprocessed = []
     tweet = "hello twitter facebook congratulations"
+    tweet2 ="This is a test"
     tweet_list.append(str(tweet))
+    tweet_list.append(str(tweet2))
     vectorizer, classifier = load()
-    preprocessed = preprocess(tweet)
-    vectorized_tweet = vectorizer.transform([preprocessed])
+    preprocessed.append(preprocess(tweet))
+    preprocessed.append(preprocess(tweet2))
+    vectorized_tweet = vectorizer.transform(preprocessed)
     prediction = classifier.predict(vectorized_tweet)
+    print(prediction)
 
 
 if __name__ == '__main__':
-    main()
+    #main()
     test()
 
