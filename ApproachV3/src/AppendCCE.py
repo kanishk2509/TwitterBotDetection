@@ -85,6 +85,7 @@ def main():
         for row in reader:
             start = time.time()
             cnt = cnt + 1
+            print(cnt, ')  Getting tweets for user -> ', row['screen_name'])
             preprocessed = []
 
             # Get all the tweets and tweet times of the user
