@@ -1,4 +1,5 @@
 import copy
+from datetime import datetime
 import datetime as dt
 
 import numpy as np
@@ -6,6 +7,7 @@ import requests
 import tweepy
 
 from ApproachV3.src.metrics import GenerateTwitterMetrics as metrics
+from ApproachV3.src.spam_metric.multinomial_bayes import preprocess
 
 dow_ratios = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
 
@@ -15,18 +17,50 @@ Calculating Account Properties Component
 '''
 
 
-def get_data(user_id, api):
+def get_data(user_id, api, vectorizer, classifier):
     tbl = []
     try:
-        tbl = mine_data(user_id, api)
+        tbl = mine_data(user_id, api, vectorizer, classifier)
         return tbl
     except tweepy.TweepError as e:
         print(e)
         return tbl
 
 
-def mine_data(user_id, api):
+def get_cce_spam_ratio(tweets, tweet_times, vectorizer, classifier):
+    t1 = datetime.now()
 
+    preprocessed = []
+    print('Computing Entropy...')
+    binned_times, binned_sequence = metrics.generate_binned_array(tweet_times)
+    first_order_entropy = metrics.calculate_entropy(binned_array=binned_times)
+    max_length, conditional_entropy, perc_unique_strings = \
+        metrics.compute_least_entropy_length_non_overlapping(list(binned_sequence))
+
+    cce = conditional_entropy + perc_unique_strings * first_order_entropy
+
+    for tweet in tweets:
+        if not tweet:
+            continue
+        preprocessed.append(preprocess(tweet).strip())
+
+    if len(preprocessed) > 1:
+        vectorized_tweet = vectorizer.transform(preprocessed)
+        prediction = classifier.predict(vectorized_tweet)
+        spam_ratio = (len(prediction) - sum(prediction)) / len(prediction)
+    else:
+        prediction = []
+        spam_ratio = 0.5
+
+    t2 = datetime.now() - t1
+    print('Time elapsed:{total_time}'.format(total_time=t2))
+
+    return cce, spam_ratio
+
+
+def mine_data(user_id, api, vectorizer, classifier):
+
+    tweets = []
     tbl = []
     tweets_parsed = 0
     hashtags_recorded = 0
@@ -58,9 +92,8 @@ def mine_data(user_id, api):
         acct_rep = user.followers_count / (user.followers_count + user.friends_count)
         print("acct_rep: ", acct_rep)
 
-    user_data = [age, in_out_ratio, favourites_ratio,
-                 status_ratio, acct_rep, ]
-    tbl.append(user_id)
+    #tbl.append(user_id)
+    tbl.append(user.screen_name)
     tbl.append(age)
     tbl.append(in_out_ratio)
     tbl.append(favourites_ratio)
@@ -74,6 +107,8 @@ def mine_data(user_id, api):
         # Iterate through all (3200 max) tweets. items() can take a lower max to limit
         for tweet in tweepy.Cursor(api.user_timeline, id=user_id, tweet_mode='extended').items(1000):
             update_dow_ratios(tweet.created_at.weekday())
+            txt = tweet._json['full_text']
+            tweets.append(txt)
 
             # If this tweet contained urls, count them
             if len(tweet.entities['urls']) > 0:
@@ -83,12 +118,12 @@ def mine_data(user_id, api):
             # If this tweet contains hashtags, count them
             if len(tweet.entities['hashtags']) > 0:
                 hashtags_recorded += len(tweet.entities['hashtags'])
-                print("hashtags_recorded: ", hashtags_recorded)
+                #print("hashtags_recorded: ", hashtags_recorded)
 
             # If this tweet contained user mentions, count them
             if len(tweet.entities['user_mentions']) > 0:
                 user_mentions_recorded += len(tweet.entities['user_mentions'])
-                print("user_mentions_recorded: ", user_mentions_recorded)
+                #("user_mentions_recorded: ", user_mentions_recorded)
 
             # Count up the tweets for each day
             # First if block captures date of most recent tweet
@@ -112,7 +147,16 @@ def mine_data(user_id, api):
             tweets_parsed += 1
 
         if tweets_parsed == 0:
-            return user_data + [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            print('No tweets parsed, skipping record...')
+            return []
+
+        if len(tweets) == 0 or len(tweet_times) == 0:
+            print('No tweets present, skipping record...')
+            return []
+
+        if len(tweets) <= 50:
+            print('Not enough tweet data, skipping record...')
+            return []
 
         # Calculate dow_ratios from values
         for key in dow_ratios:
@@ -138,30 +182,22 @@ def mine_data(user_id, api):
             mal_urls_ratio = num_malicious_urls(urls) / len(urls)
             print("mal_urls_ratio: ", mal_urls_ratio)'''
 
-        # Compute the entropy based on the tweet times
-        from datetime import datetime
-        #t1 = datetime.now()
-        binned_times, binned_sequence = metrics.generate_binned_array(tweet_times)
-        first_order_entropy = metrics.calculate_entropy(binned_array=binned_times)
-        max_length, conditional_entropy, perc_unique_strings = \
-            metrics.compute_least_entropy_length_non_overlapping(list(binned_sequence))
-
-        cce = conditional_entropy + perc_unique_strings * first_order_entropy
-        #t2 = datetime.now() - t1
-        #print('Time elapsed:'.format(total_time=t2))
-        print('Entropy: ', cce)
-
+        cce, spam_ratio = get_cce_spam_ratio(tweets, tweet_times, vectorizer, classifier)
+        print("CCE: ", cce)
+        print("spam ratio: ", spam_ratio)
         tbl.append(avg_tpd)
         tbl.append(hashtags_ratio)
         tbl.append(user_mentions_ratio)
         tbl.append(0.0)
-        tbl.append(0)
         tbl.append(cce)
+        tbl.append(spam_ratio)
+        tbl.append(0)
+        tbl.append(user.location)
         return copy.deepcopy(tbl)
 
     else:
         print("Protected Account: {}".format(user_id))
-        return user_data + [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+        return []
 
 
 # Send all the urls out to Google's SafeBrowsing API to check for

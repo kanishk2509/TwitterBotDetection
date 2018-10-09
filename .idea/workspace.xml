@@ -1,0 +1,1031 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6ba0c19f-8fea-41a3-b20d-ec773cbcd733" name="Default Changelist" comment="Modified AppendCCE to add spam ratio to existing training dataset.">
+      <change afterPath="$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_cce_split_2_temp.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_split_2_temp.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ApproachV3/src/spam_metric/model.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApproachV3/src/AppendCCE.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/src/AppendCCE.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApproachV3/src/GetAccountProperties.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/src/GetAccountProperties.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApproachV3/src/TwitterDataMiner.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/src/TwitterDataMiner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApproachV3/src/spam_metric/multinomial_bayes.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/src/spam_metric/multinomial_bayes.py" afterDir="false" />
+    </list>
+    <ignored path="model.pkl" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/TwitterBotDetection$spam_detector.coverage" NAME="spam_detector Coverage Results" MODIFIED="1538417011052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ApproachV3/src/spam_metric" />
+    <SUITE FILE_PATH="coverage/TwitterBotDetection$GenerateTwitterMetrics.coverage" NAME="GenerateTwitterMetrics Coverage Results" MODIFIED="1537698491634" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ApproachV3/src" />
+    <SUITE FILE_PATH="coverage/TwitterBotDetection$BotClassifier.coverage" NAME="BotClassifier Coverage Results" MODIFIED="1538159548187" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ApproachV3/src" />
+    <SUITE FILE_PATH="coverage/TwitterBotDetection$clean_tweets.coverage" NAME="clean_tweets Coverage Results" MODIFIED="1538509733667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ApproachV3/src/spam_metric" />
+    <SUITE FILE_PATH="coverage/TwitterBotDetection$main.coverage" NAME="main Coverage Results" MODIFIED="1538061004452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ApproachV3/src/crm" />
+    <SUITE FILE_PATH="coverage/TwitterBotDetection$combine_files.coverage" NAME="combine_files Coverage Results" MODIFIED="1538502808647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ApproachV3/src/spam_metric" />
+    <SUITE FILE_PATH="coverage/TwitterBotDetection$multinomial_bayes.coverage" NAME="multinomial_bayes Coverage Results" MODIFIED="1538513343465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ApproachV3/src/spam_metric" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1477417540">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="18" />
+          <entry key="project.open.time.0" value="7" />
+          <entry key="project.open.time.1" value="5" />
+          <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.6" value="2" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.open.time.9" value="2" />
+          <entry key="project.opened" value="20" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="csv" value="274" />
+          <entry key="md" value="4" />
+          <entry key="p" value="2" />
+          <entry key="py" value="130" />
+          <entry key="txt" value="39" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CSV" value="272" />
+          <entry key="Markdown" value="4" />
+          <entry key="PLAIN_TEXT" value="43" />
+          <entry key="Python" value="130" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="csv" value="104" />
+          <entry key="dummy" value="61" />
+          <entry key="md" value="6335" />
+          <entry key="py" value="12970" />
+          <entry key="txt" value="696" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="CSV" value="104" />
+          <entry key="Markdown" value="6335" />
+          <entry key="PLAIN_TEXT" value="757" />
+          <entry key="Python" value="12970" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.vcs.git.usages">
+        <counts>
+          <entry key="git.branch.checkout.local" value="2" />
+          <entry key="git.branch.create.new" value="2" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ApproachV3/src/AppendCCE.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="33" column="42" lean-forward="true" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ApproachV3/src/GetAccountProperties.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="477">
+              <caret line="194" column="30" selection-start-line="194" selection-start-column="30" selection-end-line="194" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ApproachV3/src/TwitterDataMiner.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="598">
+              <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_cce_split_2_temp.csv">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_cce_split_2.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="103" selection-start-column="103" selection-end-column="103" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_split_2.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="23">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>7259302</find>
+      <find>71114686</find>
+      <find>16712547</find>
+      <find>41799998</find>
+      <find>21035409</find>
+      <find>bot</find>
+      <find>21119984</find>
+      <find>4888553495</find>
+      <find>sys</find>
+      <find>2826073429</find>
+      <find>Status</find>
+      <find>2593449065</find>
+      <find>130745589</find>
+      <find>563066753</find>
+      <find>133501277</find>
+      <find>winter_py</find>
+      <find>3184054019</find>
+      <find>14186926</find>
+      <find>116551173</find>
+      <find>54516335</find>
+      <find>233991311</find>
+      <find>14401698</find>
+      <find>15340816</find>
+      <find>241202626</find>
+      <find>nan</find>
+      <find>148825650</find>
+      <find>23737582</find>
+      <find>114295199</find>
+      <find>dt</find>
+      <find>4255867467</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>TwitterBot</replace>
+      <replace>0.0</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/ApproachVx/training_dataset_final.csv" />
+        <option value="$PROJECT_DIR$/ApproachVx/training_dataset_final2.csv" />
+        <option value="$PROJECT_DIR$/ApproachVx/training_dataset_cleaned.csv" />
+        <option value="$PROJECT_DIR$/ApproachVx/src/GetAccountProperties.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/src/BotClassifier.py" />
+        <option value="$PROJECT_DIR$/ApproachV3/src/Christopher's/blah.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/datasets/honeypot.txt" />
+        <option value="$PROJECT_DIR$/kaggle_data/training_dataset_final_noheader.csv" />
+        <option value="$PROJECT_DIR$/ApproachVx/SentenceSimilarity.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/datasets/neg_tweets.txt" />
+        <option value="$PROJECT_DIR$/ApproachVx/datasets/pos_tweets.txt" />
+        <option value="$PROJECT_DIR$/ApproachVx/text_classifier/mnb.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/SentimentClassifier.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/datasets/tweet_data.txt" />
+        <option value="$PROJECT_DIR$/ApproachVx/datasets/tweet_data.csv" />
+        <option value="$PROJECT_DIR$/ApproachVx/check_progression.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_temp.csv" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_temp2.csv" />
+        <option value="$PROJECT_DIR$/ApproachVx/TwitterDataMiner.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/classifiers/RForestClassifier.py" />
+        <option value="$PROJECT_DIR$/readme.md" />
+        <option value="$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final.csv" />
+        <option value="$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final2.csv" />
+        <option value="$PROJECT_DIR$/ApproachV3/datasets/training_dataset_cleaned.csv" />
+        <option value="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_final.csv" />
+        <option value="$PROJECT_DIR$/ApproachVx/CosineSentenceSimilarity.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/SentenceSentiment.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/TwitterTextMiner.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200a.csv" />
+        <option value="$PROJECT_DIR$/ApproachVx/GetApi.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200final.csv" />
+        <option value="$PROJECT_DIR$/ApproachVx/StdDeviationFriends.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/StdDeviationFollowers.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/AverageSentenceSentiment.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/AppendAdditionalFeatures.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200f_temp.csv" />
+        <option value="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200.csv" />
+        <option value="$PROJECT_DIR$/ApproachVx/GetTweetProperties.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200f.csv" />
+        <option value="$PROJECT_DIR$/ApproachVx/BotClassifier.py" />
+        <option value="$PROJECT_DIR$/ApproachVx/GetAccountProperties.py" />
+        <option value="$PROJECT_DIR$/ApproachV3/src/FileSplitter.py" />
+        <option value="$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_split_2.csv" />
+        <option value="$PROJECT_DIR$/ApproachV3/src/spam_metric/multinomial_bayes.py" />
+        <option value="$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_cce_split_2_temp.csv" />
+        <option value="$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_cce_split_2.csv" />
+        <option value="$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_split_2_temp.csv" />
+        <option value="$PROJECT_DIR$/ApproachV3/src/AppendCCE.py" />
+        <option value="$PROJECT_DIR$/ApproachV3/src/GetAccountProperties.py" />
+        <option value="$PROJECT_DIR$/ApproachV3/src/TwitterDataMiner.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
+              <item name="ApproachV3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
+              <item name="ApproachV3" type="462c0819:PsiDirectoryNode" />
+              <item name="datasets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
+              <item name="ApproachV3" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
+              <item name="ApproachVx" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
+              <item name="kaggle_data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ApproachV3/datasets" />
+      <recent name="$PROJECT_DIR$/ApproachV3/src/spam_metric" />
+      <recent name="$PROJECT_DIR$/ApproachVx/datasets" />
+      <recent name="$PROJECT_DIR$/ApproachVx" />
+      <recent name="$PROJECT_DIR$/kaggle_data" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ApproachVx/datasets" />
+      <recent name="$PROJECT_DIR$/ApproachVx/src" />
+      <recent name="$PROJECT_DIR$/ApproachVx" />
+      <recent name="$PROJECT_DIR$/ApproachVx/classifiers" />
+      <recent name="$PROJECT_DIR$/ApproachVx/RFClassifier.py" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.AppendCCE">
+    <configuration name="AppendAdditionalFeatures" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="TwitterBotDetection" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ApproachVx" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ApproachVx/AppendAdditionalFeatures.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="AppendCCE" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="TwitterBotDetection" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ApproachV3/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ApproachV3/src/AppendCCE.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="CosineSentenceSimilarity" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="TwitterBotDetection" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ApproachVx" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ApproachVx/CosineSentenceSimilarity.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="FileSplitter" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="TwitterBotDetection" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ApproachV3/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ApproachV3/src/FileSplitter.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="check_progression" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="TwitterBotDetection" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ApproachVx" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ApproachVx/check_progression.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.CosineSentenceSimilarity" />
+      <item itemvalue="Python.check_progression" />
+      <item itemvalue="Python.AppendAdditionalFeatures" />
+      <item itemvalue="Python.AppendCCE" />
+      <item itemvalue="Python.FileSplitter" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.AppendCCE" />
+        <item itemvalue="Python.FileSplitter" />
+        <item itemvalue="Python.AppendAdditionalFeatures" />
+        <item itemvalue="Python.check_progression" />
+        <item itemvalue="Python.CosineSentenceSimilarity" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6ba0c19f-8fea-41a3-b20d-ec773cbcd733" name="Default Changelist" comment="" />
+      <created>1536536200391</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1536536200391</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Initial Version with Kaggle Data">
+      <created>1536537736502</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1536537736502</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Initial Version with Kaggle Data">
+      <created>1536537944426</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1536537944426</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Initial Version with Kaggle Data">
+      <created>1536539166171</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1536539166171</updated>
+    </task>
+    <task id="LOCAL-00004" summary="1. Installed dependencies in requirement.txt&#10;2. Implemented classifiers on training data in Classifiers.py">
+      <created>1536541540187</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1536541540187</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Corrected errors. Added global file reference. Added CustomDetector.py as a custom classifier that gives better accuracy than the traditional classifiers.">
+      <created>1536544579088</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1536544579088</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added ApproachV2, in progress. Also added detailed readme.md">
+      <created>1536587832449</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1536587832449</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added twitter auth keys.">
+      <created>1536587962312</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1536587962312</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Update readme file.">
+      <created>1536640773984</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1536640773984</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Finalized Step 3 and 4 of ApproachV3.&#10;Update readme file.">
+      <created>1536792257906</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1536792257906</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Finalized Step 3 and 4 of ApproachV3.&#10;Update readme file.">
+      <created>1536792351174</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1536792351174</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Finalized Step 3 and 4 of ApproachV3. Update readme file with names.">
+      <created>1536793862122</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1536793862122</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Finalized Step 3 and 4 of ApproachV3. Update readme file with names.">
+      <created>1536794007839</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1536794007839</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Finalized Step 3 and 4 of ApproachV3. Update readme file with names.">
+      <created>1536794110361</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1536794110361</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Finalized Step 3 and 4 of ApproachV3. Update readme file with names.">
+      <created>1536794234054</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1536794234054</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Added a new ApproachVx. Updated readme file.">
+      <created>1536910182840</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1536910182840</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Added a new ApproachVx. Updated readme file.">
+      <created>1536910526191</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1536910526191</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Completed ApproachVx. Updated readme file.">
+      <created>1537527438378</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1537527438378</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Completed ApproachVx. Updated readme file.">
+      <created>1537619701336</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1537619701336</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Completed ApproachVx. Updated readme file.">
+      <created>1537619729526</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1537619729526</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Created program to append CCE values to existing training dataset.">
+      <created>1538400779990</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1538400779990</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Modified AppendCCE to add spam ratio to existing training dataset.">
+      <created>1538518617362</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1538518617362</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Modified AppendCCE to add spam ratio to existing training dataset.">
+      <created>1538519714814</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1538519714814</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Modified AppendCCE to add spam ratio to existing training dataset.">
+      <created>1538523336682</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1538523336682</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28047922" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49964765" weight="0.35180724" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32891566" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32891566" />
+      <window_info anchor="bottom" x="9" y="171" width="1419" height="533" id="Terminal" order="8" weight="0.3759036" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5003524" side_tool="true" weight="0.6831325" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32891566" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial Version with Kaggle Data" />
+    <MESSAGE value="1. Installed dependencies in requirement.txt&#10;2. Implemented classifiers on training data in Classifiers.py" />
+    <MESSAGE value="Corrected errors. Added global file reference. Added CustomDetector.py as a custom classifier that gives better accuracy than the traditional classifiers." />
+    <MESSAGE value="Added ApproachV2, in progress. Also added detailed readme.md" />
+    <MESSAGE value="Added twitter auth keys." />
+    <MESSAGE value="Update readme file." />
+    <MESSAGE value="Finalized Step 3 and 4 of ApproachV3.&#10;Update readme file." />
+    <MESSAGE value="Finalized Step 3 and 4 of ApproachV3. Update readme file with names." />
+    <MESSAGE value="Added a new ApproachVx. Updated readme file." />
+    <MESSAGE value="Completed ApproachVx. Updated readme file." />
+    <MESSAGE value="Created program to append CCE values to existing training dataset." />
+    <MESSAGE value="Modified AppendCCE to add spam ratio to existing training dataset." />
+    <option name="LAST_COMMIT_MESSAGE" value="Modified AppendCCE to add spam ratio to existing training dataset." />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/ApproachVx/datasets/tweet_data2.csv" />
+    <entry file="file://$PROJECT_DIR$/ApproachVx/datasets/training_dataset_temp2.csv" />
+    <entry file="file://$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v2.csv" />
+    <entry file="file://$PROJECT_DIR$/ApproachVx/datasets/pos_tweets.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13447">
+          <caret line="616" column="42" selection-start-line="616" selection-start-column="42" selection-end-line="616" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/datasets/neg_tweets.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="649">
+          <caret line="1386" column="55" selection-start-line="1386" selection-start-column="55" selection-end-line="1386" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/src/classifiers/DTreeClassifier.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/classifiers/RForestClassifier.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/classifiers/MNBClassifier.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/SentimentClassifier.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="43" column="64" selection-start-line="43" selection-start-column="64" selection-end-line="43" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/check_progression.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/nltk/tokenize/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="112" column="4" selection-start-line="112" selection-start-column="4" selection-end-line="112" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/CosineSentenceSimilarity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-277">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/TwitterTextMiner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="100" column="43" selection-start-line="100" selection-start-column="43" selection-end-line="100" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/GetApi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="7" column="100" selection-start-line="7" selection-start-column="100" selection-end-line="7" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200final.csv" />
+    <entry file="file://$PROJECT_DIR$/ApproachVx/datasets/training_dataset_final.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/StdDeviationFriends.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/StdDeviationFollowers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/AverageSentenceSentiment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="30" column="48" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200a.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3080">
+          <caret line="154" column="197" selection-start-line="154" selection-start-column="197" selection-end-line="154" selection-end-column="197" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200f_temp.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200f.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18120">
+          <caret line="906" column="151" selection-start-line="906" selection-start-column="151" selection-end-line="906" selection-end-column="151" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/GetAccountProperties.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="743">
+          <caret line="72" column="41" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/BotClassifier.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="743">
+          <caret line="181" column="13" selection-start-line="181" selection-start-column="13" selection-end-line="181" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="2620">
+            <caret line="131" selection-start-line="131" selection-end-line="131" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final2.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/src/CleanDataset.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/src/BotClassifier.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="47" column="49" lean-forward="true" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/src/GetApi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaggle_data/test_data_4_students.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11954" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/src/metrics/GenerateTwitterMetrics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4740">
+          <caret line="238" column="49" selection-start-line="238" selection-start-column="49" selection-end-line="238" selection-end-column="49" />
+          <folding>
+            <element signature="e#121#152#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/src/FileSplitter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="62" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="760" column="32" selection-start-line="760" selection-start-column="32" selection-end-line="760" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_cce.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/dt_trained_classifier.p">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/src/spam_metric/spam_detector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/GetTweetProperties.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-843">
+          <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachVx/AppendAdditionalFeatures.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="108" selection-start-line="108" selection-end-line="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/src/spam_metric/multinomial_bayes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="35" column="104" selection-start-line="35" selection-start-column="104" selection-end-line="35" selection-end-column="104" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_split_1.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16054">
+          <caret line="700" column="9" selection-start-line="700" selection-end-line="700" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_split_2_temp.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_split_2.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/src/GetAccountProperties.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="194" column="30" selection-start-line="194" selection-start-column="30" selection-end-line="194" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/datasets/training_dataset.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="2019" column="10" selection-start-line="2019" selection-end-line="2019" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/datasets/training_dataset_cleaned.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="10" selection-start-line="1" selection-end-line="1" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/src/AppendCCE.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="33" column="42" lean-forward="true" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_cce_split_2_temp.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_cce_split_2.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="103" selection-start-column="103" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/src/TwitterDataMiner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
