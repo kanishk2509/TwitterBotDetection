@@ -6,7 +6,7 @@ def get_avg_sentiment(data):
     data_list = list(data)
     data_list_len = len(data_list)
     total_sentiment = 0.0
-    print("data list len ", data_list_len)
+    print("Calculating sentiment for ", data_list_len, " tweets")
 
     if data_list_len > 0:
         # Compute Average Tweet Sentiment
@@ -14,24 +14,23 @@ def get_avg_sentiment(data):
             txt = re.sub(r'^http?://.*[\r\n]*', '', i, flags=re.MULTILINE)
             analysis = TextBlob(clean_tweet(txt))
             total_sentiment = total_sentiment + analysis.sentiment.polarity
-            print("Total sentiment ", total_sentiment)
 
         avg_sentiment = total_sentiment / data_list_len
     else:
         avg_sentiment = 0
 
-    print("Avg Sentiment ", avg_sentiment)
+    print("Avg Sentiment for tweets: ", avg_sentiment)
 
     return avg_sentiment
 
 
-def get_avg_sentiment_single(data):
+def get_avg_sentiment_single(data, type):
     total_sentiment = 0.0
 
     txt = re.sub(r'^http?://.*[\r\n]*', '', data, flags=re.MULTILINE)
     analysis = TextBlob(clean_tweet(txt))
     total_sentiment = total_sentiment + analysis.sentiment.polarity
-    print("Total sentiment ", total_sentiment)
+    print("Average sentiment for ", type, ": ", total_sentiment)
 
     return total_sentiment
 

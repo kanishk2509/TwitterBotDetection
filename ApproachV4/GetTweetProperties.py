@@ -153,44 +153,69 @@ Returns 8 tweet semantics listed below
 
 def get_tweet_semantics(user_id, api):
     user = api.get_user(user_id)
-
+    tbl = []
     urls = []
-    unique_urls_ratio = 0.0
-    tweet_url_similarity = 0.0
 
     # Calculating (1, 2)
+    # 1
     std_dev_friends = compute_std_deviation_friends(user_id, api)
+    # 2
     std_dev_followers = compute_std_deviation_followers(user_id, api)
     print("std_dev_friends : ", std_dev_friends)
     print("std_dev_followers : ", std_dev_followers)
+    tbl.append(0)
 
-    # Calculating (3, 4)
+    if std_dev_friends > 0:
+        tbl.append(std_dev_friends)
+    else:
+        tbl.append('nan')
+
+    if std_dev_followers > 0:
+        tbl.append(std_dev_followers)
+    else:
+        tbl.append('nan')
+
     if not user.protected:
         try:
             for tweet in tweepy.Cursor(api.user_timeline, id=user_id, tweet_mode='extended').items(1000):
                 if len(tweet.entities['urls']) > 0:
                     for url in tweet.entities['urls']:
                         urls.append(url['expanded_url'])
-            unique_urls_ratio = len(Counter(urls).keys()) / len(urls)
-            tweet_url_similarity = get_avg_cosine_similarity(urls)
+            # Calculating (3, 4)
+            if len(urls) > 0:
+                # 3
+                unique_urls_ratio = len(Counter(urls).keys()) / len(urls)
+                # 4
+                tweet_url_similarity = get_avg_cosine_similarity(urls, 'URLs')
+                tbl.append(unique_urls_ratio)
+                tbl.append(tweet_url_similarity)
+            else:
+                unique_urls_ratio = 'nan'
+                tweet_url_similarity = 'nan'
+                tbl.append(unique_urls_ratio)
+                tbl.append(tweet_url_similarity)
         except tweepy.TweepError as e:
             print("Some error occurred! ", e)
-        except ZeroDivisionError as ze:
-            print("Zero Division Error")
-            unique_urls_ratio = 0.0
+            return []
+
+        # Calculating (5, 6, 7, 8)
+        description = user.description
+        # 5
+        user_desc_len = len(description)
+        # 6
+        user_desc_sentiment = get_avg_sentiment_single(description, 'user description')
+        # 7
+        special_char_count = len(re.sub('[\w]+', '', description))
+        # 8
+        tweet_count = user.statuses_count
+
+        tbl.append(user_desc_len)
+        tbl.append(user_desc_sentiment)
+        tbl.append(special_char_count)
+        tbl.append(tweet_count)
+
+        return tbl
 
     else:
         print("Protected Account: {}".format(user_id))
-
-    # Calculating (5, 6, 7)
-    description = user.description
-    user_desc_len = len(description)
-    user_desc_sentiment = get_avg_sentiment_single(description)
-    special_char_count = len(re.sub('[\w]+', '', description))
-
-    # Calculating 8
-    tweet_count = user.statuses_count
-
-    return \
-        std_dev_friends, std_dev_followers, unique_urls_ratio, tweet_url_similarity, \
-        user_desc_len, user_desc_sentiment, special_char_count, tweet_count
+        return []

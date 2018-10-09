@@ -25,7 +25,7 @@ def get_training_data():
     #             'training_dataset_final.csv'
 
     # Use the this file path when running locally from personal machine for faster access
-    file_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachVx/datasets/training_dataset_v200f.csv'
+    file_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV44/datasets/training_dataset_v200f.csv'
     training_data = pd.read_csv(file_path, encoding='utf-8')
 
     # Replacing screen_name column to a binary value

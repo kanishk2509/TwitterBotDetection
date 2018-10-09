@@ -16,8 +16,8 @@ def train_classifier(training, test):
 
 def classify():
 
-    pos_tweet_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachVx/datasets/pos_tweets.txt'
-    neg_tweet_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachVx/datasets/neg_tweets.txt'
+    pos_tweet_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV44/datasets/pos_tweets.txt'
+    neg_tweet_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV44/datasets/neg_tweets.txt'
 
     # Generate Training and Test dataset from the txt files we have
     pos = []

@@ -29,7 +29,7 @@ def get_cosine(vec1, vec2):
         return float(numerator) / denominator
 
 
-def get_avg_cosine_similarity(data):
+def get_avg_cosine_similarity(data, type):
     # Split the data into pairs
     pair_list = list(itertools.combinations(data, 2))
     cosine_sim = 0.0
@@ -45,6 +45,6 @@ def get_avg_cosine_similarity(data):
         print(e)
         avg_cosine_sim = 1.0
 
-    print('Average Similarity in tweets :: ', avg_cosine_sim)
+    print('Average Similarity in ', type, " : ", avg_cosine_sim)
 
     return avg_cosine_sim
