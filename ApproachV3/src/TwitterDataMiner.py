@@ -1,6 +1,6 @@
 import csv
-from GetApi import get_api
-from GetAccountProperties import get_data
+from ApproachV3.src.GetApi import get_api
+from ApproachV3.src.GetAccountProperties import get_data
 
 from ApproachV3.src.spam_metric.multinomial_bayes import load
 
@@ -51,16 +51,16 @@ def main():
         writer.writeheader()
 
         for row in reader:
-            data = (lookup(row['id_str'].replace('"', '')))
+            data = (lookup(row['id'].replace('"', '')))
             if not data:
                 print('Skipping record!')
                 print(data)
             else:
                 print(data)
                 writer.writerow({'id': row['id'],
-                                 'id_str': row['id_str'],
-                                 'screen_name': row['screen_name'],
-                                 'location': row['location'],
+                                 'id_str': str(row['id']),
+                                 'screen_name': data[0],
+                                 'location': data[13],
                                  'age': data[1],
                                  'in_out_ratio': data[2],
                                  'favorites_ratio': data[3],

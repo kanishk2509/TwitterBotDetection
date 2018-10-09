@@ -17,10 +17,10 @@ Calculating Account Properties Component
 '''
 
 
-def get_data(user_id, api):
+def get_data(user_id, api, vectorizer, classifier):
     tbl = []
     try:
-        tbl = mine_data(user_id, api)
+        tbl = mine_data(user_id, api, vectorizer, classifier)
         return tbl
     except tweepy.TweepError as e:
         print(e)
@@ -39,8 +39,6 @@ def get_cce_spam_ratio(tweets, tweet_times, vectorizer, classifier):
 
     cce = conditional_entropy + perc_unique_strings * first_order_entropy
 
-    print('Entropy: ', cce)
-
     for tweet in tweets:
         if not tweet:
             continue
@@ -54,10 +52,8 @@ def get_cce_spam_ratio(tweets, tweet_times, vectorizer, classifier):
         prediction = []
         spam_ratio = 0.5
 
-    print('Spam Ratio: ', spam_ratio)
-
     t2 = datetime.now() - t1
-    print('Time elapsed:'.format(total_time=t2))
+    print('Time elapsed:{total_time}'.format(total_time=t2))
 
     return cce, spam_ratio
 
@@ -96,7 +92,8 @@ def mine_data(user_id, api, vectorizer, classifier):
         acct_rep = user.followers_count / (user.followers_count + user.friends_count)
         print("acct_rep: ", acct_rep)
 
-    tbl.append(user_id)
+    #tbl.append(user_id)
+    tbl.append(user.screen_name)
     tbl.append(age)
     tbl.append(in_out_ratio)
     tbl.append(favourites_ratio)
@@ -121,12 +118,12 @@ def mine_data(user_id, api, vectorizer, classifier):
             # If this tweet contains hashtags, count them
             if len(tweet.entities['hashtags']) > 0:
                 hashtags_recorded += len(tweet.entities['hashtags'])
-                print("hashtags_recorded: ", hashtags_recorded)
+                #print("hashtags_recorded: ", hashtags_recorded)
 
             # If this tweet contained user mentions, count them
             if len(tweet.entities['user_mentions']) > 0:
                 user_mentions_recorded += len(tweet.entities['user_mentions'])
-                print("user_mentions_recorded: ", user_mentions_recorded)
+                #("user_mentions_recorded: ", user_mentions_recorded)
 
             # Count up the tweets for each day
             # First if block captures date of most recent tweet
@@ -186,7 +183,8 @@ def mine_data(user_id, api, vectorizer, classifier):
             print("mal_urls_ratio: ", mal_urls_ratio)'''
 
         cce, spam_ratio = get_cce_spam_ratio(tweets, tweet_times, vectorizer, classifier)
-
+        print("CCE: ", cce)
+        print("spam ratio: ", spam_ratio)
         tbl.append(avg_tpd)
         tbl.append(hashtags_ratio)
         tbl.append(user_mentions_ratio)
@@ -194,6 +192,7 @@ def mine_data(user_id, api, vectorizer, classifier):
         tbl.append(cce)
         tbl.append(spam_ratio)
         tbl.append(0)
+        tbl.append(user.location)
         return copy.deepcopy(tbl)
 
     else:
