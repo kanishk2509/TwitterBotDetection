@@ -9,3 +9,4 @@ tweepy
 gensim
 nltk
 textblob
+sns

@@ -1,6 +1,10 @@
 import pandas as pd
+import seaborn as sns
 from nltk import word_tokenize
 from sklearn.feature_extraction import stop_words
+from sklearn.metrics import roc_curve, auc
+import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestClassifier
 from ApproachV4.GetApi import get_api
 from ApproachV4.GetAccountProperties import get_data
 from ApproachV3.src.classifiers.RForestClassifier import RFC
@@ -66,7 +70,6 @@ def get_training_data():
     X = training_data[features].iloc[:, :-1]
     y = training_data[features].iloc[:, -1]
 
-    print(X, y)
     return X, y
 
 
