@@ -2,7 +2,7 @@ import tweepy
 import datetime as dt
 import requests
 import re
-from GetTweetProperties import get_tweet_properties, get_tweet_semantics
+from ApproachV4.GetTweetProperties import get_tweet_properties, get_tweet_semantics
 
 dow_ratios = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
 
@@ -67,20 +67,16 @@ def mine_data(user_id, api):
     for i in tbl2:
         tbl.append(i)
 
-    std_dev_friends, \
-        std_dev_followers, unique_urls_ratio, \
-        tweet_url_similarity, user_desc_len, user_desc_sentiment, \
-        special_char_count, tweet_count \
-        = get_tweet_semantics(user_id, api)
+    tbl3 = get_tweet_semantics(user_id, api)
 
-    tbl.append(std_dev_friends)
-    tbl.append(std_dev_followers)
-    tbl.append(unique_urls_ratio)
-    tbl.append(tweet_url_similarity)
-    tbl.append(user_desc_len)
-    tbl.append(user_desc_sentiment)
-    tbl.append(special_char_count)
-    tbl.append(tweet_count)
+    tbl.append(tbl3[1])
+    tbl.append(tbl3[2])
+    tbl.append(tbl3[3])
+    tbl.append(tbl3[4])
+    tbl.append(tbl3[5])
+    tbl.append(tbl3[6])
+    tbl.append(tbl3[7])
+    tbl.append(tbl3[8])
     tbl.append(bot_flag)
 
     return tbl

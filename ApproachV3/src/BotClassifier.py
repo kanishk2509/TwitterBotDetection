@@ -29,8 +29,8 @@ def get_training_data():
     file_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/datasets/training_dataset_final.csv'
     training_data = pd.read_csv(file_path, encoding='utf-8-sig')
 
-    # Replacing screen_name column to a binary value
-    symbols = r'_|%|"| '
+    # Feature engineering
+    symbols = r'_|%|"|nan| '
     training_data['screen_name_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
 
     # Extracting Features

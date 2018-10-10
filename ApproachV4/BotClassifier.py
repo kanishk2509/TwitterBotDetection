@@ -1,6 +1,8 @@
 import pandas as pd
-from ApproachV3.src.GetApi import get_api
-from ApproachV3.src.GetAccountProperties import get_data
+from nltk import word_tokenize
+from sklearn.feature_extraction import stop_words
+from ApproachV4.GetApi import get_api
+from ApproachV4.GetAccountProperties import get_data
 from ApproachV3.src.classifiers.RForestClassifier import RFC
 from ApproachV3.src.classifiers.DTreeClassifier import DTC
 from ApproachV3.src.classifiers.MNBClassifier import MNB
@@ -25,12 +27,17 @@ def get_training_data():
     #             'training_dataset_final.csv'
 
     # Use the this file path when running locally from personal machine for faster access
-    file_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV44/datasets/training_dataset_v200f.csv'
+    file_path = '/Users/kanishksinha/Desktop/TwitterBotDetection/kaggle_data/final_training_datasets/training-dataset' \
+                '-final-v4.csv'
     training_data = pd.read_csv(file_path, encoding='utf-8')
 
-    # Replacing screen_name column to a binary value
+    # Feature engineering
     symbols = r'_|%|"| |nan'
     training_data['screen_name_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
+    training_data['std_deviation_friends_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
+    training_data['std_deviation_followers_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
+    training_data['unique_urls_ratio_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
+    training_data['tweet_url_similarity_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
 
     # Extracting Features
     features = ['id',
@@ -44,15 +51,15 @@ def get_training_data():
                 'hashtags_ratio',
                 'user_mentions_ratio',
                 'url_ratio',
-                'avg_cosine_sim',
+                'avg_cosine_similarity',
                 'avg_tweet_sentiment',
-                'std_dev_friends',
-                'std_dev_followers',
-                'unique_urls_ratio',
-                'tweet_url_similarity',
-                'user_desc_len',
-                'user_desc_sentiment',
-                'special_char_count',
+                'std_deviation_friends_binary',
+                'std_deviation_followers_binary',
+                'unique_urls_ratio_binary',
+                'tweet_url_similarity_binary',
+                'user_description_len',
+                'user_description_sentiment',
+                'special_char_in_description',
                 'tweet_count',
                 'bot']
 
@@ -69,15 +76,15 @@ def lookup(user_id):
     return X
 
 
-def main():
+def classify(id, type):
     # Get 1st user input from command line. This is a twitter user id used to test the classifier
-    twitter_user_name = sys.argv[1].lstrip().rstrip()
+    user_id = id.lstrip().rstrip()
 
     # Get 2nd user input from command line. This is the type of classifier to train our system
     # RF => Random Forest
     # DT => Decision Tree
     # NB => Multinomial Naive Bayes
-    classifier_type = sys.argv[2].lstrip().rstrip().lower()
+    classifier_type = type.lstrip().rstrip().lower()
 
     # Consult the trained classifier from the file system, or create it if it does not exist
     if classifier_type == 'rf':
@@ -157,7 +164,7 @@ def main():
 
     # Run user input through classifier
     print("Mining twitter data...")
-    data = lookup(twitter_user_name)
+    data = lookup(user_id)
     bot_flag = data[len(data) - 1]
     input_data = np.array(data).reshape(1, -1)
     print('========================================================')
@@ -167,22 +174,27 @@ def main():
     print('========================================================\n')
 
     if bot_flag == 1:
-        print('1111111111111')
-        print("1111 BOT 1111")
-        print('1111111111111\n')
-
+        print('Bot value')
+        return 1
     else:
         # Predict the class Bot or Human for user id
         result = rfc.predict(input_data)
         if result[0] == 1:
-            print('*1111111111111*')
-            print("*1111 BOT 1111*")
-            print('*1111111111111*\n')
-
+            return 1
         else:
-            print('0000000000000')
-            print("000 HUMAN 000")
-            print('0000000000000\n')
+            return 0
+
+
+def main():
+    classification = classify('452533162', 'rf')
+    if classification == 1:
+        print('1111111111111')
+        print("1111 BOT 1111")
+        print('1111111111111\n')
+    else:
+        print('0000000000000')
+        print("000 HUMAN 000")
+        print('0000000000000\n')
 
 
 if __name__ == '__main__':
