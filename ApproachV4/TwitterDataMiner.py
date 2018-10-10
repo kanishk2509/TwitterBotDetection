@@ -57,10 +57,10 @@ def main():
     common_path = '/Users/kanishksinha/Desktop/TwitterBotDetection/ApproachV4/datasets/'
 
     with \
-            open(common_path + 'dataset-2.csv',
+            open(common_path + 'dataset-2-temp.csv',
                  'r+',
                  encoding="utf-8") as inp, \
-            open(common_path + 'dataset-2-1.csv',
+            open(common_path + 'dataset-2-1-temp.csv',
                  'w+',
                  encoding="utf-8") as out:
 
@@ -157,7 +157,30 @@ def main():
 
                 else:
                     cnt = cnt - 1
-                    print("Skipping record due to error...")
+                    print("Writing null values due to error...")
+                    writer.writerow({'id': row['id'],
+                                     'id_str': row['id_str'],
+                                     'screen_name': row['screen_name'],
+                                     'age': row['age'],
+                                     'in_out_ratio': row['in_out_ratio'],
+                                     'favorites_ratio': row['favorites_ratio'],
+                                     'status_ratio': row['status_ratio'],
+                                     'account_rep': row['account_rep'],
+                                     'avg_tpd': row['avg_tpd'],
+                                     'hashtags_ratio': row['hashtags_ratio'],
+                                     'user_mentions_ratio': row['user_mentions_ratio'],
+                                     'url_ratio': url_ratio,
+                                     'avg_cosine_similarity': cos_sim,
+                                     'avg_tweet_sentiment': avg_sentiment,
+                                     'std_deviation_friends': 'nan',
+                                     'std_deviation_followers': 'nan',
+                                     'unique_urls_ratio': 'nan',
+                                     'tweet_url_similarity': 'nan',
+                                     'user_description_len': 'nan',
+                                     'user_description_sentiment': 'nan',
+                                     'special_char_in_description': 'nan',
+                                     'tweet_count': 'nan',
+                                     'bot': row['bot']})
 
             else:
                 cnt = cnt - 1

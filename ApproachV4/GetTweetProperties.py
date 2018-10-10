@@ -194,6 +194,8 @@ def get_tweet_semantics(user_id, api):
                 tweet_url_similarity = 'nan'
                 tbl.append(unique_urls_ratio)
                 tbl.append(tweet_url_similarity)
+                print('unique_urls_ratio : ', unique_urls_ratio)
+                print('tweet_url_similarity :', tweet_url_similarity)
         except tweepy.TweepError as e:
             print("Some error occurred! ", e)
             return []
