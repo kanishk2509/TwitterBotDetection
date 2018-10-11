@@ -2,7 +2,7 @@ import tweepy
 import datetime as dt
 import requests
 import re
-from ApproachV4.GetTweetProperties import get_tweet_properties, get_tweet_semantics
+from GetTweetProperties import get_tweet_properties, get_tweet_semantics
 
 dow_ratios = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
 

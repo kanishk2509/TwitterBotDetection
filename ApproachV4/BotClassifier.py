@@ -1,15 +1,9 @@
 import pandas as pd
-import seaborn as sns
-from nltk import word_tokenize
-from sklearn.feature_extraction import stop_words
-from sklearn.metrics import roc_curve, auc
-import matplotlib.pyplot as plt
-from sklearn.ensemble import RandomForestClassifier
-from ApproachV4.GetApi import get_api
-from ApproachV4.GetAccountProperties import get_data
-from ApproachV3.src.classifiers.RForestClassifier import RFC
-from ApproachV3.src.classifiers.DTreeClassifier import DTC
-from ApproachV3.src.classifiers.MNBClassifier import MNB
+from GetApi import get_api
+from GetAccountProperties import get_data
+from classifiers.RForestClassifier import RFC
+from classifiers.DTreeClassifier import DTC
+from classifiers.MNBClassifier import MNB
 from sklearn.model_selection import train_test_split
 import numpy as np
 import os
@@ -27,19 +21,22 @@ def get_training_data():
     print("\nGetting the new Classifier data...")
 
     # Use the this file path when running remotely from other machine
-    # file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data/' \
-    #             'training_dataset_final.csv'
+    file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data' \
+                '/final_training_datasets/training-dataset-final-v4.csv'
 
     # Use the this file path when running locally from personal machine for faster access
-    file_path = '/Users/kanishksinha/Desktop/TwitterBotDetection/kaggle_data/final_training_datasets/training-dataset' \
-                '-final-v4.csv'
+    # file_path =
+    # '/Users/kanishksinha/Desktop/TwitterBotDetection/kaggle_data/final_training_datasets/training-dataset' \
+    # '-final-v4.csv'
     training_data = pd.read_csv(file_path, encoding='utf-8')
 
-    # Feature engineering
+    # Feature engineering : Taking care of the incomplete/inappropriate data
     symbols = r'_|%|"| |nan'
     training_data['screen_name_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
-    training_data['std_deviation_friends_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
-    training_data['std_deviation_followers_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
+    training_data['std_deviation_friends_binary'] = training_data.screen_name.str.contains(symbols, case=False,
+                                                                                           na=False)
+    training_data['std_deviation_followers_binary'] = training_data.screen_name.str.contains(symbols, case=False,
+                                                                                             na=False)
     training_data['unique_urls_ratio_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
     training_data['tweet_url_similarity_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
 

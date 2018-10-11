@@ -3,10 +3,10 @@ import tweepy
 from nltk import PorterStemmer, word_tokenize, re
 from nltk.corpus import stopwords
 from collections import Counter
-from ApproachV4.CosineSentenceSimilarity import get_avg_cosine_similarity
-from ApproachV4.AverageSentenceSentiment import get_avg_sentiment, get_avg_sentiment_single
-from ApproachV4.StdDeviationFollowers import compute_std_deviation_followers
-from ApproachV4.StdDeviationFriends import compute_std_deviation_friends
+from CosineSentenceSimilarity import get_avg_cosine_similarity
+from AverageSentenceSentiment import get_avg_sentiment, get_avg_sentiment_single
+from StdDeviationFollowers import compute_std_deviation_followers
+from StdDeviationFriends import compute_std_deviation_friends
 
 '''
 Returns 7 tweet properties listed below
