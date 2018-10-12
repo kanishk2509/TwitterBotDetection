@@ -1,13 +1,11 @@
 import copy
 from datetime import datetime
 import datetime as dt
-
 import numpy as np
 import requests
 import tweepy
-
-from ApproachV3.src.metrics import GenerateTwitterMetrics as metrics
-from ApproachV3.src.spam_metric.multinomial_bayes import preprocess
+from metrics import GenerateTwitterMetrics as metrics
+from spam_metric.multinomial_bayes import preprocess
 
 dow_ratios = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
 
@@ -118,12 +116,10 @@ def mine_data(user_id, api, vectorizer, classifier):
             # If this tweet contains hashtags, count them
             if len(tweet.entities['hashtags']) > 0:
                 hashtags_recorded += len(tweet.entities['hashtags'])
-                #print("hashtags_recorded: ", hashtags_recorded)
 
             # If this tweet contained user mentions, count them
             if len(tweet.entities['user_mentions']) > 0:
                 user_mentions_recorded += len(tweet.entities['user_mentions'])
-                #("user_mentions_recorded: ", user_mentions_recorded)
 
             # Count up the tweets for each day
             # First if block captures date of most recent tweet

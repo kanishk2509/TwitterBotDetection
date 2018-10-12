@@ -168,12 +168,12 @@ def get_tweet_semantics(user_id, api):
     if std_dev_friends > 0:
         tbl.append(std_dev_friends)
     else:
-        tbl.append('nan')
+        tbl.append('0.0')
 
     if std_dev_followers > 0:
         tbl.append(std_dev_followers)
     else:
-        tbl.append('nan')
+        tbl.append('0.0')
 
     if not user.protected:
         try:
@@ -190,8 +190,8 @@ def get_tweet_semantics(user_id, api):
                 tbl.append(unique_urls_ratio)
                 tbl.append(tweet_url_similarity)
             else:
-                unique_urls_ratio = 'nan'
-                tweet_url_similarity = 'nan'
+                unique_urls_ratio = '0.0'
+                tweet_url_similarity = '0.0'
                 tbl.append(unique_urls_ratio)
                 tbl.append(tweet_url_similarity)
                 print('unique_urls_ratio : ', unique_urls_ratio)
@@ -215,6 +215,7 @@ def get_tweet_semantics(user_id, api):
         tbl.append(user_desc_sentiment)
         tbl.append(special_char_count)
         tbl.append(tweet_count)
+        tbl.append(description)
 
         return tbl
 

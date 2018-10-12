@@ -1,3 +1,6 @@
+import csv
+
+import numpy
 import pandas as pd
 from GetApi import get_api
 from GetAccountProperties import get_data
@@ -7,7 +10,7 @@ from classifiers.MNBClassifier import MNB
 from sklearn.model_selection import train_test_split
 import numpy as np
 import os
-import sys
+from spam_metric.multinomial_bayes import load
 
 '''Twitter Account Keys'''
 key = ['L5UQsE4pIb9YUJvP7HjHuxSvW',
@@ -15,28 +18,37 @@ key = ['L5UQsE4pIb9YUJvP7HjHuxSvW',
        '1039011019786342401-iDggGlhErT1KKdVGVXz4Kt7X8v0kIV',
        'MJ17S1uhCaI1zS3NBWksMaWdwjvAjn7cpji5vyhknfcUe']
 
+vectorizer, classifier = load()
+
 
 def get_training_data():
-
     # Getting training data
-    print("\nGetting the new Classifier data...")
+    print("\nGetting the training data...")
 
     # Use the this file path when running remotely from other machine
-    # file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data/' \
-    #             'training_dataset_final.csv'
+    file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data' \
+                '/final_training_datasets/training-dataset-final-v3.csv'
 
     # Use the this file path when running locally from personal machine for faster access
-    file_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/datasets/training_dataset_final.csv'
+    # file_path =
+    # '/Users/kanishksinha/Desktop/TwitterBotDetection/kaggle_data/final_training_datasets/training-dataset' \
+    # '-final-v3.csv'
     training_data = pd.read_csv(file_path, encoding='utf-8-sig')
 
     # Feature engineering
-    symbols = r'_|%|"|nan| '
+    symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|updates ' \
+              r'every|gorilla|yes_ofc|forget' \
+              r'expos|kill|clit|bbb|butt|fuck|XXX|sex|truthe|fake|anony|free|virus|funky|RNA|kuck' \
+              r'|jargon' \
+              r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|dunia|clone|genie|bbb' \
+              r'ffd|onlyman|emoji|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
     training_data['screen_name_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
+    training_data['id_s'] = training_data.id
 
     # Extracting Features
-    features = ['id', 'screen_name_binary', 'age', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
+    features = ['id_s', 'screen_name_binary', 'age', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
                 'account_rep', 'avg_tpd', 'hashtags_ratio', 'user_mentions_ratio',
-                'mal_url_ratio', 'bot']
+                'mal_url_ratio', 'cce', 'spam_ratio', 'bot']
     X = training_data[features].iloc[:, :-1]
     y = training_data[features].iloc[:, -1]
 
@@ -44,22 +56,29 @@ def get_training_data():
     return X, y
 
 
-def lookup(user_id):
-    api = get_api(key[0], key[1], key[2], key[3])
-    X = get_data(user_id, api)
+def get_test_data():
+    file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data/'
+    test_dataframe = pd.read_csv(file_path + 'test_datasets/test_data-v3.csv')
+    # Feature engineering
+    symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|updates ' \
+              r'every|gorilla|yes_ofc|forget' \
+              r'expos|kill|clit|bbb|butt|fuck|XXX|sex|fake|anony|free|virus|funky|RNA' \
+              r'|jargon' \
+              r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|clone|genie|bbb' \
+              r'ffd|emoji|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
+    test_dataframe['screen_name_binary'] = test_dataframe.screen_name.str.contains(symbols, case=False, na=False)
+
+    # Extracting Features
+    features = ['id', 'screen_name_binary', 'age', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
+                'account_rep', 'avg_tpd', 'hashtags_ratio', 'user_mentions_ratio',
+                'mal_url_ratio', 'cce', 'spam_ratio', 'bot']
+
+    X = test_dataframe[features].iloc[:, :-1]
     return X
 
 
-def main():
-
-    # Get 1st user input from command line. This is a twitter user id used to test the classifier
-    twitter_user_name = sys.argv[1].lstrip().rstrip()
-
-    # Get 2nd user input from command line. This is the type of classifier to train our system
-    # RF => Random Forest
-    # DT => Decision Tree
-    # NB => Multinomial Naive Bayes
-    classifier_type = sys.argv[2].lstrip().rstrip().lower()
+def train_classifiers(type):
+    classifier_type = type.lstrip().rstrip().lower()
 
     # Consult the trained classifier from the file system, or create it if it does not exist
     if classifier_type == 'rf':
@@ -137,21 +156,44 @@ def main():
             accuracy = rfc.get_classifier_accuracy(predicted_class_labels, y_test)
             print("Classifier accuracy: ", accuracy)
 
-    # Run user input through classifier
-    print("Mining twitter data...")
-    input_data = np.array(lookup(twitter_user_name)).reshape(1, -1)
-    print(input_data)
-    print("Mining Done!")
-    print("\nClassifying user now...")
+    return rfc
 
-    # Predict the class Bot or Human for user id
-    result = rfc.predict(input_data)
-    print("\nClassification done!\n")
-    print(result)
-    if result[0] == 1:
-        print("This account is a BOT!\n")
-    else:
-        print("This account is a HUMAN!\n")
+
+def main():
+    cl_type = 'rf'
+    predicted_df = []
+    try:
+        # The program checks if the classifier is already trained. If not, trains again.
+        rfc = train_classifiers(cl_type)
+
+        print("\nGetting test data from repository...")
+        pd_test_data = get_test_data()
+
+        print("\nClassifying user now...")
+        for i in pd_test_data.itertuples():
+            data = np.array(i).reshape(1, -1)
+            input_data = np.delete(data, 0, axis=1)
+            print(input_data)
+            result = rfc.predict(input_data)
+            if result[0] == 1:
+                dictn = {'id': i.id, 'bot': 1}
+                predicted_df.append(dictn)
+            else:
+                dictn = {'id': i.id, 'bot': 0}
+                predicted_df.append(dictn)
+
+        with open('./classified_users.csv', 'w+', encoding="utf-8") as out:
+            fields = ['id', 'bot']
+            writer = csv.DictWriter(out, fieldnames=fields)
+            writer.writeheader()
+            for row in predicted_df:
+                writer.writerow({'id': row['id'],
+                                 'bot': row['bot']})
+
+        print("\nClassification done and saved!\n")
+    except TypeError as e:
+        print(e)
+        print('Please re-run the code with valid parameters')
 
 
 if __name__ == '__main__':

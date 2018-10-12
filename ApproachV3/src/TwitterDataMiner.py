@@ -21,11 +21,11 @@ def lookup(user_id):
 
 def main():
     with \
-            open('/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/datasets'
+            open('/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/temp_datasets'
                  '/training_dataset_cleaned.csv',
                  'r+',
                  encoding="utf-8") as inp, \
-            open('/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/datasets'
+            open('/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/temp_datasets'
                  '/training_dataset_final_cce_split_3.csv',
                  'w+', 
                  encoding="utf-8") as out:

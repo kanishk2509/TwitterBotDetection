@@ -1,12 +1,7 @@
-import pandas
-from sklearn import preprocessing
-
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import pickle
 import os
-
-from sklearn.preprocessing import LabelEncoder
 
 """
 The larger the number of trees, the better the performance of the random forest classifier at the expense

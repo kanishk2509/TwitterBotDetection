@@ -1,6 +1,6 @@
 import csv
-from ApproachV4.GetApi import get_api
-from ApproachV4.GetTweetProperties import get_tweet_semantics
+from src.GetApi import get_api
+from src.GetTweetProperties import get_tweet_semantics
 
 '''
 The purpose of this module is to append additional sentimental and semantic properties listed below.
@@ -28,7 +28,7 @@ api = get_api(key[0], key[1], key[2], key[3])
 
 
 def main():
-    common_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV44/datasets/'
+    common_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV4/temp_temp_datasets/'
 
     with \
             open(common_path + 'training_dataset_v200.csv',

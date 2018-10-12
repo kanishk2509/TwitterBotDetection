@@ -2,7 +2,7 @@ import csv
 
 
 def main():
-    common_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/datasets/'
+    common_path = '/Users/kanishksinha/PycharmProjects/TwitterBotDetection/ApproachV3/temp_datasets/'
 
     with \
             open(common_path + 'training_dataset_final.csv',

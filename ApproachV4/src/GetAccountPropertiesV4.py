@@ -29,11 +29,7 @@ def mine_data(user_id, api):
     user = api.get_user(user_id)
 
     print('User Screen Name :: ', user.screen_name)
-    regexp = re.compile(r'Bot|bot|b0t|B0T|B0t')
-    if regexp.search(user.screen_name.lower()):
-        bot_flag = 1
-    else:
-        bot_flag = 0
+
     age = dt.datetime.today().timestamp() - user.created_at.timestamp()
     print("User Age :: ", age, " seconds")
 
@@ -77,7 +73,6 @@ def mine_data(user_id, api):
     tbl.append(tbl3[6])
     tbl.append(tbl3[7])
     tbl.append(tbl3[8])
-    tbl.append(bot_flag)
 
     return tbl
 

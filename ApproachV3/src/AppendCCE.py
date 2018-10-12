@@ -47,7 +47,7 @@ def get_tweet_and_tweet_times(id, api_):
 
 
 def main():
-    common_path = '/home/chris/PycharmProjects/TwitterBotDetection/ApproachV3/datasets/'
+    common_path = '/home/chris/PycharmProjects/TwitterBotDetection/ApproachV3/temp_datasets/'
 
     with \
             open(common_path + 'training_dataset_final_split_1.csv',

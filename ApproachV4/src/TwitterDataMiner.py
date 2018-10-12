@@ -5,9 +5,9 @@ from nltk import word_tokenize, PorterStemmer
 from nltk.corpus import stopwords
 import tweepy
 from datetime import datetime
-from ApproachV4.CosineSentenceSimilarity import get_avg_cosine_similarity
-from ApproachV4.AverageSentenceSentiment import get_avg_sentiment
-from ApproachV4.GetTweetProperties import get_tweet_semantics
+from CosineSentenceSimilarity import get_avg_cosine_similarity
+from AverageSentenceSentiment import get_avg_sentiment
+from GetTweetProperties import get_tweet_semantics
 
 '''
 A text mining and pre-processing module extracting features from a user's first 200 tweets such as
@@ -54,13 +54,13 @@ def get_all_tweets(user_id):
 
 
 def main():
-    common_path = '/Users/kanishksinha/Desktop/TwitterBotDetection/ApproachV4/datasets/'
+    common_path = '/Users/kanishksinha/Desktop/TwitterBotDetection/ApproachV4/temp_datasets/'
 
     with \
-            open(common_path + 'dataset-2-temp.csv',
+            open(common_path + 'test_data_temp.csv',
                  'r+',
                  encoding="utf-8") as inp, \
-            open(common_path + 'dataset-2-1-temp.csv',
+            open(common_path + 'test_data_v4.csv',
                  'w+',
                  encoding="utf-8") as out:
 
@@ -88,6 +88,7 @@ def main():
                   'user_description_sentiment',
                   'special_char_in_description',
                   'tweet_count',
+                  'description',
                   'bot']
 
         writer = csv.DictWriter(out, fieldnames=fields)
@@ -149,6 +150,7 @@ def main():
                                      'user_description_sentiment': tbl[6],
                                      'special_char_in_description': tbl[7],
                                      'tweet_count': tbl[8],
+                                     'description': tbl[9],
                                      'bot': row['bot']})
 
                     print('Row ', cnt, ' written for => ', row['screen_name'].upper())
@@ -172,14 +174,15 @@ def main():
                                      'url_ratio': url_ratio,
                                      'avg_cosine_similarity': cos_sim,
                                      'avg_tweet_sentiment': avg_sentiment,
-                                     'std_deviation_friends': 'nan',
-                                     'std_deviation_followers': 'nan',
-                                     'unique_urls_ratio': 'nan',
-                                     'tweet_url_similarity': 'nan',
-                                     'user_description_len': 'nan',
-                                     'user_description_sentiment': 'nan',
-                                     'special_char_in_description': 'nan',
-                                     'tweet_count': 'nan',
+                                     'std_deviation_friends': 0.0,
+                                     'std_deviation_followers': 0.0,
+                                     'unique_urls_ratio': 0.0,
+                                     'tweet_url_similarity': 0.0,
+                                     'user_description_len': 0.0,
+                                     'user_description_sentiment': 0.0,
+                                     'special_char_in_description': 0.0,
+                                     'tweet_count': 0.0,
+                                     'description': ' ',
                                      'bot': row['bot']})
 
             else:

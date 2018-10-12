@@ -2,30 +2,28 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn import metrics
-import numpy as np
 import pandas as pd
 import pickle
 import re
 import string
 import time
 
-
 table = str.maketrans({key: None for key in string.punctuation})
 
 
 def save(vectorizer, classifier):
-    '''
+    """
     save classifier to disk
-    '''
+    """
     with open('model.pkl', 'wb') as file:
         pickle.dump((vectorizer, classifier), file)
 
 
 def load():
-    '''
+    """
     load classifier from disk
-    '''
-    with open('model.pkl', 'rb') as file:
+    """
+    with open('/Users/kanishksinha/Desktop/TwitterBotDetection/ApproachV3/src/spam_metric/model.pkl', 'rb') as file:
         vectorizer, classifier = pickle.load(file)
     return vectorizer, classifier
 
@@ -67,7 +65,6 @@ def preprocess(tweet):
 
 
 def main():
-
     # load features and labels
     print('Loading data')
     start = time.time()
@@ -80,7 +77,7 @@ def main():
     features_train, features_test, labels_train, labels_test = train_test_split(
         features,
         labels,
-        test_size=0.2,   # use 10% for testing
+        test_size=0.2,  # use 10% for testing
         random_state=42)
 
     print("no. of train features: {}".format(len(features_train)))
@@ -121,7 +118,7 @@ def main():
     start = time.time()
     prediction = classifier.predict(features_test_transformed)
     end = time.time()
-    print('Testing time:{diff}'.format(diff=end-start))
+    print('Testing time:{diff}'.format(diff=end - start))
     fscore = metrics.f1_score(labels_test, prediction, average='macro')
     print("F score {:.2f}".format(fscore))
 
@@ -130,7 +127,7 @@ def test():
     tweet_list = []
     preprocessed = []
     tweet = "hello twitter facebook congratulations"
-    tweet2 ="This is a test"
+    tweet2 = "This is a test"
     tweet_list.append(str(tweet))
     tweet_list.append(str(tweet2))
     vectorizer, classifier = load()
@@ -142,6 +139,5 @@ def test():
 
 
 if __name__ == '__main__':
-    #main()
+    # main()
     test()
-
