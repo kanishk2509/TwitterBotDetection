@@ -2,6 +2,9 @@ import csv
 from datetime import datetime
 
 import numpy as np
+
+from AverageSentenceSentiment import get_avg_sentiment
+from CosineSentenceSimilarity import get_avg_cosine_similarity
 from GetApi import get_api
 import tweepy
 from nltk import word_tokenize
@@ -9,10 +12,8 @@ from sklearn.feature_extraction import stop_words
 
 from ApproachV3.src.metrics import GenerateTwitterMetrics as metrics
 from ApproachV3.src.spam_metric.multinomial_bayes import load, preprocess
-from ApproachV4.AverageSentenceSentiment import get_avg_sentiment
-from ApproachV4.CosineSentenceSimilarity import get_avg_cosine_similarity
-from ApproachV4.GetTweetProperties import get_tweet_semantics
-from ApproachV4.TwitterDataMiner import get_all_tweets
+from GetTweetProperties import get_tweet_semantics
+from TwitterDataMiner import get_all_tweets
 
 '''
 The purpose of this module is to append CCE to the existing training data.

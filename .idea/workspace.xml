@@ -2,56 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ba0c19f-8fea-41a3-b20d-ec773cbcd733" name="Default Changelist" comment="Modified AppendCCE to add spam ratio to existing training dataset.">
-      <change afterPath="$PROJECT_DIR$/ApproachV3/src/__init__.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/ApproachV3/src/spam_metric/model.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ApproachV4/src/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ApproachV4/temp_datasets/dataset-2-temp.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ApproachV4/temp_datasets/test_data_temp.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ApproachV4/src/AppendDescription.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ApproachV4/temp_datasets/training-dataset-final-v4.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kaggle_data/final_training_datasets/training-dataset-final-v4-d.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/kaggle_data/test_datasets/src/model.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/TwitterBotDetection.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TwitterBotDetection.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/kanishksinha.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/kanishksinha.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kaggle_data/test_datasets/test_data_v4.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ApproachV3/datasets/completed_dataset.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV3/datasets/training_dataset.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/temp_datasets/training_dataset.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV3/datasets/training_dataset_cleaned.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/temp_datasets/training_dataset_cleaned.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/temp_datasets/training_dataset_final.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_split_1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/temp_datasets/training_dataset_final_split_1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV3/datasets/training_dataset_final_split_2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/temp_datasets/training_dataset_final_split_2.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV3/src/AppendCCE.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/src/AppendCCE.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV3/src/BotClassifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/src/BotClassifierV3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV3/src/FileSplitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/src/FileSplitter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV3/src/GetAccountProperties.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/src/GetAccountProperties.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV3/src/TwitterDataMiner.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/src/TwitterDataMiner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV3/src/classifiers/RForestClassifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/src/classifiers/RForestClassifier.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ApproachV3/src/dt_trained_classifier.p" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ApproachV3/src/rf_trained_classifier.p" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV3/src/spam_metric/multinomial_bayes.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/src/spam_metric/multinomial_bayes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/AppendAdditionalFeatures.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/AppendAdditionalFeatures.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/AverageSentenceSentiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/AverageSentenceSentiment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/BotClassifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/BotClassifierV4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/CosineSentenceSimilarity.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/CosineSentenceSimilarity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/GetAccountProperties.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/GetAccountPropertiesV4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/GetApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/GetApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/GetTweetProperties.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/GetTweetProperties.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/SentenceSimilarity.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/SentenceSimilarity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/SentimentClassifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/SentimentClassifier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/StdDeviationFollowers.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/StdDeviationFollowers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/StdDeviationFriends.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/StdDeviationFriends.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/TwitterDataMiner.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/TwitterDataMiner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/check_progression.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/check_progression.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/classifiers/DTreeClassifier.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/classifiers/MNBClassifier.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/classifiers/RForestClassifier.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ApproachV4/dt_trained_classifier.p" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ApproachV4/rf_trained_classifier.p" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApproachV4/src/BotClassifierV4.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/BotClassifierV4.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ApproachVx/datasets/honeypot.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachVx/datasets/neg_tweets.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/temp_datasets/neg_tweets.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachVx/datasets/pos_tweets.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/temp_datasets/pos_tweets.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_final.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/temp_datasets/training_dataset_final.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/temp_datasets/training_dataset_v200.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200a.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/temp_datasets/training_dataset_v200a.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200f.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/temp_datasets/training_dataset_v200f.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200f_temp.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/temp_datasets/training_dataset_v200f_temp.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kaggle_data/test_datasets/src/GenerateTestData.py" beforeDir="false" afterPath="$PROJECT_DIR$/kaggle_data/test_datasets/src/GenerateTestData.py" afterDir="false" />
     </list>
     <ignored path="model.pkl" />
@@ -138,32 +102,32 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="csv" value="72" />
+          <entry key="csv" value="79" />
           <entry key="p" value="1" />
-          <entry key="py" value="92" />
+          <entry key="py" value="94" />
           <entry key="txt" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSV" value="72" />
+          <entry key="CSV" value="79" />
           <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="92" />
+          <entry key="Python" value="94" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="csv" value="4" />
           <entry key="dummy" value="10" />
-          <entry key="py" value="2438" />
-          <entry key="txt" value="144" />
+          <entry key="py" value="2610" />
+          <entry key="txt" value="147" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSV" value="4" />
-          <entry key="PLAIN_TEXT" value="154" />
-          <entry key="Python" value="2438" />
+          <entry key="PLAIN_TEXT" value="157" />
+          <entry key="Python" value="2610" />
         </counts>
       </usages-collector>
     </session>
@@ -173,13 +137,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ApproachV4/src/GetTweetProperties.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="217" column="31" lean-forward="true" selection-start-line="217" selection-start-column="31" selection-end-line="217" selection-end-column="31" />
+            <state relative-caret-position="415">
+              <caret line="214" column="33" lean-forward="true" selection-start-line="214" selection-start-column="33" selection-end-line="214" selection-end-column="33" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/training-dataset-final-v4-d.csv">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -198,8 +167,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ApproachV4/src/TwitterDataMiner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1511">
-              <caret line="90" column="32" selection-start-line="90" selection-start-column="32" selection-end-line="90" selection-end-column="32" />
+            <state relative-caret-position="77">
+              <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="91" selection-end-column="24" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -212,35 +181,35 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ApproachV4/src/BotClassifierV4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5520">
-              <caret line="240" column="10" lean-forward="true" selection-start-line="240" selection-start-column="10" selection-end-line="240" selection-end-column="10" />
+            <state relative-caret-position="461">
+              <caret line="230" column="71" selection-start-line="230" selection-start-column="71" selection-end-line="230" selection-end-column="71" />
               <folding>
-                <element signature="e#0#19#0" expanded="true" />
+                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kaggle_data/test_datasets/test_data-v3.csv">
+        <entry file="file://$PROJECT_DIR$/ApproachV4/src/AppendDescription.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2208">
-              <caret line="96" column="8" selection-start-line="96" selection-end-line="96" selection-end-column="8" />
+            <state relative-caret-position="987">
+              <caret line="79" column="92" selection-start-line="79" selection-start-column="92" selection-end-line="79" selection-end-column="92" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ApproachV3/src/GetAccountProperties.py">
+        <entry file="file://$PROJECT_DIR$/ApproachV4/src/AppendAdditionalFeatures.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1434">
-              <caret line="92" column="5" selection-start-line="92" selection-start-column="5" selection-end-line="92" selection-end-column="5" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="734">
+              <caret line="47" column="33" lean-forward="true" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -253,15 +222,6 @@
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kaggle_data/test_datasets/src/GenerateTestData.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4130">
-              <caret line="10" column="49" lean-forward="true" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -324,7 +284,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ApproachVx/StdDeviationFriends.py" />
         <option value="$PROJECT_DIR$/ApproachVx/StdDeviationFollowers.py" />
         <option value="$PROJECT_DIR$/ApproachVx/AverageSentenceSentiment.py" />
         <option value="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200f_temp.csv" />
@@ -374,6 +333,7 @@
         <option value="$PROJECT_DIR$/ApproachV4/src/TwitterDataMiner.py" />
         <option value="$PROJECT_DIR$/ApproachV3/src/BotClassifierV3.py" />
         <option value="$PROJECT_DIR$/ApproachV4/src/GetAccountPropertiesV4.py" />
+        <option value="$PROJECT_DIR$/ApproachV4/src/AppendDescription.py" />
         <option value="$PROJECT_DIR$/ApproachV4/src/BotClassifierV4.py" />
       </list>
     </option>
@@ -401,41 +361,6 @@
             <path>
               <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
               <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
-              <item name="ApproachV1" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
-              <item name="ApproachV2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
-              <item name="ApproachV3" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
-              <item name="ApproachV3" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
-              <item name="ApproachV3" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="classifiers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
-              <item name="ApproachV3" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="metrics" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
               <item name="ApproachV4" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -443,11 +368,23 @@
               <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
               <item name="ApproachV4" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
+              <item name="ApproachV4" type="462c0819:PsiDirectoryNode" />
+              <item name="temp_datasets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
               <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
               <item name="kaggle_data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
+              <item name="kaggle_data" type="462c0819:PsiDirectoryNode" />
+              <item name="final_training_datasets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
@@ -486,11 +423,11 @@
       <recent name="$PROJECT_DIR$/ApproachVx" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/kaggle_data/final_training_datasets" />
       <recent name="$PROJECT_DIR$/ApproachV4/temp_datasets" />
+      <recent name="$PROJECT_DIR$/kaggle_data/test_datasets" />
       <recent name="$PROJECT_DIR$/ApproachV3/src/spam_metric" />
       <recent name="$PROJECT_DIR$/ApproachV3/src" />
-      <recent name="$PROJECT_DIR$/kaggle_data/final_training_datasets" />
-      <recent name="$PROJECT_DIR$/kaggle_data/test_datasets/src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -505,8 +442,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.BotClassifierV3">
-    <configuration name="AppendCCE" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.AppendDescription">
+    <configuration name="AppendDescription" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="TwitterBotDetection" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -514,12 +451,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ApproachV3/src" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ApproachV4/src" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ApproachV3/src/AppendCCE.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ApproachV4/src/AppendDescription.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -613,19 +549,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.AppendCCE" />
       <item itemvalue="Python.TwitterDataMiner" />
       <item itemvalue="Python.GenerateTestData" />
       <item itemvalue="Python.BotClassifier" />
       <item itemvalue="Python.BotClassifierV3" />
+      <item itemvalue="Python.AppendDescription" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.AppendDescription" />
         <item itemvalue="Python.BotClassifierV3" />
         <item itemvalue="Python.TwitterDataMiner" />
         <item itemvalue="Python.GenerateTestData" />
         <item itemvalue="Python.BotClassifier" />
-        <item itemvalue="Python.AppendCCE" />
       </list>
     </recent_temporary>
   </component>
@@ -836,7 +772,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539296227581</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="...">
+      <created>1539311562442</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1539311562442</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TodoView">
@@ -852,12 +795,12 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28047922" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28047922" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49964765" weight="0.35783133" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49964765" weight="0.4493976" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -889,55 +832,11 @@
     <MESSAGE value="Modified code for new training dataset" />
     <MESSAGE value="Modified TwitterDataMiner to generate all the properties at once." />
     <MESSAGE value="datasets" />
-    <MESSAGE value="..." />
     <MESSAGE value="Modified AppendCCE to add spam ratio to existing training dataset." />
-    <option name="LAST_COMMIT_MESSAGE" value="Modified AppendCCE to add spam ratio to existing training dataset." />
+    <MESSAGE value="..." />
+    <option name="LAST_COMMIT_MESSAGE" value="..." />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/local/lib/python3.6/site-packages/sklearn/model_selection/_split.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="1919" column="4" selection-start-line="1919" selection-start-column="4" selection-end-line="1919" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ApproachV4/src/AverageSentenceSentiment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/ApproachV3/datasets/completed_dataset.csv" />
-    <entry file="file://$PROJECT_DIR$/ApproachV3/temp_datasets/training_dataset.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46437">
-          <caret line="2019" column="10" selection-start-line="2019" selection-end-line="2019" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ApproachV3/src/FileSplitter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="91" selection-start-line="4" selection-start-column="91" selection-end-line="4" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ApproachV4/src/AppendAdditionalFeatures.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="30" column="91" selection-start-line="30" selection-start-column="91" selection-end-line="30" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/dataset-2.csv" />
     <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/dataset-final-v4.csv" />
     <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/neg_tweets.txt">
@@ -1144,16 +1043,6 @@
     <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/test_data_temp.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ApproachV4/src/GetTweetProperties.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="217" column="31" lean-forward="true" selection-start-line="217" selection-start-column="31" selection-end-line="217" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/test_data_v4.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
@@ -1192,16 +1081,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ApproachV4/src/TwitterDataMiner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1511">
-          <caret line="90" column="32" selection-start-line="90" selection-start-column="32" selection-end-line="90" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ApproachV4/src/GetAccountPropertiesV4.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
@@ -1212,15 +1091,70 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ApproachV4/src/BotClassifierV4.py">
+    <entry file="file://$PROJECT_DIR$/kaggle_data/test_datasets/test_data_v4.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaggle_data/test_datasets/test-dataset-final-v4.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaggle_data/final_training_datasets/training-dataset-final-v4.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/training-dataset-final-v4.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV4/src/TwitterDataMiner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5520">
-          <caret line="240" column="10" lean-forward="true" selection-start-line="240" selection-start-column="10" selection-end-line="240" selection-end-column="10" />
+        <state relative-caret-position="77">
+          <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="91" selection-end-column="24" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV4/src/AppendDescription.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="987">
+          <caret line="79" column="92" selection-start-line="79" selection-start-column="92" selection-end-line="79" selection-end-column="92" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV4/src/BotClassifierV4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="230" column="71" selection-start-line="230" selection-start-column="71" selection-end-line="230" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV4/src/AppendAdditionalFeatures.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="734">
+          <caret line="47" column="33" lean-forward="true" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV4/src/GetTweetProperties.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="214" column="33" lean-forward="true" selection-start-line="214" selection-start-column="33" selection-end-line="214" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaggle_data/final_training_datasets/training-dataset-final-v4-d.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/training-dataset-final-v4-d.csv">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

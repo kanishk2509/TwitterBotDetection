@@ -1,6 +1,5 @@
+import csv
 import pandas as pd
-from GetApi import get_api
-from GetAccountPropertiesV4 import get_data
 from classifiers.RForestClassifier import RFC
 from classifiers.DTreeClassifier import DTC
 from classifiers.MNBClassifier import MNB
@@ -14,14 +13,23 @@ key = ['L5UQsE4pIb9YUJvP7HjHuxSvW',
        '1039011019786342401-iDggGlhErT1KKdVGVXz4Kt7X8v0kIV',
        'MJ17S1uhCaI1zS3NBWksMaWdwjvAjn7cpji5vyhknfcUe']
 
+symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|updates| ' \
+              r'every|gorilla|yes_ofc|forget|FOLLOW|killin|genome|shout out|Save$$|Save $|' \
+              r'expos|kill|clit|bbb|butt|fuck|XXX|sex|truthe|fake|anony|free|virus|funky|RNA' \
+              r'|jargon|Xanax|Only $|Free Instant|Extra income|Big bucks|$$$|Money making|' \
+              r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|clone|genie|bbb|Viagra|' \
+              r'ffd|emoji|Sale|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
+
+training_file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data' \
+                '/final_training_datasets/training-dataset-final-v4.csv'
+
 
 def get_training_data():
     # Getting training data
     print("\nGetting the training data...")
 
     # Use the this file path when running remotely from other machine
-    file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data' \
-                '/final_training_datasets/training-dataset-final-v4.csv'
+    file_path = training_file_path
 
     # Use the this file path when running locally from personal machine for faster access
     # file_path =
@@ -29,13 +37,7 @@ def get_training_data():
     # '-final-v4.csv'
     training_data = pd.read_csv(file_path, encoding='utf-8')
 
-    # Feature engineering : Taking care of the incomplete/inappropriate data
-    symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|updates ' \
-              r'every|gorilla|yes_ofc|forget' \
-              r'expos|kill|clit|bbb|butt|fuck|XXX|sex|truthe|fake|anony|free|virus|funky|RNA' \
-              r'|jargon' \
-              r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|clone|genie|bbb' \
-              r'ffd|emoji|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
+    # Feature engineering : Taking care of the incomplete/inappropriate/bot/spam data
     training_data['screen_name_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
     training_data['description_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
     training_data['std_deviation_friends_binary'] = training_data.screen_name.str.contains(symbols, case=False,
@@ -79,13 +81,8 @@ def get_training_data():
 def get_test_data():
     file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data/'
     test_dataframe = pd.read_csv(file_path + 'test_datasets/test_data_v4.csv')
+
     # Feature engineering
-    symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|updates ' \
-              r'every|gorilla|yes_ofc|forget' \
-              r'expos|kill|clit|bbb|butt|fuck|XXX|sex|fake|anony|free|virus|funky|RNA' \
-              r'|jargon' \
-              r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|clone|genie|bbb' \
-              r'ffd|emoji|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
     test_dataframe['screen_name_binary'] = test_dataframe.screen_name.str.contains(symbols, case=False, na=False)
     test_dataframe['description_binary'] = test_dataframe.screen_name.str.contains(symbols, case=False, na=False)
     # Extracting Features
@@ -231,7 +228,7 @@ def main():
                 writer.writerow({'id': row['id'],
                                  'bot': row['bot']})
 
-        print("\nClassification done and saved!\n")
+        print("\nClassification done and saved in 'classified_users.csv'!\n")
     except TypeError as e:
         print(e)
         print('Please re-run the code with valid parameters')
