@@ -199,7 +199,7 @@ def train_classifiers(type):
 
 
 def main():
-    cl_type = 'dt'
+    cl_type = 'rf'
     predicted_df = []
     try:
         # The program checks if the classifier is already trained. If not, trains again.
