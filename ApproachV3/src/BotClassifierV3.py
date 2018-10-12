@@ -1,9 +1,5 @@
 import csv
-
-import numpy
 import pandas as pd
-from GetApi import get_api
-from GetAccountProperties import get_data
 from classifiers.RForestClassifier import RFC
 from classifiers.DTreeClassifier import DTC
 from classifiers.MNBClassifier import MNB
@@ -26,7 +22,7 @@ def get_training_data():
     print("\nGetting the training data...")
 
     # Use the this file path when running remotely from other machine
-    file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data' \
+    file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data' \
                 '/final_training_datasets/training-dataset-final-v3.csv'
 
     # Use the this file path when running locally from personal machine for faster access
@@ -52,13 +48,12 @@ def get_training_data():
     X = training_data[features].iloc[:, :-1]
     y = training_data[features].iloc[:, -1]
 
-    print(X, y)
     return X, y
 
 
 def get_test_data():
-    file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data/'
-    test_dataframe = pd.read_csv(file_path + 'test_datasets/test_data-v3.csv')
+    file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data/'
+    test_dataframe = pd.read_csv(file_path + 'final_test_datasets/test-data-v3.csv')
     # Feature engineering
     symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|updates ' \
               r'every|gorilla|yes_ofc|forget' \

@@ -21,7 +21,7 @@ symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|
           r'ffd|emoji|Sale|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
 
 training_file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data' \
-                     '/final_training_datasets/training-dataset-final-v4-d.csv'
+                     '/final_training_datasets/training-dataset-final-v4.csv'
 
 
 def get_training_data():
@@ -74,7 +74,7 @@ def get_training_data():
 
 def get_test_data():
     file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data/'
-    test_dataframe = pd.read_csv(file_path + 'test_datasets/test_data_v4.csv')
+    test_dataframe = pd.read_csv(file_path + 'test_datasets/test-data-v4.csv')
 
     # Feature engineering
     test_dataframe['screen_name_binary'] = test_dataframe.screen_name.str.contains(symbols, case=False, na=False)

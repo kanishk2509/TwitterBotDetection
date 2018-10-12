@@ -1,4 +1,6 @@
 import csv
+import re
+
 from GetApi import get_api
 import numpy as np
 from nltk import word_tokenize, PorterStemmer
@@ -127,6 +129,11 @@ def main():
 
                 tbl = get_tweet_semantics(user_id, api)
 
+                desc_str = tbl[9]
+                regex = re.compile('[^a-zA-Z]')
+                # First parameter is the replacement, second parameter is your input string
+                strr = regex.sub('', desc_str)
+
                 if len(tbl) > 0:
                     writer.writerow({'id': row['id'],
                                      'id_str': row['id_str'],
@@ -150,7 +157,7 @@ def main():
                                      'user_description_sentiment': tbl[6],
                                      'special_char_in_description': tbl[7],
                                      'tweet_count': tbl[8],
-                                     'description': tbl[9],
+                                     'description': strr,
                                      'bot': row['bot']})
 
                     print('Row ', cnt, ' written for => ', row['screen_name'].upper())

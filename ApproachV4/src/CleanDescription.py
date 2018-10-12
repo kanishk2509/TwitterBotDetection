@@ -19,7 +19,7 @@ def main():
             open(common_path + 'training-dataset-final-v4-d.csv',
                  'r+',
                  encoding="utf-8") as inp, \
-            open(common_path + 'training-dataset-final-v4-d-d.csv',
+            open(common_path + 'training-dataset-final-v4.csv',
                  'w+',
                  encoding="utf-8") as out:
         reader = csv.DictReader(inp)

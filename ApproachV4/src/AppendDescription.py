@@ -14,7 +14,7 @@ def main():
     common_path = '/Users/kanishksinha/Desktop/TwitterBotDetection/ApproachV4/temp_datasets/'
 
     with \
-            open(common_path + 'training-dataset-final-v4.csv',
+            open(common_path + 'training-dataset-final-v4-old.csv',
                  'r+',
                  encoding="utf-8") as inp, \
             open(common_path + 'training-dataset-final-v4-d.csv',
