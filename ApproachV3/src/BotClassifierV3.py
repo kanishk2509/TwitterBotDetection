@@ -1,5 +1,7 @@
 import csv
 import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
+
 from classifiers.RForestClassifier import RFC
 from classifiers.DTreeClassifier import DTC
 from classifiers.MNBClassifier import MNB
@@ -15,6 +17,8 @@ key = ['L5UQsE4pIb9YUJvP7HjHuxSvW',
        'MJ17S1uhCaI1zS3NBWksMaWdwjvAjn7cpji5vyhknfcUe']
 
 vectorizer, classifier = load()
+test_size = 0.1
+random_state = 50
 
 
 def get_training_data():
@@ -88,7 +92,7 @@ def train_classifiers(type):
             X, y = get_training_data()
 
             # Split data into training and test data
-            x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=101)
+            x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
             print("\nTraining Random Forest classifier...")
             rfc.learn(x_train, y_train, 22)
 
@@ -113,7 +117,7 @@ def train_classifiers(type):
             X, y = get_training_data()
 
             # Split data into training and test data
-            x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=101)
+            x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
             print("\nTraining Decision Tree Classifier...")
             rfc.learn(x_train, y_train)
 
@@ -136,9 +140,11 @@ def train_classifiers(type):
             # Train the classifier
             # Extract the features and class label from the raw data
             X, y = get_training_data()
-
+            scaler = MinMaxScaler()
+            print(scaler.fit(X))
+            x = scaler.transform(X)
             # Split data into training and test data
-            x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=101)
+            x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=random_state)
             print("\nTraining Naive Bayes Classifier...")
             rfc.learn(x_train, y_train)
 
@@ -155,7 +161,7 @@ def train_classifiers(type):
 
 
 def main():
-    cl_type = 'rf'
+    cl_type = 'dt'
     predicted_df = []
     try:
         # The program checks if the classifier is already trained. If not, trains again.
@@ -168,7 +174,6 @@ def main():
         for i in pd_test_data.itertuples():
             data = np.array(i).reshape(1, -1)
             input_data = np.delete(data, 0, axis=1)
-            print(input_data)
             result = rfc.predict(input_data)
             if result[0] == 1:
                 dictn = {'id': i.id, 'bot': 1}

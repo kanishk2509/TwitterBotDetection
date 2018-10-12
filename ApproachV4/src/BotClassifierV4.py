@@ -6,6 +6,7 @@ from classifiers.MNBClassifier import MNB
 from sklearn.model_selection import train_test_split
 import numpy as np
 import os
+from sklearn.preprocessing import MinMaxScaler
 
 '''Twitter Account Keys'''
 key = ['L5UQsE4pIb9YUJvP7HjHuxSvW',
@@ -20,8 +21,11 @@ symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|
           r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|clone|genie|bbb|Viagra|' \
           r'ffd|emoji|Sale|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
 
-training_file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data' \
+training_file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data' \
                      '/final_training_datasets/training-dataset-final-v4.csv'
+
+test_size = 0.1
+random_state = 50
 
 
 def get_training_data():
@@ -73,8 +77,8 @@ def get_training_data():
 
 
 def get_test_data():
-    file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data/'
-    test_dataframe = pd.read_csv(file_path + 'test_datasets/test-data-v4.csv')
+    file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data/'
+    test_dataframe = pd.read_csv(file_path + 'final_test_datasets/test-data-v4.csv')
 
     # Feature engineering
     test_dataframe['screen_name_binary'] = test_dataframe.screen_name.str.contains(symbols, case=False, na=False)
@@ -125,7 +129,7 @@ def train_classifiers(type):
             X, y = get_training_data()
 
             # Split data into training and test data
-            x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=101)
+            x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
             print("\nTraining Random Forest classifier...")
             rfc.learn(x_train, y_train, 22)
 
@@ -150,7 +154,7 @@ def train_classifiers(type):
             X, y = get_training_data()
 
             # Split data into training and test data
-            x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=101)
+            x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
             print("\nTraining Decision Tree Classifier...")
             rfc.learn(x_train, y_train)
 
@@ -172,10 +176,13 @@ def train_classifiers(type):
         else:
             # Train the classifier
             # Extract the features and class label from the raw data
+            # Normalise negative values
             X, y = get_training_data()
-
+            scaler = MinMaxScaler()
+            print(scaler.fit(X))
+            x = scaler.transform(X)
             # Split data into training and test data
-            x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=101)
+            x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=random_state)
             print("\nTraining Naive Bayes Classifier...")
             rfc.learn(x_train, y_train)
 
@@ -192,7 +199,7 @@ def train_classifiers(type):
 
 
 def main():
-    cl_type = 'rf'
+    cl_type = 'dt'
     predicted_df = []
     try:
         # The program checks if the classifier is already trained. If not, trains again.
@@ -205,7 +212,6 @@ def main():
         for i in pd_test_data.itertuples():
             data = np.array(i).reshape(1, -1)
             input_data = np.delete(data, 0, axis=1)
-            print(input_data)
             result = rfc.predict(input_data)
             if result[0] == 1:
                 dictn = {'id': i.id, 'bot': 1}
