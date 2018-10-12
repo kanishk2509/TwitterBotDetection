@@ -3,16 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="6ba0c19f-8fea-41a3-b20d-ec773cbcd733" name="Default Changelist" comment="Modified AppendCCE to add spam ratio to existing training dataset.">
       <change afterPath="$PROJECT_DIR$/ApproachV3/src/spam_metric/model.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ApproachV4/src/CleanDescription.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ApproachV4/temp_datasets/training-dataset-final-v4-d.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/ApproachV4/temp_datasets/training-dataset-final-v4.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kaggle_data/final_training_datasets/training-dataset-final-v4-d-d.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/kaggle_data/test_datasets/src/model.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ApproachV3/src/dt_trained_classifier.p" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ApproachV3/src/rf_trained_classifier.p" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ApproachV4/dt_trained_classifier.p" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ApproachV4/rf_trained_classifier.p" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/src/BotClassifierV4.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/BotClassifierV4.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ApproachVx/datasets/honeypot.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaggle_data/final_training_datasets/training-dataset-final-v4-d.csv" beforeDir="false" afterPath="$PROJECT_DIR$/kaggle_data/final_training_datasets/training-dataset-final-v4-d.csv" afterDir="false" />
     </list>
     <ignored path="model.pkl" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -98,32 +99,32 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="csv" value="89" />
+          <entry key="csv" value="93" />
           <entry key="p" value="1" />
-          <entry key="py" value="94" />
+          <entry key="py" value="96" />
           <entry key="txt" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSV" value="89" />
+          <entry key="CSV" value="93" />
           <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="94" />
+          <entry key="Python" value="96" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="csv" value="4" />
           <entry key="dummy" value="10" />
-          <entry key="py" value="2689" />
-          <entry key="txt" value="154" />
+          <entry key="py" value="2761" />
+          <entry key="txt" value="157" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSV" value="4" />
-          <entry key="PLAIN_TEXT" value="164" />
-          <entry key="Python" value="2689" />
+          <entry key="PLAIN_TEXT" value="167" />
+          <entry key="Python" value="2761" />
         </counts>
       </usages-collector>
     </session>
@@ -168,18 +169,46 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kaggle_data/test_datasets/test_data_temp_copy.csv">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ApproachV4/src/BotClassifierV4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="689">
-              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+            <state relative-caret-position="551">
+              <caret line="37" column="60" selection-start-line="37" selection-start-column="60" selection-end-line="37" selection-end-column="60" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ApproachV4/src/CleanDescription.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="461">
+              <caret line="84" column="48" selection-start-line="84" selection-start-column="48" selection-end-line="84" selection-end-column="48" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ApproachV4/src/AppendDescription.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="759">
+              <caret line="61" column="32" lean-forward="true" selection-end-line="92" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kaggle_data/final_training_datasets/training-dataset-final-v4-d.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-7030">
+              <caret line="1" column="46" selection-start-line="1" selection-start-column="46" selection-end-line="1" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -263,7 +292,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ApproachVx/AverageSentenceSentiment.py" />
         <option value="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200f_temp.csv" />
         <option value="$PROJECT_DIR$/ApproachVx/datasets/training_dataset_v200.csv" />
         <option value="$PROJECT_DIR$/ApproachVx/GetTweetProperties.py" />
@@ -314,6 +342,7 @@
         <option value="$PROJECT_DIR$/ApproachV4/src/AppendDescription.py" />
         <option value="$PROJECT_DIR$/kaggle_data/final_training_datasets/training-dataset-final-v4-d.csv" />
         <option value="$PROJECT_DIR$/ApproachV4/src/BotClassifierV4.py" />
+        <option value="$PROJECT_DIR$/ApproachV4/src/CleanDescription.py" />
       </list>
     </option>
   </component>
@@ -415,7 +444,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.BotClassifier">
+  <component name="RunManager" selected="Python.CleanDescription">
     <configuration name="AppendDescription" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="TwitterBotDetection" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -479,7 +508,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="GenerateTestData" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="CleanDescription" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="TwitterBotDetection" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -487,11 +516,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kaggle_data/test_datasets/src" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ApproachV4/src" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kaggle_data/test_datasets/src/GenerateTestData.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ApproachV4/src/CleanDescription.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -523,18 +552,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.TwitterDataMiner" />
-      <item itemvalue="Python.GenerateTestData" />
       <item itemvalue="Python.BotClassifier" />
       <item itemvalue="Python.BotClassifierV3" />
       <item itemvalue="Python.AppendDescription" />
+      <item itemvalue="Python.CleanDescription" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.CleanDescription" />
         <item itemvalue="Python.BotClassifier" />
         <item itemvalue="Python.AppendDescription" />
         <item itemvalue="Python.BotClassifierV3" />
         <item itemvalue="Python.TwitterDataMiner" />
-        <item itemvalue="Python.GenerateTestData" />
       </list>
     </recent_temporary>
   </component>
@@ -766,7 +795,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539316924877</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="...">
+      <created>1539318033660</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1539318033660</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TodoView">
@@ -825,11 +861,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="..." />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/dataset-2.csv" />
-    <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/dataset-final-v4.csv" />
-    <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/neg_tweets.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/pos_tweets.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1114,36 +1145,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/training-dataset-final-v4-d.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/training-dataset-final-v4.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/kaggle_data/final_training_datasets/training-dataset-final-v4.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/kaggle_data/final_training_datasets/training-dataset-final-v4-d.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7030">
+          <caret line="1" column="46" selection-start-line="1" selection-start-column="46" selection-end-line="1" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ApproachV4/src/AppendDescription.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1403">
-          <caret line="61" column="32" lean-forward="true" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
+        <state relative-caret-position="759">
+          <caret line="61" column="32" lean-forward="true" selection-end-line="92" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kaggle_data/final_training_datasets/training-dataset-final-v4-d.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="16" column="318" selection-start-line="16" selection-start-column="318" selection-end-line="16" selection-end-column="318" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/training-dataset-final-v4-d.csv">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/ApproachV4/src/BotClassifierV4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="689">
-          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+        <state relative-caret-position="551">
+          <caret line="37" column="60" selection-start-line="37" selection-start-column="60" selection-end-line="37" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV4/temp_datasets/training-dataset-final-v4-d-d.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaggle_data/final_training_datasets/training-dataset-final-v4-d-d.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV4/src/CleanDescription.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="84" column="48" selection-start-line="84" selection-start-column="48" selection-end-line="84" selection-end-column="48" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
