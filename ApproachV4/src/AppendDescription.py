@@ -56,7 +56,10 @@ def main():
             cnt = cnt + 1
             user = api.get_user(row['id'])
             description = user.description
-
+            if not description:
+                dc = 0
+            else:
+                dc = description
             writer.writerow({'id': row['id'],
                              'id_str': row['id_str'],
                              'screen_name': row['screen_name'],
@@ -79,7 +82,7 @@ def main():
                              'user_description_sentiment': row['user_description_sentiment'],
                              'special_char_in_description': row['special_char_in_description'],
                              'tweet_count': row['tweet_count'],
-                             'description': description,
+                             'description': dc,
                              'bot': row['bot']})
 
             print('Row ', cnt, ' written for => ', row['screen_name'].upper())

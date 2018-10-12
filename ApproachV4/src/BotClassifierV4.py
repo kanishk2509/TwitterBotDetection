@@ -14,14 +14,14 @@ key = ['L5UQsE4pIb9YUJvP7HjHuxSvW',
        'MJ17S1uhCaI1zS3NBWksMaWdwjvAjn7cpji5vyhknfcUe']
 
 symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|updates| ' \
-              r'every|gorilla|yes_ofc|forget|FOLLOW|killin|genome|shout out|Save$$|Save $|' \
-              r'expos|kill|clit|bbb|butt|fuck|XXX|sex|truthe|fake|anony|free|virus|funky|RNA' \
-              r'|jargon|Xanax|Only $|Free Instant|Extra income|Big bucks|$$$|Money making|' \
-              r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|clone|genie|bbb|Viagra|' \
-              r'ffd|emoji|Sale|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
+          r'every|gorilla|yes_ofc|forget|FOLLOW|killin|genome|shout out|Save$$|Save $|' \
+          r'expos|kill|clit|bbb|butt|fuck|XXX|sex|truthe|fake|anony|free|virus|funky|RNA' \
+          r'|jargon|Xanax|Only $|Free Instant|Extra income|Big bucks|$$$|Money making|' \
+          r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|clone|genie|bbb|Viagra|' \
+          r'ffd|emoji|Sale|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
 
 training_file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/kaggle_data' \
-                '/final_training_datasets/training-dataset-final-v4.csv'
+                     '/final_training_datasets/training-dataset-final-v4-d.csv'
 
 
 def get_training_data():
@@ -39,13 +39,7 @@ def get_training_data():
 
     # Feature engineering : Taking care of the incomplete/inappropriate/bot/spam data
     training_data['screen_name_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
-    training_data['description_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
-    training_data['std_deviation_friends_binary'] = training_data.screen_name.str.contains(symbols, case=False,
-                                                                                           na=False)
-    training_data['std_deviation_followers_binary'] = training_data.screen_name.str.contains(symbols, case=False,
-                                                                                             na=False)
-    training_data['unique_urls_ratio_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
-    training_data['tweet_url_similarity_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
+    training_data['description_binary'] = training_data.description.str.contains(symbols, case=False, na=False)
 
     # Extracting Features
     features = ['id',
@@ -61,10 +55,10 @@ def get_training_data():
                 'url_ratio',
                 'avg_cosine_similarity',
                 'avg_tweet_sentiment',
-                'std_deviation_friends_binary',
-                'std_deviation_followers_binary',
-                'unique_urls_ratio_binary',
-                'tweet_url_similarity_binary',
+                'std_deviation_friends',
+                'std_deviation_followers',
+                'unique_urls_ratio',
+                'tweet_url_similarity',
                 'user_description_len',
                 'user_description_sentiment',
                 'special_char_in_description',
@@ -84,7 +78,7 @@ def get_test_data():
 
     # Feature engineering
     test_dataframe['screen_name_binary'] = test_dataframe.screen_name.str.contains(symbols, case=False, na=False)
-    test_dataframe['description_binary'] = test_dataframe.screen_name.str.contains(symbols, case=False, na=False)
+    test_dataframe['description_binary'] = test_dataframe.description.str.contains(symbols, case=False, na=False)
     # Extracting Features
     features = ['id',
                 'screen_name_binary',
@@ -99,10 +93,10 @@ def get_test_data():
                 'url_ratio',
                 'avg_cosine_similarity',
                 'avg_tweet_sentiment',
-                'std_deviation_friends_binary',
-                'std_deviation_followers_binary',
-                'unique_urls_ratio_binary',
-                'tweet_url_similarity_binary',
+                'std_deviation_friends',
+                'std_deviation_followers',
+                'unique_urls_ratio',
+                'tweet_url_similarity',
                 'user_description_len',
                 'user_description_sentiment',
                 'special_char_in_description',
