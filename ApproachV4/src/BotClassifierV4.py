@@ -14,12 +14,10 @@ key = ['L5UQsE4pIb9YUJvP7HjHuxSvW',
        '1039011019786342401-iDggGlhErT1KKdVGVXz4Kt7X8v0kIV',
        'MJ17S1uhCaI1zS3NBWksMaWdwjvAjn7cpji5vyhknfcUe']
 
-symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|updates| ' \
-          r'every|gorilla|yes_ofc|forget|FOLLOW|killin|genome|shout out|Save$$|Save $|' \
-          r'expos|kill|clit|bbb|butt|fuck|XXX|sex|truthe|fake|anony|free|virus|funky|RNA' \
-          r'|jargon|Xanax|Only $|Free Instant|Extra income|Big bucks|$$$|Money making|' \
-          r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|clone|genie|bbb|Viagra|' \
-          r'ffd|emoji|Sale|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
+symbols = ['Bot', 'bot', 'b0t', 'B0T', 'B0t', 'cannabis', 'lets go', 'shout out', '$$$', 'tweet me', 'follow me',
+               'gorilla', 'yes_ofc', 'FOLLOW', 'Free instant', 'hypocrisy', 'troll', 'blatant', 'request', 'big bucks',
+               'cheese', 'wow', 'magic', 'bang', 'sex', 'fuck', 'fake', 'butt', 'bbb', 'free', 'virus', 'clit', 'funky',
+               'jargon', 'xanax', 'chick', 'prison', 'freak', 'clone', 'droop', 'free', 'swag']
 
 training_file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data' \
                      '/final_training_datasets/balanced_dataset_v4.csv'
@@ -42,8 +40,8 @@ def get_training_data():
     training_data = pd.read_csv(file_path, encoding='utf-8')
 
     # Feature engineering : Taking care of the incomplete/inappropriate/bot/spam data
-    training_data['screen_name_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
-    training_data['description_binary'] = training_data.description.str.contains(symbols, case=False, na=False)
+    training_data['screen_name_binary'] = any(x in training_data.screen_name for x in symbols)
+    training_data['description_binary'] = any(x in training_data.description for x in symbols)
 
     # Extracting Features
     features = ['id',
@@ -73,6 +71,9 @@ def get_training_data():
     X = training_data[features].iloc[:, :-1]
     y = training_data[features].iloc[:, -1]
 
+    print(training_data['screen_name_binary'])
+    print(training_data['description_binary'])
+
     return X, y
 
 
@@ -81,8 +82,8 @@ def get_test_data():
     test_dataframe = pd.read_csv(file_path + 'final_test_datasets/test-data-v4.csv')
 
     # Feature engineering
-    test_dataframe['screen_name_binary'] = test_dataframe.screen_name.str.contains(symbols, case=False, na=False)
-    test_dataframe['description_binary'] = test_dataframe.description.str.contains(symbols, case=False, na=False)
+    test_dataframe['screen_name_binary'] = any(x in test_dataframe.screen_name for x in symbols)
+    test_dataframe['description_binary'] = any(x in test_dataframe.description for x in symbols)
     # Extracting Features
     features = ['id',
                 'screen_name_binary',
@@ -199,7 +200,7 @@ def train_classifiers(type):
 
 
 def main():
-    cl_type = 'dt'
+    cl_type = 'nb'
     predicted_df = []
     try:
         # The program checks if the classifier is already trained. If not, trains again.

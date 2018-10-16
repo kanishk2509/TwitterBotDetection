@@ -20,12 +20,10 @@ vectorizer, classifier = load()
 test_size = 0.1
 random_state = 42
 
-symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|updates| ' \
-          r'every|gorilla|yes_ofc|forget|FOLLOW|killin|genome|shout out|Save$$|Save $|' \
-          r'expos|kill|clit|bbb|butt|fuck|XXX|sex|truthe|fake|anony|free|virus|funky|RNA' \
-          r'|jargon|Xanax|Only $|Free Instant|Extra income|Big bucks|$$$|Money making|' \
-          r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|clone|genie|bbb|Viagra|' \
-          r'ffd|emoji|Sale|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
+symbols = ['Bot', 'bot', 'b0t', 'B0T', 'B0t', 'cannabis', 'lets go', 'shout out', '$$$', 'tweet me', 'follow me',
+               'gorilla', 'yes_ofc', 'FOLLOW', 'Free instant', 'hypocrisy', 'troll', 'blatant', 'request', 'big bucks',
+               'cheese', 'wow', 'magic', 'bang', 'sex', 'fuck', 'fake', 'butt', 'bbb', 'free', 'virus', 'clit', 'funky',
+               'jargon', 'xanax', 'chick', 'prison', 'freak', 'clone', 'droop', 'free', 'swag']
 
 
 def get_training_data():
@@ -34,7 +32,7 @@ def get_training_data():
 
     # Use the this file path when running remotely from other machine
     file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data' \
-                '/final_training_datasets/completed_dataset.csv'
+                '/final_training_datasets/completed_dataset_new_v3.csv'
 
     # Use the this file path when running locally from personal machine for faster access
     # file_path =
@@ -43,14 +41,15 @@ def get_training_data():
     training_data = pd.read_csv(file_path, encoding='utf-8-sig')
 
     # Feature engineering
-    # training_data['screen_name_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
-    # training_data['description_binary'] = training_data.description.str.contains(symbols, case=False, na=False)
+    training_data['screen_name_binary'] = any(x in training_data.screen_name for x in symbols)
+    training_data['description_binary'] = any(x in training_data.description for x in symbols)
     training_data['id_s'] = training_data.id
 
+
     # Extracting Features
-    features = ['id_s', 'age', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
+    features = ['id_s', 'screen_name_binary', 'age', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
                 'account_rep', 'avg_tpd', 'hashtags_ratio', 'user_mentions_ratio',
-                'mal_url_ratio', 'cce', 'spam_ratio', 'bot']
+                'mal_url_ratio', 'cce', 'spam_ratio', 'description_binary', 'bot']
     X = training_data[features].iloc[:, :-1]
     y = training_data[features].iloc[:, -1]
 
@@ -59,15 +58,15 @@ def get_training_data():
 
 def get_test_data():
     file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data/'
-    test_dataframe = pd.read_csv(file_path + 'final_test_datasets/test-data-v3.csv')
+    test_dataframe = pd.read_csv(file_path + 'final_test_datasets/test-data-v3-new.csv')
     # Feature engineering
-    # test_dataframe['screen_name_binary'] = test_dataframe.screen_name.str.contains(symbols, case=False, na=False)
-    # test_dataframe['description_binary'] = test_dataframe.description.str.contains(symbols, case=False, na=False)
+    test_dataframe['screen_name_binary'] = any(x in test_dataframe.screen_name for x in symbols)
+    test_dataframe['description_binary'] = any(x in test_dataframe.description for x in symbols)
 
     # Extracting Features
-    features = ['id', 'age', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
+    features = ['id', 'screen_name_binary', 'age', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
                 'account_rep', 'avg_tpd', 'hashtags_ratio', 'user_mentions_ratio',
-                'mal_url_ratio', 'cce', 'spam_ratio', 'bot']
+                'mal_url_ratio', 'cce', 'spam_ratio', 'description_binary', 'bot']
 
     X = test_dataframe[features].iloc[:, :-1]
     return X
@@ -158,7 +157,7 @@ def train_classifiers(type):
 
 
 def main():
-    cl_type = 'dt'
+    cl_type = 'nb'
     predicted_df = []
     try:
         # The program checks if the classifier is already trained. If not, trains again.
