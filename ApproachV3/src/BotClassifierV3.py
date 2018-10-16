@@ -18,7 +18,7 @@ key = ['L5UQsE4pIb9YUJvP7HjHuxSvW',
 
 vectorizer, classifier = load()
 test_size = 0.1
-random_state = 50
+random_state = 42
 
 symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|updates| ' \
           r'every|gorilla|yes_ofc|forget|FOLLOW|killin|genome|shout out|Save$$|Save $|' \
@@ -34,7 +34,7 @@ def get_training_data():
 
     # Use the this file path when running remotely from other machine
     file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data' \
-                '/final_training_datasets/completed_dataset_v3_temp.csv'
+                '/final_training_datasets/balanced_dataset_v3_des.csv'
 
     # Use the this file path when running locally from personal machine for faster access
     # file_path =
@@ -59,15 +59,15 @@ def get_training_data():
 
 def get_test_data():
     file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data/'
-    test_dataframe = pd.read_csv(file_path + 'final_test_datasets/test-data-v3.csv')
+    test_dataframe = pd.read_csv(file_path + 'final_test_datasets/test-data-v3-new.csv')
     # Feature engineering
     test_dataframe['screen_name_binary'] = test_dataframe.screen_name.str.contains(symbols, case=False, na=False)
-    # test_dataframe['description_binary'] = test_dataframe.description.str.contains(symbols, case=False, na=False)
+    test_dataframe['description_binary'] = test_dataframe.description.str.contains(symbols, case=False, na=False)
 
     # Extracting Features
     features = ['id', 'screen_name_binary', 'age', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
                 'account_rep', 'avg_tpd', 'hashtags_ratio', 'user_mentions_ratio',
-                'mal_url_ratio', 'cce', 'spam_ratio', 'bot']
+                'mal_url_ratio', 'cce', 'spam_ratio', 'description_binary', 'bot']
 
     X = test_dataframe[features].iloc[:, :-1]
     return X
