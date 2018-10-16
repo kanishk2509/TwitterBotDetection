@@ -32,7 +32,7 @@ def get_training_data():
 
     # Use the this file path when running remotely from other machine
     file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data' \
-                '/final_training_datasets/balanced_dataset_v3.csv'
+                '/final_training_datasets/balanced_dataset_v3_des.csv'
 
     # Use the this file path when running locally from personal machine for faster access
     # file_path =
@@ -57,7 +57,7 @@ def get_training_data():
 
 def get_test_data():
     file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data/'
-    test_dataframe = pd.read_csv(file_path + 'final_test_datasets/test-data-v3.csv')
+    test_dataframe = pd.read_csv(file_path + 'final_test_datasets/test-data-v3-new.csv')
     # Feature engineering
     test_dataframe['screen_name_binary'] = any(x in test_dataframe.screen_name for x in symbols)
     test_dataframe['description_binary'] = any(x in test_dataframe.description for x in symbols)
@@ -156,7 +156,7 @@ def train_classifiers(type):
 
 
 def main():
-    cl_type = 'dt'
+    cl_type = 'nb'
     predicted_df = []
     try:
         # The program checks if the classifier is already trained. If not, trains again.

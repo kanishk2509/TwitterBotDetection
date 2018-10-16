@@ -15,9 +15,9 @@ key = ['L5UQsE4pIb9YUJvP7HjHuxSvW',
        'MJ17S1uhCaI1zS3NBWksMaWdwjvAjn7cpji5vyhknfcUe']
 
 symbols = ['Bot', 'bot', 'b0t', 'B0T', 'B0t', 'cannabis', 'lets go', 'shout out', '$$$', 'tweet me', 'follow me',
-               'gorilla', 'yes_ofc', 'FOLLOW', 'Free instant', 'hypocrisy', 'troll', 'blatant', 'request', 'big bucks',
-               'cheese', 'wow', 'magic', 'bang', 'sex', 'fuck', 'fake', 'butt', 'bbb', 'free', 'virus', 'clit', 'funky',
-               'jargon', 'xanax', 'chick', 'prison', 'freak', 'clone', 'droop', 'free', 'swag']
+           'gorilla', 'yes_ofc', 'FOLLOW', 'Free instant', 'hypocrisy', 'troll', 'blatant', 'request', 'big bucks',
+           'cheese', 'wow', 'magic', 'bang', 'sex', 'fuck', 'fake', 'butt', 'bbb', 'free', 'virus', 'clit', 'funky',
+           'jargon', 'xanax', 'chick', 'prison', 'freak', 'clone', 'droop', 'free', 'swag']
 
 training_file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data' \
                      '/final_training_datasets/balanced_dataset_v4.csv'
@@ -40,13 +40,11 @@ def get_training_data():
     training_data = pd.read_csv(file_path, encoding='utf-8')
 
     # Feature engineering : Taking care of the incomplete/inappropriate/bot/spam data
-    training_data['screen_name_binary'] = any(x in training_data.screen_name for x in symbols)
-    training_data['description_binary'] = any(x in training_data.description for x in symbols)
+    # training_data['screen_name_binary'] = any(x in training_data.screen_name for x in symbols)
+    # training_data['description_binary'] = any(x in training_data.description for x in symbols)
 
     # Extracting Features
-    features = ['id',
-                'screen_name_binary',
-                'age',
+    features = ['age',
                 'in_out_ratio',
                 'favorites_ratio',
                 'status_ratio',
@@ -65,7 +63,6 @@ def get_training_data():
                 'user_description_sentiment',
                 'special_char_in_description',
                 'tweet_count',
-                'description_binary',
                 'bot']
 
     X = training_data[features].iloc[:, :-1]
@@ -82,12 +79,10 @@ def get_test_data():
     test_dataframe = pd.read_csv(file_path + 'final_test_datasets/test-data-v4.csv')
 
     # Feature engineering
-    test_dataframe['screen_name_binary'] = any(x in test_dataframe.screen_name for x in symbols)
-    test_dataframe['description_binary'] = any(x in test_dataframe.description for x in symbols)
+    # test_dataframe['screen_name_binary'] = any(x in test_dataframe.screen_name for x in symbols)
+    # test_dataframe['description_binary'] = any(x in test_dataframe.description for x in symbols)
     # Extracting Features
-    features = ['id',
-                'screen_name_binary',
-                'age',
+    features = ['age',
                 'in_out_ratio',
                 'favorites_ratio',
                 'status_ratio',
@@ -106,7 +101,6 @@ def get_test_data():
                 'user_description_sentiment',
                 'special_char_in_description',
                 'tweet_count',
-                'description_binary',
                 'bot']
 
     X = test_dataframe[features].iloc[:, :-1]
