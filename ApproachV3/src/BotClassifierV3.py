@@ -44,7 +44,6 @@ def get_training_data():
 
     # Feature engineering
     training_data['screen_name_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
-    training_data['description_binary'] = training_data.description.str.contains(symbols, case=False, na=False)
     training_data['id_s'] = training_data.id
 
     # Extracting Features
@@ -61,12 +60,6 @@ def get_test_data():
     file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data/'
     test_dataframe = pd.read_csv(file_path + 'final_test_datasets/test-data-v3.csv')
     # Feature engineering
-    symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|updates ' \
-              r'every|gorilla|yes_ofc|forget' \
-              r'expos|kill|clit|bbb|butt|fuck|XXX|sex|fake|anony|free|virus|funky|RNA' \
-              r'|jargon' \
-              r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|clone|genie|bbb' \
-              r'ffd|emoji|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
     test_dataframe['screen_name_binary'] = test_dataframe.screen_name.str.contains(symbols, case=False, na=False)
 
     # Extracting Features
@@ -163,7 +156,7 @@ def train_classifiers(type):
 
 
 def main():
-    cl_type = 'nb'
+    cl_type = 'dt'
     predicted_df = []
     try:
         # The program checks if the classifier is already trained. If not, trains again.

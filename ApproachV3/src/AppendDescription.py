@@ -17,10 +17,10 @@ def main():
     common_path = '/Users/kanishksinha/Desktop/TwitterBotDetection/ApproachV3/temp_datasets/'
 
     with \
-            open(common_path + 'completed_dataset.csv',
+            open(common_path + 'training-dataset-final-v3.csv',
                  'r+',
                  encoding="utf-8") as inp, \
-            open(common_path + 'completed_dataset_new.csv',
+            open(common_path + 'training-dataset-final-v3-new.csv',
                  'w+',
                  encoding="utf-8") as out:
         reader = csv.DictReader(inp)
