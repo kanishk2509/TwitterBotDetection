@@ -34,7 +34,7 @@ def get_training_data():
 
     # Use the this file path when running remotely from other machine
     file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data' \
-                '/final_training_datasets/training-dataset-final-v3.csv'
+                '/final_training_datasets/completed_dataset_v3.csv'
 
     # Use the this file path when running locally from personal machine for faster access
     # file_path =
@@ -158,7 +158,7 @@ def train_classifiers(type):
 
 
 def main():
-    cl_type = 'nb'
+    cl_type = 'dt'
     predicted_df = []
     try:
         # The program checks if the classifier is already trained. If not, trains again.
