@@ -23,7 +23,7 @@ training_file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDe
                      '/final_training_datasets/balanced_dataset_v4.csv'
 
 test_size = 0.1
-random_state = 42
+random_state = 0
 
 
 def get_training_data():
@@ -40,11 +40,12 @@ def get_training_data():
     training_data = pd.read_csv(file_path, encoding='utf-8')
 
     # Feature engineering : Taking care of the incomplete/inappropriate/bot/spam data
-    # training_data['screen_name_binary'] = any(x in training_data.screen_name for x in symbols)
-    # training_data['description_binary'] = any(x in training_data.description for x in symbols)
+    training_data['screen_name_binary'] = any(x in training_data.screen_name for x in symbols)
+    training_data['description_binary'] = any(x in training_data.description for x in symbols)
 
     # Extracting Features
     features = ['id',
+                'screen_name_binary',
                 'age',
                 'in_out_ratio',
                 'favorites_ratio',
@@ -64,12 +65,13 @@ def get_training_data():
                 'user_description_sentiment',
                 'special_char_in_description',
                 'tweet_count',
+                'description_binary',
                 'bot']
 
     X = training_data[features].iloc[:, :-1]
     y = training_data[features].iloc[:, -1]
 
-
+    print(X)
 
     return X, y
 
@@ -79,10 +81,11 @@ def get_test_data():
     test_dataframe = pd.read_csv(file_path + 'final_test_datasets/test-data-v4.csv')
 
     # Feature engineering
-    # test_dataframe['screen_name_binary'] = any(x in test_dataframe.screen_name for x in symbols)
-    # test_dataframe['description_binary'] = any(x in test_dataframe.description for x in symbols)
+    test_dataframe['screen_name_binary'] = any(x in test_dataframe.screen_name for x in symbols)
+    test_dataframe['description_binary'] = any(x in test_dataframe.description for x in symbols)
     # Extracting Features
     features = ['id',
+                'screen_name_binary',
                 'age',
                 'in_out_ratio',
                 'favorites_ratio',
@@ -102,6 +105,7 @@ def get_test_data():
                 'user_description_sentiment',
                 'special_char_in_description',
                 'tweet_count',
+                'description_binary',
                 'bot']
 
     X = test_dataframe[features].iloc[:, :-1]
@@ -109,7 +113,7 @@ def get_test_data():
 
 
 def train_classifiers(type):
-    path = '../ApproachV4/src/trained_classifiers/'
+    path = '/Users/kanishksinha/Desktop/TwitterBotDetection/ApproachV4/src/trained_classifiers/'
     classifier_type = type.lstrip().rstrip().lower()
 
     # Consult the trained classifier from the file system, or create it if it does not exist
@@ -195,7 +199,7 @@ def train_classifiers(type):
 
 
 def main():
-    cl_type = 'nb'
+    cl_type = 'dt'
     predicted_df = []
     try:
         # The program checks if the classifier is already trained. If not, trains again.

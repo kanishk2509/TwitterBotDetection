@@ -11,10 +11,11 @@ import matplotlib.pyplot as plt
 
 
 def read_dataset():
-    symbols = ['Bot', 'bot', 'b0t', 'B0T', 'B0t', 'cannabis', 'lets go', 'shout out', '$$$', 'tweet me', 'follow me',
-               'gorilla', 'yes_ofc', 'FOLLOW', 'Free instant', 'hypocrisy', 'troll', 'blatant', 'request', 'big bucks',
-               'cheese', 'wow', 'magic', 'bang', 'sex', 'fuck', 'fake', 'butt', 'bbb', 'free', 'virus', 'clit', 'funky',
-               'jargon', 'xanax', 'chick', 'prison', 'freak', 'clone', 'droop', 'free', 'swag']
+    symbols = ['Bot', 'bot', 'b0t', 'B0T', 'B0t', 'random', 'http', 'co', 'every', 'twitter', 'pubmed', 'news',
+               'created', 'like', 'feed', 'tweeting', 'task', 'world', 'x', 'affiliated', 'latest', 'twitterbot',
+               'project', 'botally', 'generated', 'image', 'reply', 'tinysubversions', 'biorxiv', 'digital', 'rt',
+               'ckolderup', 'arxiv', 'rss', 'thricedotted', 'collection', 'want', 'backspace', 'maintained',
+               'things', 'curated', 'see', 'us', 'people', 'every', 'get', 'love', 'please']
     bot_array = []
     user_array = []
     with \
@@ -41,7 +42,8 @@ def read_dataset():
                 array.append(0 if float(row['user_description_sentiment']) < 0 else float(row['user_description_sentiment']))
                 array.append(0 if float(row['special_char_in_description']) < 0 else float(row['special_char_in_description']))
                 array.append(0 if float(row['tweet_count']) < 0 else float(row['tweet_count']))
-                array.append(any(x in row['screen_name'] for x in symbols))
+                array.append(0 if any(x in row['screen_name'] for x in symbols) else 1)
+                array.append(0 if any(x in row['description'] for x in symbols) else 1)
                 bot_array.append(deepcopy(array))
 
             else:
@@ -61,7 +63,8 @@ def read_dataset():
                 array.append(0 if float(row['user_description_sentiment']) < 0 else float(row['user_description_sentiment']))
                 array.append(0 if float(row['special_char_in_description']) < 0 else float(row['special_char_in_description']))
                 array.append(0 if float(row['tweet_count']) < 0 else float(row['tweet_count']))
-                array.append(any(x in row['screen_name'] for x in symbols))
+                array.append(0 if any(x in row['screen_name'] for x in symbols) else 1)
+                array.append(0 if any(x in row['description'] for x in symbols) else 1)
                 user_array.append(deepcopy(array))
 
     features = user_array + bot_array[:len(user_array)]
@@ -76,7 +79,7 @@ def main():
         features,
         labels,
         test_size=0.1,  # use 10% for testing
-        random_state=42)
+        random_state=50)
 
     scaler = MinMaxScaler()
     scaler.fit(features_train)

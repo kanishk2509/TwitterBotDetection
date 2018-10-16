@@ -12,20 +12,13 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import roc_curve, auc
 import matplotlib.pyplot as plt
 
-symbolsxx = r'Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|updates|' \
-          r'every|gorilla|yes_ofc|forget|FOLLOW|killin|genome|shout out|Save$$|Save $|' \
-          r'expos|kill|clit|bbb|butt|fuck|XXX|sex|truthe|fake|anony|free|virus|funky|RNA' \
-          r'|jargon|Xanax|Only $|Free Instant|Extra income|Big bucks|$$$|Money making|' \
-          r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|clone|genie|bbb|Viagra|' \
-          r'ffd|emoji|Sale|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
-
-symbols = ['Bot', 'bot', 'b0t', 'B0T', 'B0t', 'cannabis', 'lets go', 'shout out', '$$$', 'tweet me', 'follow me',
-           'gorilla', 'yes_ofc', 'FOLLOW', 'Free instant', 'hypocrisy', 'troll', 'blatant', 'request', 'big bucks',
-           'cheese', 'wow', 'magic', 'bang', 'sex', 'fuck', 'fake', 'butt', 'bbb', 'free', 'virus', 'clit', 'funky',
-           'jargon', 'xanax', 'chick', 'prison', 'freak', 'clone', 'droop', 'free', 'swag']
-
 
 def read_dataset_with_feature():
+    symbols = ['Bot', 'bot', 'b0t', 'B0T', 'B0t', 'random', 'http', 'co', 'every', 'twitter', 'pubmed', 'news',
+               'created', 'like', 'feed', 'tweeting', 'task', 'world', 'x', 'affiliated', 'latest', 'twitterbot',
+               'project', 'botally', 'generated', 'image', 'reply', 'tinysubversions', 'biorxiv', 'digital', 'rt',
+               'ckolderup', 'arxiv', 'rss', 'thricedotted', 'collection', 'want', 'backspace', 'maintained',
+               'things', 'curated', 'see', 'us', 'people', 'every', 'get', 'love', 'please']
     file_path = 'completed_dataset_new_v3.csv'
     bot_array = []
     user_array = []
@@ -48,7 +41,8 @@ def read_dataset_with_feature():
                 array.append(0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']))
                 array.append(0 if float(row['cce']) < 0 else float(row['cce']))
                 array.append(0 if float(row['spam_ratio']) < 0 else float(row['spam_ratio']))
-                array.append(any(x in row['screen_name'] for x in symbols))
+                array.append(0 if any(x in row['screen_name'] for x in symbols) else 1)
+                array.append(0 if any(x in row['description'] for x in symbols) else 1)
 
                 bot_array.append(deepcopy(array))
 
@@ -63,7 +57,8 @@ def read_dataset_with_feature():
                 array.append(0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']))
                 array.append(0 if float(row['cce']) < 0 else float(row['cce']))
                 array.append(0 if float(row['spam_ratio']) < 0 else float(row['spam_ratio']))
-                array.append(any(x in row['screen_name'] for x in symbols))
+                array.append(0 if any(x in row['screen_name'] for x in symbols) else 1)
+                array.append(0 if any(x in row['description'] for x in symbols) else 1)
                 user_array.append(deepcopy(array))
 
     print(bot_array)
@@ -72,7 +67,6 @@ def read_dataset_with_feature():
 
     features = user_array + bot_array[:len(user_array)]
     labels = ([0] * len(user_array)) + ([1] * len(user_array))
-
 
     return features, labels
 
