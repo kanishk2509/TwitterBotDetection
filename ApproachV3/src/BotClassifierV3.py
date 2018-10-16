@@ -44,6 +44,7 @@ def get_training_data():
 
     # Feature engineering
     training_data['screen_name_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
+    # training_data['description_binary'] = training_data.description.str.contains(symbols, case=False, na=False)
     training_data['id_s'] = training_data.id
 
     # Extracting Features
@@ -61,6 +62,7 @@ def get_test_data():
     test_dataframe = pd.read_csv(file_path + 'final_test_datasets/test-data-v3.csv')
     # Feature engineering
     test_dataframe['screen_name_binary'] = test_dataframe.screen_name.str.contains(symbols, case=False, na=False)
+    # test_dataframe['description_binary'] = test_dataframe.description.str.contains(symbols, case=False, na=False)
 
     # Extracting Features
     features = ['id', 'screen_name_binary', 'age', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
@@ -156,7 +158,7 @@ def train_classifiers(type):
 
 
 def main():
-    cl_type = 'dt'
+    cl_type = 'nb'
     predicted_df = []
     try:
         # The program checks if the classifier is already trained. If not, trains again.
