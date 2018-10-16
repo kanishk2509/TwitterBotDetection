@@ -20,6 +20,13 @@ vectorizer, classifier = load()
 test_size = 0.1
 random_state = 50
 
+symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|updates| ' \
+          r'every|gorilla|yes_ofc|forget|FOLLOW|killin|genome|shout out|Save$$|Save $|' \
+          r'expos|kill|clit|bbb|butt|fuck|XXX|sex|truthe|fake|anony|free|virus|funky|RNA' \
+          r'|jargon|Xanax|Only $|Free Instant|Extra income|Big bucks|$$$|Money making|' \
+          r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|clone|genie|bbb|Viagra|' \
+          r'ffd|emoji|Sale|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
+
 
 def get_training_data():
     # Getting training data
@@ -36,13 +43,8 @@ def get_training_data():
     training_data = pd.read_csv(file_path, encoding='utf-8-sig')
 
     # Feature engineering
-    symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|updates ' \
-              r'every|gorilla|yes_ofc|forget' \
-              r'expos|kill|clit|bbb|butt|fuck|XXX|sex|truthe|fake|anony|free|virus|funky|RNA|kuck' \
-              r'|jargon' \
-              r'nerd|swag|jack|bang|bonsai|chick|prison|paper|pokem|xx|freak|ffd|dunia|clone|genie|bbb' \
-              r'ffd|onlyman|emoji|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
     training_data['screen_name_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
+    training_data['description_binary'] = training_data.description.str.contains(symbols, case=False, na=False)
     training_data['id_s'] = training_data.id
 
     # Extracting Features
@@ -161,7 +163,7 @@ def train_classifiers(type):
 
 
 def main():
-    cl_type = 'dt'
+    cl_type = 'nb'
     predicted_df = []
     try:
         # The program checks if the classifier is already trained. If not, trains again.
