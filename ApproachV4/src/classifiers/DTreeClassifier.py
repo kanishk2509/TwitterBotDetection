@@ -17,7 +17,8 @@ class DTC:
         :param n_trees: the number of decision trees to use
         :return: n/a
         """
-        self.dt = DecisionTreeClassifier(criterion='entropy', min_samples_leaf=50, min_samples_split=10)
+        self.dt = DecisionTreeClassifier(criterion='entropy', min_samples_leaf=50, min_samples_split=10,
+                                         random_state=10)
         self.dt.fit(x_train, y_train)
 
     def predict(self, x):

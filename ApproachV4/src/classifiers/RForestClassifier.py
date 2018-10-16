@@ -22,7 +22,7 @@ class RFC:
         :param n_trees: the number of decision trees to use
         :return: n/a
         """
-        self.forest = RandomForestClassifier(criterion='entropy', n_estimators=n_trees, random_state=42, n_jobs=2,
+        self.forest = RandomForestClassifier(criterion='entropy', n_estimators=n_trees, random_state=53, n_jobs=2,
                                              max_features=None)
 
         self.forest.fit(x_train, y_train)
