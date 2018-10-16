@@ -34,7 +34,7 @@ def get_training_data():
 
     # Use the this file path when running remotely from other machine
     file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data' \
-                '/final_training_datasets/balanced_dataset_v3_des.csv'
+                '/final_training_datasets/completed_dataset.csv'
 
     # Use the this file path when running locally from personal machine for faster access
     # file_path =
@@ -44,13 +44,13 @@ def get_training_data():
 
     # Feature engineering
     training_data['screen_name_binary'] = training_data.screen_name.str.contains(symbols, case=False, na=False)
-    # training_data['description_binary'] = training_data.description.str.contains(symbols, case=False, na=False)
+    training_data['description_binary'] = training_data.description.str.contains(symbols, case=False, na=False)
     training_data['id_s'] = training_data.id
 
     # Extracting Features
     features = ['id_s', 'screen_name_binary', 'age', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
                 'account_rep', 'avg_tpd', 'hashtags_ratio', 'user_mentions_ratio',
-                'mal_url_ratio', 'cce', 'spam_ratio', 'bot']
+                'mal_url_ratio', 'cce', 'spam_ratio', 'description_binary', 'bot']
     X = training_data[features].iloc[:, :-1]
     y = training_data[features].iloc[:, -1]
 

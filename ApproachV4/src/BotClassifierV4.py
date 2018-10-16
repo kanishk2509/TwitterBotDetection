@@ -22,10 +22,10 @@ symbols = r'_|%|"|nan| |Bot|bot|b0t|B0T|B0t|cannabis|tweet me|mishear|follow me|
           r'ffd|emoji|Sale|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
 
 training_file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data' \
-                     '/final_training_datasets/training-dataset-final-v4.csv'
+                     '/final_training_datasets/balanced_dataset_v4.csv'
 
 test_size = 0.1
-random_state = 50
+random_state = 42
 
 
 def get_training_data():
@@ -199,7 +199,7 @@ def train_classifiers(type):
 
 
 def main():
-    cl_type = 'nb'
+    cl_type = 'dt'
     predicted_df = []
     try:
         # The program checks if the classifier is already trained. If not, trains again.
