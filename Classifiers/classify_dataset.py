@@ -30,40 +30,38 @@ def read_dataset_with_feature():
         reader = csv.DictReader(inp)
 
         for row in reader:
-            if row['bot'] == '1':
-                array = []
-                array.append(0 if float(row['age']) < 0 else float(row['age']))
-                array.append(0 if float(row['in_out_ratio']) < 0 else float(row['in_out_ratio']))
-                array.append(0 if float(row['favorites_ratio']) < 0 else float(row['favorites_ratio']))
-                array.append(0 if float(row['status_ratio']) < 0 else float(row['status_ratio']))
-                array.append(0 if float(row['account_rep']) < 0 else float(row['account_rep']))
-                array.append(0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']))
-                array.append(0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']))
-                array.append(0 if float(row['cce']) < 0 else float(row['cce']))
-                array.append(0 if float(row['spam_ratio']) < 0 else float(row['spam_ratio']))
-                array.append(0 if any(x in row['screen_name'] for x in symbols) else 1)
-                array.append(0 if any(x in row['description'] for x in symbols) else 1)
+            array_feature = [float(any(x in row['screen_name'] for x in symbols)),
+                             float(any(x in row['description'] for x in symbols))]
 
-                bot_array.append(deepcopy(array))
+            if row['bot'] == '1':
+                arraybot = [0 if float(row['age']) < 0 else float(row['age']),
+                            0 if float(row['in_out_ratio']) < 0 else float(row['in_out_ratio']),
+                            0 if float(row['favorites_ratio']) < 0 else float(row['favorites_ratio']),
+                            0 if float(row['status_ratio']) < 0 else float(row['status_ratio']),
+                            0 if float(row['account_rep']) < 0 else float(row['account_rep']),
+                            0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']),
+                            0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']),
+                            0 if float(row['cce']) < 0 else float(row['cce']),
+                            0 if float(row['spam_ratio']) < 0 else float(row['spam_ratio']),
+                            array_feature[0],
+                            array_feature[1]]
+
+                bot_array.append(deepcopy(arraybot))
 
             else:
-                array = []
-                array.append(0 if float(row['age']) < 0 else float(row['age']))
-                array.append(0 if float(row['in_out_ratio']) < 0 else float(row['in_out_ratio']))
-                array.append(0 if float(row['favorites_ratio']) < 0 else float(row['favorites_ratio']))
-                array.append(0 if float(row['status_ratio']) < 0 else float(row['status_ratio']))
-                array.append(0 if float(row['account_rep']) < 0 else float(row['account_rep']))
-                array.append(0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']))
-                array.append(0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']))
-                array.append(0 if float(row['cce']) < 0 else float(row['cce']))
-                array.append(0 if float(row['spam_ratio']) < 0 else float(row['spam_ratio']))
-                array.append(0 if any(x in row['screen_name'] for x in symbols) else 1)
-                array.append(0 if any(x in row['description'] for x in symbols) else 1)
+                array = [0 if float(row['age']) < 0 else float(row['age']),
+                         0 if float(row['in_out_ratio']) < 0 else float(row['in_out_ratio']),
+                         0 if float(row['favorites_ratio']) < 0 else float(row['favorites_ratio']),
+                         0 if float(row['status_ratio']) < 0 else float(row['status_ratio']),
+                         0 if float(row['account_rep']) < 0 else float(row['account_rep']),
+                         0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']),
+                         0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']),
+                         0 if float(row['cce']) < 0 else float(row['cce']),
+                         0 if float(row['spam_ratio']) < 0 else float(row['spam_ratio']),
+                         array_feature[0],
+                         array_feature[1]]
+
                 user_array.append(deepcopy(array))
-
-    print(bot_array)
-
-    print(user_array)
 
     features = user_array + bot_array[:len(user_array)]
     labels = ([0] * len(user_array)) + ([1] * len(user_array))
@@ -122,7 +120,7 @@ def main():
         features,
         labels,
         test_size=0.1,  # use 10% for testing
-        random_state=42)
+        random_state=50)
 
     scaler = MinMaxScaler()
     scaler.fit(features_train)

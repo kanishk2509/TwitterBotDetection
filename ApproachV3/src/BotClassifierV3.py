@@ -18,12 +18,57 @@ key = ['L5UQsE4pIb9YUJvP7HjHuxSvW',
 
 vectorizer, classifier = load()
 test_size = 0.1
-random_state = 42
+random_state = 50
 
-symbols = ['Bot', 'bot', 'b0t', 'B0T', 'B0t', 'cannabis', 'lets go', 'shout out', '$$$', 'tweet me', 'follow me',
-           'gorilla', 'yes_ofc', 'FOLLOW', 'Free instant', 'hypocrisy', 'troll', 'blatant', 'request', 'big bucks',
-           'cheese', 'wow', 'magic', 'bang', 'sex', 'fuck', 'fake', 'butt', 'bbb', 'free', 'virus', 'clit', 'funky',
-           'jargon', 'xanax', 'chick', 'prison', 'freak', 'clone', 'droop', 'free', 'swag']
+symbols = ['Bot', 'bot', 'b0t', 'B0T', 'B0t', 'random', 'http', 'co', 'every', 'twitter', 'pubmed', 'news',
+           'created', 'like', 'feed', 'tweet', 'tweeting', 'task', 'world', 'x', 'affiliated', 'latest', 'twitterbot',
+           'project', 'botally', 'generated', 'image', 'reply', 'tinysubversions', 'biorxiv', 'digital', 'rt',
+           'ckolderup', 'arxiv', 'rss', 'thricedotted', 'collection', 'want', 'backspace', 'maintained',
+           'things', 'curated', 'see', 'us', 'people', 'every', 'love', 'please']
+
+
+def get_training_data_feature():
+    # Getting training data
+    print("\nGetting the training data...")
+
+    # Use the this file path when running remotely from other machine
+    file_path = '/Users/kanishksinha/Desktop/TwitterBotDetection/ApproachV3/temp_datasets/balanced_dataset_v3_des.csv'
+
+    # Feature engineering
+    with \
+            open(file_path,
+                 'r+',
+                 encoding="utf-8") as inp:
+        reader = csv.DictReader(inp)
+
+        arr = []
+
+        for row in reader:
+            if any(x in row['screen_name'].lower() for x in symbols):
+                row['screen_name'] = float(True)
+            else:
+                row['screen_name'] = float(False)
+
+            if any(x in row['description'].lower() for x in symbols):
+                row['description'] = float(True)
+            else:
+                row['description'] = float(False)
+
+            arr.append(row)
+
+    # Extracting Features
+    features = ['age', 'screen_name', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
+                'account_rep', 'avg_tpd', 'hashtags_ratio', 'user_mentions_ratio',
+                'mal_url_ratio', 'cce', 'spam_ratio', 'description', 'bot']
+
+    training_data = pd.DataFrame(arr, columns=features)
+
+    X = training_data[features].iloc[:, :-1]
+    y = training_data[features].iloc[:, -1]
+
+    print(X)
+
+    return X, y
 
 
 def get_training_data():
@@ -32,23 +77,14 @@ def get_training_data():
 
     # Use the this file path when running remotely from other machine
     file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data' \
-                '/final_training_datasets/balanced_dataset_v3_des.csv'
+                '/final_training_datasets/balanced_dataset_v3.csv'
 
-    # Use the this file path when running locally from personal machine for faster access
-    # file_path =
-    # '/Users/kanishksinha/Desktop/TwitterBotDetection/kaggle_data/final_training_datasets/training-dataset' \
-    # '-final-v3.csv'
     training_data = pd.read_csv(file_path, encoding='utf-8-sig')
 
-    # Feature engineering
-    training_data['screen_name_binary'] = any(x in training_data.screen_name for x in symbols)
-    training_data['description_binary'] = any(x in training_data.description for x in symbols)
-    # training_data['id_s'] = training_data.id
-
     # Extracting Features
-    features = ['age', 'screen_name_binary', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
+    features = ['age', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
                 'account_rep', 'avg_tpd', 'hashtags_ratio', 'user_mentions_ratio',
-                'mal_url_ratio', 'cce', 'spam_ratio', 'description_binary', 'bot']
+                'mal_url_ratio', 'cce', 'spam_ratio', 'bot']
     X = training_data[features].iloc[:, :-1]
     y = training_data[features].iloc[:, -1]
 
@@ -57,22 +93,56 @@ def get_training_data():
 
 def get_test_data():
     file_path = 'https://raw.githubusercontent.com/kanishk2509/TwitterBotDetection/master/twitter_data/'
-    test_dataframe = pd.read_csv(file_path + 'final_test_datasets/test-data-v3-new.csv')
-    # Feature engineering
-    test_dataframe['screen_name_binary'] = any(x in test_dataframe.screen_name for x in symbols)
-    test_dataframe['description_binary'] = any(x in test_dataframe.description for x in symbols)
-
+    test_dataframe = pd.read_csv(file_path + 'final_test_datasets/test-data-v3.csv')
     # Extracting Features
-    features = ['age', 'screen_name_binary', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
+    features = ['id', 'age', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
                 'account_rep', 'avg_tpd', 'hashtags_ratio', 'user_mentions_ratio',
-                'mal_url_ratio', 'cce', 'spam_ratio', 'description_binary', 'bot']
+                'mal_url_ratio', 'cce', 'spam_ratio', 'bot']
 
     X = test_dataframe[features].iloc[:, :-1]
     return X
 
 
+def get_test_data_feature():
+    file_path = '/Users/kanishksinha/Desktop/TwitterBotDetection/ApproachV3/temp_datasets/test-data-v3-new.csv'
+    # Feature engineering
+    with \
+            open(file_path,
+                 'r+',
+                 encoding="utf-8") as inp:
+        reader = csv.DictReader(inp)
+
+        arr = []
+
+        for row in reader:
+            if any(x in row['screen_name'].lower() for x in symbols):
+                row['screen_name'] = float(True)
+            else:
+                row['screen_name'] = float(False)
+
+            if any(x in row['description'].lower() for x in symbols):
+                row['description'] = float(True)
+            else:
+                row['description'] = float(False)
+
+            arr.append(row)
+
+    # Extracting Features
+    features = ['id', 'age', 'screen_name', 'in_out_ratio', 'favorites_ratio', 'status_ratio',
+                'account_rep', 'avg_tpd', 'hashtags_ratio', 'user_mentions_ratio',
+                'mal_url_ratio', 'cce', 'spam_ratio', 'description', 'bot']
+
+    test_dataframe = pd.DataFrame(arr, columns=features)
+
+    X = test_dataframe[features].iloc[:, :-1]
+
+    return X
+
+
 def train_classifiers(type):
     classifier_type = type.lstrip().rstrip().lower()
+    X, y = get_training_data_feature()
+    # X, y = get_training_data()
 
     # Consult the trained classifier from the file system, or create it if it does not exist
     if classifier_type == 'rf':
@@ -84,8 +154,6 @@ def train_classifiers(type):
         else:
             # Train the classifier
             # Extract the features and class label from the raw data
-            X, y = get_training_data()
-
             # Split data into training and test data
             x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
             print("\nTraining Random Forest classifier...")
@@ -109,8 +177,6 @@ def train_classifiers(type):
         else:
             # Train the classifier
             # Extract the features and class label from the raw data
-            X, y = get_training_data()
-
             # Split data into training and test data
             x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
             print("\nTraining Decision Tree Classifier...")
@@ -134,7 +200,6 @@ def train_classifiers(type):
         else:
             # Train the classifier
             # Extract the features and class label from the raw data
-            X, y = get_training_data()
             scaler = MinMaxScaler()
             print(scaler.fit(X))
             x = scaler.transform(X)
@@ -156,21 +221,21 @@ def train_classifiers(type):
 
 
 def main():
-    cl_type = 'nb'
+    cl_type = 'dt'
     predicted_df = []
     try:
         # The program checks if the classifier is already trained. If not, trains again.
         rfc = train_classifiers(cl_type)
 
         print("\nGetting test data from repository...")
-        pd_test_data = get_test_data()
+        pd_test_data = get_test_data_feature()
 
         print("\nClassifying user now...")
         for i in pd_test_data.itertuples():
             data = np.array(i).reshape(1, -1)
-            input_data = np.delete(data, 0, axis=1)
+            input_data = np.delete(data, np.s_[0:2], axis=1)
             result = rfc.predict(input_data)
-            if result[0] == 1:
+            if result[0] is '1':
                 dictn = {'id': i.id, 'bot': 1}
                 predicted_df.append(dictn)
             else:

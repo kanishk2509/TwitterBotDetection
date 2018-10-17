@@ -11,6 +11,62 @@ import matplotlib.pyplot as plt
 
 
 def read_dataset():
+    bot_array = []
+    user_array = []
+    with \
+            open('training-dataset-final-v4.csv',
+                 'r+',
+                 encoding="utf-8") as inp:
+        reader = csv.DictReader(inp)
+
+        for row in reader:
+            if row['bot'] == '1':
+                array = [0 if float(row['age']) < 0 else float(row['age']),
+                         0 if float(row['in_out_ratio']) < 0 else float(row['in_out_ratio']),
+                         0 if float(row['favorites_ratio']) < 0 else float(row['favorites_ratio']),
+                         0 if float(row['status_ratio']) < 0 else float(row['status_ratio']),
+                         0 if float(row['account_rep']) < 0 else float(row['account_rep']),
+                         0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']),
+                         0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']),
+                         0 if float(row['user_mentions_ratio']) < 0 else float(row['user_mentions_ratio']),
+                         0 if float(row['url_ratio']) < 0 else float(row['url_ratio']),
+                         0 if float(row['avg_cosine_similarity']) < 0 else float(row['avg_cosine_similarity']),
+                         0 if float(row['avg_tweet_sentiment']) < 0 else float(row['avg_tweet_sentiment']),
+                         0 if float(row['user_description_len']) < 0 else float(row['user_description_len']),
+                         0 if float(row['user_description_sentiment']) < 0 else float(
+                             row['user_description_sentiment']),
+                         0 if float(row['special_char_in_description']) < 0 else float(
+                             row['special_char_in_description']),
+                         0 if float(row['tweet_count']) < 0 else float(row['tweet_count'])]
+                bot_array.append(deepcopy(array))
+
+            else:
+                array = [0 if float(row['age']) < 0 else float(row['age']),
+                         0 if float(row['in_out_ratio']) < 0 else float(row['in_out_ratio']),
+                         0 if float(row['favorites_ratio']) < 0 else float(row['favorites_ratio']),
+                         0 if float(row['status_ratio']) < 0 else float(row['status_ratio']),
+                         0 if float(row['account_rep']) < 0 else float(row['account_rep']),
+                         0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']),
+                         0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']),
+                         0 if float(row['user_mentions_ratio']) < 0 else float(row['user_mentions_ratio']),
+                         0 if float(row['url_ratio']) < 0 else float(row['url_ratio']),
+                         0 if float(row['avg_cosine_similarity']) < 0 else float(row['avg_cosine_similarity']),
+                         0 if float(row['avg_tweet_sentiment']) < 0 else float(row['avg_tweet_sentiment']),
+                         0 if float(row['user_description_len']) < 0 else float(row['user_description_len']),
+                         0 if float(row['user_description_sentiment']) < 0 else float(
+                             row['user_description_sentiment']),
+                         0 if float(row['special_char_in_description']) < 0 else float(
+                             row['special_char_in_description']),
+                         0 if float(row['tweet_count']) < 0 else float(row['tweet_count'])]
+                user_array.append(deepcopy(array))
+
+    features = user_array + bot_array[:len(user_array)]
+    labels = ([0] * len(user_array)) + ([1] * len(user_array))
+
+    return features, labels
+
+
+def read_dataset_feature():
     symbols = ['Bot', 'bot', 'b0t', 'B0T', 'B0t', 'random', 'http', 'co', 'every', 'twitter', 'pubmed', 'news',
                'created', 'like', 'feed', 'tweeting', 'task', 'world', 'x', 'affiliated', 'latest', 'twitterbot',
                'project', 'botally', 'generated', 'image', 'reply', 'tinysubversions', 'biorxiv', 'digital', 'rt',
@@ -25,46 +81,51 @@ def read_dataset():
         reader = csv.DictReader(inp)
 
         for row in reader:
+            array_feature = [float(any(x in row['screen_name'] for x in symbols)),
+                             float(any(x in row['description'] for x in symbols))]
+
             if row['bot'] == '1':
-                array = []
-                array.append(0 if float(row['age']) < 0 else float(row['age']))
-                array.append(0 if float(row['in_out_ratio']) < 0 else float(row['in_out_ratio']))
-                array.append(0 if float(row['favorites_ratio']) < 0 else float(row['favorites_ratio']))
-                array.append(0 if float(row['status_ratio']) < 0 else float(row['status_ratio']))
-                array.append(0 if float(row['account_rep']) < 0 else float(row['account_rep']))
-                array.append(0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']))
-                array.append(0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']))
-                array.append(0 if float(row['user_mentions_ratio']) < 0 else float(row['user_mentions_ratio']))
-                array.append(0 if float(row['url_ratio']) < 0 else float(row['url_ratio']))
-                array.append(0 if float(row['avg_cosine_similarity']) < 0 else float(row['avg_cosine_similarity']))
-                array.append(0 if float(row['avg_tweet_sentiment']) < 0 else float(row['avg_tweet_sentiment']))
-                array.append(0 if float(row['user_description_len']) < 0 else float(row['user_description_len']))
-                array.append(0 if float(row['user_description_sentiment']) < 0 else float(row['user_description_sentiment']))
-                array.append(0 if float(row['special_char_in_description']) < 0 else float(row['special_char_in_description']))
-                array.append(0 if float(row['tweet_count']) < 0 else float(row['tweet_count']))
-                array.append(0 if any(x in row['screen_name'] for x in symbols) else 1)
-                array.append(0 if any(x in row['description'] for x in symbols) else 1)
+                array = [0 if float(row['age']) < 0 else float(row['age']),
+                         0 if float(row['in_out_ratio']) < 0 else float(row['in_out_ratio']),
+                         0 if float(row['favorites_ratio']) < 0 else float(row['favorites_ratio']),
+                         0 if float(row['status_ratio']) < 0 else float(row['status_ratio']),
+                         0 if float(row['account_rep']) < 0 else float(row['account_rep']),
+                         0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']),
+                         0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']),
+                         0 if float(row['user_mentions_ratio']) < 0 else float(row['user_mentions_ratio']),
+                         0 if float(row['url_ratio']) < 0 else float(row['url_ratio']),
+                         0 if float(row['avg_cosine_similarity']) < 0 else float(row['avg_cosine_similarity']),
+                         0 if float(row['avg_tweet_sentiment']) < 0 else float(row['avg_tweet_sentiment']),
+                         0 if float(row['user_description_len']) < 0 else float(row['user_description_len']),
+                         0 if float(row['user_description_sentiment']) < 0 else float(
+                             row['user_description_sentiment']),
+                         0 if float(row['special_char_in_description']) < 0 else float(
+                             row['special_char_in_description']),
+                         0 if float(row['tweet_count']) < 0 else float(row['tweet_count']),
+                         array_feature[0],
+                         array_feature[1]]
                 bot_array.append(deepcopy(array))
 
             else:
-                array = []
-                array.append(0 if float(row['age']) < 0 else float(row['age']))
-                array.append(0 if float(row['in_out_ratio']) < 0 else float(row['in_out_ratio']))
-                array.append(0 if float(row['favorites_ratio']) < 0 else float(row['favorites_ratio']))
-                array.append(0 if float(row['status_ratio']) < 0 else float(row['status_ratio']))
-                array.append(0 if float(row['account_rep']) < 0 else float(row['account_rep']))
-                array.append(0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']))
-                array.append(0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']))
-                array.append(0 if float(row['user_mentions_ratio']) < 0 else float(row['user_mentions_ratio']))
-                array.append(0 if float(row['url_ratio']) < 0 else float(row['url_ratio']))
-                array.append(0 if float(row['avg_cosine_similarity']) < 0 else float(row['avg_cosine_similarity']))
-                array.append(0 if float(row['avg_tweet_sentiment']) < 0 else float(row['avg_tweet_sentiment']))
-                array.append(0 if float(row['user_description_len']) < 0 else float(row['user_description_len']))
-                array.append(0 if float(row['user_description_sentiment']) < 0 else float(row['user_description_sentiment']))
-                array.append(0 if float(row['special_char_in_description']) < 0 else float(row['special_char_in_description']))
-                array.append(0 if float(row['tweet_count']) < 0 else float(row['tweet_count']))
-                array.append(0 if any(x in row['screen_name'] for x in symbols) else 1)
-                array.append(0 if any(x in row['description'] for x in symbols) else 1)
+                array = [0 if float(row['age']) < 0 else float(row['age']),
+                         0 if float(row['in_out_ratio']) < 0 else float(row['in_out_ratio']),
+                         0 if float(row['favorites_ratio']) < 0 else float(row['favorites_ratio']),
+                         0 if float(row['status_ratio']) < 0 else float(row['status_ratio']),
+                         0 if float(row['account_rep']) < 0 else float(row['account_rep']),
+                         0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']),
+                         0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']),
+                         0 if float(row['user_mentions_ratio']) < 0 else float(row['user_mentions_ratio']),
+                         0 if float(row['url_ratio']) < 0 else float(row['url_ratio']),
+                         0 if float(row['avg_cosine_similarity']) < 0 else float(row['avg_cosine_similarity']),
+                         0 if float(row['avg_tweet_sentiment']) < 0 else float(row['avg_tweet_sentiment']),
+                         0 if float(row['user_description_len']) < 0 else float(row['user_description_len']),
+                         0 if float(row['user_description_sentiment']) < 0 else float(
+                             row['user_description_sentiment']),
+                         0 if float(row['special_char_in_description']) < 0 else float(
+                             row['special_char_in_description']),
+                         0 if float(row['tweet_count']) < 0 else float(row['tweet_count']),
+                         array_feature[0],
+                         array_feature[1]]
                 user_array.append(deepcopy(array))
 
     features = user_array + bot_array[:len(user_array)]
@@ -74,7 +135,8 @@ def read_dataset():
 
 
 def main():
-    features, labels = read_dataset()
+    # features, labels = read_dataset()
+    features, labels = read_dataset_feature()
     features_train, features_test, labels_train, labels_test = train_test_split(
         features,
         labels,
