@@ -56,20 +56,21 @@ def get_all_tweets(user_id):
 
 
 def main():
-    common_path = '/Users/kanishksinha/Desktop/TwitterBotDetection/ApproachV4/temp_datasets/'
+
+
+    common_path = '/Users/kanishksinha/Desktop/TwitterBotDetection/Classifiers/'
 
     with \
-            open(common_path + 'test_data_temp.csv',
+            open(common_path + 'diff.csv',
                  'r+',
                  encoding="utf-8") as inp, \
-            open(common_path + 'test_data_v4.csv',
+            open(common_path + 'diff_merged.csv',
                  'w+',
                  encoding="utf-8") as out:
 
         reader = csv.DictReader(inp)
 
         fields = ['id',
-                  'id_str',
                   'screen_name',
                   'age',
                   'in_out_ratio',
@@ -80,6 +81,8 @@ def main():
                   'hashtags_ratio',
                   'user_mentions_ratio',
                   'url_ratio',
+                  'cce',
+                  'spam_ratio',
                   'avg_cosine_similarity',
                   'avg_tweet_sentiment',
                   'std_deviation_friends',
@@ -129,14 +132,13 @@ def main():
 
                 tbl = get_tweet_semantics(user_id, api)
 
-                desc_str = tbl[9]
+                '''desc_str = tbl[9]
                 regex = re.compile('[^a-zA-Z]')
                 # First parameter is the replacement, second parameter is your input string
-                strr = regex.sub('', desc_str)
+                strr = regex.sub('', desc_str) '''
 
                 if len(tbl) > 0:
                     writer.writerow({'id': row['id'],
-                                     'id_str': row['id_str'],
                                      'screen_name': row['screen_name'],
                                      'age': row['age'],
                                      'in_out_ratio': row['in_out_ratio'],
@@ -147,6 +149,8 @@ def main():
                                      'hashtags_ratio': row['hashtags_ratio'],
                                      'user_mentions_ratio': row['user_mentions_ratio'],
                                      'url_ratio': url_ratio,
+                                     'cce': row['cce'],
+                                     'spam_ratio': row['spam_ratio'],
                                      'avg_cosine_similarity': cos_sim,
                                      'avg_tweet_sentiment': avg_sentiment,
                                      'std_deviation_friends': tbl[1],
@@ -157,7 +161,7 @@ def main():
                                      'user_description_sentiment': tbl[6],
                                      'special_char_in_description': tbl[7],
                                      'tweet_count': tbl[8],
-                                     'description': strr,
+                                     'description': row['description'],
                                      'bot': row['bot']})
 
                     print('Row ', cnt, ' written for => ', row['screen_name'].upper())
@@ -166,31 +170,8 @@ def main():
 
                 else:
                     cnt = cnt - 1
-                    print("Writing null values due to error...")
-                    writer.writerow({'id': row['id'],
-                                     'id_str': row['id_str'],
-                                     'screen_name': row['screen_name'],
-                                     'age': row['age'],
-                                     'in_out_ratio': row['in_out_ratio'],
-                                     'favorites_ratio': row['favorites_ratio'],
-                                     'status_ratio': row['status_ratio'],
-                                     'account_rep': row['account_rep'],
-                                     'avg_tpd': row['avg_tpd'],
-                                     'hashtags_ratio': row['hashtags_ratio'],
-                                     'user_mentions_ratio': row['user_mentions_ratio'],
-                                     'url_ratio': url_ratio,
-                                     'avg_cosine_similarity': cos_sim,
-                                     'avg_tweet_sentiment': avg_sentiment,
-                                     'std_deviation_friends': 0.0,
-                                     'std_deviation_followers': 0.0,
-                                     'unique_urls_ratio': 0.0,
-                                     'tweet_url_similarity': 0.0,
-                                     'user_description_len': 0.0,
-                                     'user_description_sentiment': 0.0,
-                                     'special_char_in_description': 0.0,
-                                     'tweet_count': 0.0,
-                                     'description': ' ',
-                                     'bot': row['bot']})
+                    print("Error...")
+                    continue
 
             else:
                 cnt = cnt - 1

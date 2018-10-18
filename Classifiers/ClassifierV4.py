@@ -11,10 +11,11 @@ import matplotlib.pyplot as plt
 
 
 def read_dataset():
+    print("Normal dataset\n")
     bot_array = []
     user_array = []
     with \
-            open('training-dataset-final-v4.csv',
+            open('final_merged.csv',
                  'r+',
                  encoding="utf-8") as inp:
         reader = csv.DictReader(inp)
@@ -32,12 +33,11 @@ def read_dataset():
                          0 if float(row['url_ratio']) < 0 else float(row['url_ratio']),
                          0 if float(row['avg_cosine_similarity']) < 0 else float(row['avg_cosine_similarity']),
                          0 if float(row['avg_tweet_sentiment']) < 0 else float(row['avg_tweet_sentiment']),
-                         0 if float(row['user_description_len']) < 0 else float(row['user_description_len']),
-                         0 if float(row['user_description_sentiment']) < 0 else float(
-                             row['user_description_sentiment']),
-                         0 if float(row['special_char_in_description']) < 0 else float(
-                             row['special_char_in_description']),
-                         0 if float(row['tweet_count']) < 0 else float(row['tweet_count'])]
+                         0 if float(row['std_deviation_friends']) < 0 else float(row['std_deviation_friends']),
+                         0 if float(row['std_deviation_followers']) < 0 else float(row['std_deviation_followers']),
+                         0 if float(row['unique_urls_ratio']) < 0 else float(row['unique_urls_ratio']),
+                         0 if float(row['tweet_url_similarity']) < 0 else float(row['tweet_url_similarity']),
+                         0 if float(row['user_description_len']) < 0 else float(row['user_description_len'])]
                 bot_array.append(deepcopy(array))
 
             else:
@@ -52,14 +52,15 @@ def read_dataset():
                          0 if float(row['url_ratio']) < 0 else float(row['url_ratio']),
                          0 if float(row['avg_cosine_similarity']) < 0 else float(row['avg_cosine_similarity']),
                          0 if float(row['avg_tweet_sentiment']) < 0 else float(row['avg_tweet_sentiment']),
-                         0 if float(row['user_description_len']) < 0 else float(row['user_description_len']),
-                         0 if float(row['user_description_sentiment']) < 0 else float(
-                             row['user_description_sentiment']),
-                         0 if float(row['special_char_in_description']) < 0 else float(
-                             row['special_char_in_description']),
-                         0 if float(row['tweet_count']) < 0 else float(row['tweet_count'])]
+                         0 if float(row['std_deviation_friends']) < 0 else float(row['std_deviation_friends']),
+                         0 if float(row['std_deviation_followers']) < 0 else float(row['std_deviation_followers']),
+                         0 if float(row['unique_urls_ratio']) < 0 else float(row['unique_urls_ratio']),
+                         0 if float(row['tweet_url_similarity']) < 0 else float(row['tweet_url_similarity']),
+                         0 if float(row['user_description_len']) < 0 else float(row['user_description_len'])]
                 user_array.append(deepcopy(array))
 
+    print(len(bot_array))
+    print(len(user_array))
     features = user_array + bot_array[:len(user_array)]
     labels = ([0] * len(user_array)) + ([1] * len(user_array))
 
@@ -67,15 +68,16 @@ def read_dataset():
 
 
 def read_dataset_feature():
+    print("Feature engineered dataset\n")
     symbols = ['Bot', 'bot', 'b0t', 'B0T', 'B0t', 'random', 'http', 'co', 'every', 'twitter', 'pubmed', 'news',
                'created', 'like', 'feed', 'tweeting', 'task', 'world', 'x', 'affiliated', 'latest', 'twitterbot',
                'project', 'botally', 'generated', 'image', 'reply', 'tinysubversions', 'biorxiv', 'digital', 'rt',
                'ckolderup', 'arxiv', 'rss', 'thricedotted', 'collection', 'want', 'backspace', 'maintained',
-               'things', 'curated', 'see', 'us', 'people', 'every', 'get', 'love', 'please']
+               'things', 'curated', 'see', 'us', 'people', 'every', 'love', 'please']
     bot_array = []
     user_array = []
     with \
-            open('training-dataset-final-v4.csv',
+            open('final_merged.csv',
                  'r+',
                  encoding="utf-8") as inp:
         reader = csv.DictReader(inp)
@@ -96,12 +98,11 @@ def read_dataset_feature():
                          0 if float(row['url_ratio']) < 0 else float(row['url_ratio']),
                          0 if float(row['avg_cosine_similarity']) < 0 else float(row['avg_cosine_similarity']),
                          0 if float(row['avg_tweet_sentiment']) < 0 else float(row['avg_tweet_sentiment']),
+                         0 if float(row['std_deviation_friends']) < 0 else float(row['std_deviation_friends']),
+                         0 if float(row['std_deviation_followers']) < 0 else float(row['std_deviation_followers']),
+                         0 if float(row['unique_urls_ratio']) < 0 else float(row['unique_urls_ratio']),
+                         0 if float(row['tweet_url_similarity']) < 0 else float(row['tweet_url_similarity']),
                          0 if float(row['user_description_len']) < 0 else float(row['user_description_len']),
-                         0 if float(row['user_description_sentiment']) < 0 else float(
-                             row['user_description_sentiment']),
-                         0 if float(row['special_char_in_description']) < 0 else float(
-                             row['special_char_in_description']),
-                         0 if float(row['tweet_count']) < 0 else float(row['tweet_count']),
                          array_feature[0],
                          array_feature[1]]
                 bot_array.append(deepcopy(array))
@@ -118,16 +119,17 @@ def read_dataset_feature():
                          0 if float(row['url_ratio']) < 0 else float(row['url_ratio']),
                          0 if float(row['avg_cosine_similarity']) < 0 else float(row['avg_cosine_similarity']),
                          0 if float(row['avg_tweet_sentiment']) < 0 else float(row['avg_tweet_sentiment']),
+                         0 if float(row['std_deviation_friends']) < 0 else float(row['std_deviation_friends']),
+                         0 if float(row['std_deviation_followers']) < 0 else float(row['std_deviation_followers']),
+                         0 if float(row['unique_urls_ratio']) < 0 else float(row['unique_urls_ratio']),
+                         0 if float(row['tweet_url_similarity']) < 0 else float(row['tweet_url_similarity']),
                          0 if float(row['user_description_len']) < 0 else float(row['user_description_len']),
-                         0 if float(row['user_description_sentiment']) < 0 else float(
-                             row['user_description_sentiment']),
-                         0 if float(row['special_char_in_description']) < 0 else float(
-                             row['special_char_in_description']),
-                         0 if float(row['tweet_count']) < 0 else float(row['tweet_count']),
                          array_feature[0],
                          array_feature[1]]
                 user_array.append(deepcopy(array))
 
+    print(len(bot_array))
+    print(len(user_array))
     features = user_array + bot_array[:len(user_array)]
     labels = ([0] * len(user_array)) + ([1] * len(user_array))
 
@@ -135,13 +137,13 @@ def read_dataset_feature():
 
 
 def main():
-    # features, labels = read_dataset()
+    #features, labels = read_dataset()
     features, labels = read_dataset_feature()
     features_train, features_test, labels_train, labels_test = train_test_split(
         features,
         labels,
         test_size=0.1,  # use 10% for testing
-        random_state=50)
+        random_state=0)
 
     scaler = MinMaxScaler()
     scaler.fit(features_train)

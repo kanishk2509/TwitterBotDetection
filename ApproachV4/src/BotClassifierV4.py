@@ -20,15 +20,15 @@ symbols = ['Bot', 'bot', 'b0t', 'B0T', 'B0t', 'random', 'http', 'co', 'every', '
            'ckolderup', 'arxiv', 'rss', 'thricedotted', 'collection', 'want', 'backspace', 'maintained',
            'things', 'curated', 'see', 'us', 'people', 'every', 'love', 'please']
 
-training_file_path = '/Users/kanishksinha/Desktop/TwitterBotDetection/ApproachV4/temp_datasets/balanced_dataset_v4.csv'
+training_file_path = '/Users/kanishksinha/Desktop/TwitterBotDetection/Classifiers/final_merged.csv'
 
 test_size = 0.1
-random_state = 50
+random_state = 0
 
 
 def get_training_data():
     # Getting training data
-    print("\nGetting the training data...")
+    print("Normal training data...\n")
 
     # Use the this file path when running remotely from other machine
     file_path = training_file_path
@@ -52,9 +52,6 @@ def get_training_data():
                 'unique_urls_ratio',
                 'tweet_url_similarity',
                 'user_description_len',
-                'user_description_sentiment',
-                'special_char_in_description',
-                'tweet_count',
                 'bot']
 
     X = training_data[features].iloc[:, :-1]
@@ -65,7 +62,7 @@ def get_training_data():
 
 def get_training_data_feature():
     # Getting training data
-    print("\nGetting the training data...")
+    print("Training data with features...\n")
 
     # Feature engineering
     with \
@@ -107,9 +104,6 @@ def get_training_data_feature():
                 'unique_urls_ratio',
                 'tweet_url_similarity',
                 'user_description_len',
-                'user_description_sentiment',
-                'special_char_in_description',
-                'tweet_count',
                 'description',
                 'bot']
 
@@ -117,8 +111,6 @@ def get_training_data_feature():
 
     X = training_data[features].iloc[:, :-1]
     y = training_data[features].iloc[:, -1]
-
-    print(X)
 
     return X, y
 
@@ -145,9 +137,6 @@ def get_test_data():
                 'unique_urls_ratio',
                 'tweet_url_similarity',
                 'user_description_len',
-                'user_description_sentiment',
-                'special_char_in_description',
-                'tweet_count',
                 'bot']
 
     X = test_dataframe[features].iloc[:, :-1]
@@ -197,9 +186,6 @@ def get_test_data_feature():
                 'unique_urls_ratio',
                 'tweet_url_similarity',
                 'user_description_len',
-                'user_description_sentiment',
-                'special_char_in_description',
-                'tweet_count',
                 'description',
                 'bot']
 
@@ -213,7 +199,7 @@ def train_classifiers(type):
     path = '/Users/kanishksinha/Desktop/TwitterBotDetection/ApproachV4/src/trained_classifiers/'
     classifier_type = type.lstrip().rstrip().lower()
     X, y = get_training_data_feature()
-    # X, y = get_training_data()
+    #X, y = get_training_data()
 
     # Consult the trained classifier from the file system, or create it if it does not exist
     if classifier_type == 'rf':

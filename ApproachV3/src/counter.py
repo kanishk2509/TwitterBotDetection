@@ -2,10 +2,10 @@ import csv
 
 
 def main():
-    common_path = '/Users/kanishksinha/Desktop/TwitterBotDetection/ApproachV3/temp_datasets/'
+    common_path = '/Users/kanishksinha/Desktop/TwitterBotDetection/Classifiers/final_merged.csv'
 
     with \
-            open(common_path + 'balanced_dataset_v4.csv',
+            open(common_path,
                  'r+',
                  encoding="utf-8") as inp:
         reader = csv.DictReader(inp)

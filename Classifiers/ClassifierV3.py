@@ -14,12 +14,15 @@ import matplotlib.pyplot as plt
 
 
 def read_dataset_with_feature():
+    print("Feature engineered dataset\n")
     symbols = ['Bot', 'bot', 'b0t', 'B0T', 'B0t', 'random', 'http', 'co', 'every', 'twitter', 'pubmed', 'news',
                'created', 'like', 'feed', 'tweeting', 'task', 'world', 'x', 'affiliated', 'latest', 'twitterbot',
                'project', 'botally', 'generated', 'image', 'reply', 'tinysubversions', 'biorxiv', 'digital', 'rt',
                'ckolderup', 'arxiv', 'rss', 'thricedotted', 'collection', 'want', 'backspace', 'maintained',
-               'things', 'curated', 'see', 'us', 'people', 'every', 'get', 'love', 'please']
-    file_path = 'completed_dataset_new_v3.csv'
+               'things', 'curated', 'see', 'us', 'people', 'every', 'love', 'please']
+
+    file_path = 'final_merged.csv'
+
     bot_array = []
     user_array = []
 
@@ -41,6 +44,8 @@ def read_dataset_with_feature():
                             0 if float(row['account_rep']) < 0 else float(row['account_rep']),
                             0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']),
                             0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']),
+                            0 if float(row['user_mentions_ratio']) < 0 else float(row['user_mentions_ratio']),
+                            0 if float(row['url_ratio']) < 0 else float(row['url_ratio']),
                             0 if float(row['cce']) < 0 else float(row['cce']),
                             0 if float(row['spam_ratio']) < 0 else float(row['spam_ratio']),
                             array_feature[0],
@@ -56,12 +61,17 @@ def read_dataset_with_feature():
                          0 if float(row['account_rep']) < 0 else float(row['account_rep']),
                          0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']),
                          0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']),
+                         0 if float(row['user_mentions_ratio']) < 0 else float(row['user_mentions_ratio']),
+                         0 if float(row['url_ratio']) < 0 else float(row['url_ratio']),
                          0 if float(row['cce']) < 0 else float(row['cce']),
                          0 if float(row['spam_ratio']) < 0 else float(row['spam_ratio']),
                          array_feature[0],
                          array_feature[1]]
 
                 user_array.append(deepcopy(array))
+
+    print(len(bot_array))
+    print(len(user_array))
 
     features = user_array + bot_array[:len(user_array)]
     labels = ([0] * len(user_array)) + ([1] * len(user_array))
@@ -70,7 +80,8 @@ def read_dataset_with_feature():
 
 
 def read_dataset():
-    file_path = 'completed_dataset.csv'
+    print("Normal dataset\n")
+    file_path = 'final_merged.csv'
     bot_array = []
     user_array = []
 
@@ -82,29 +93,31 @@ def read_dataset():
 
         for row in reader:
             if row['bot'] == '1':
-                array = []
-                array.append(0 if float(row['age']) < 0 else float(row['age']))
-                array.append(0 if float(row['in_out_ratio']) < 0 else float(row['in_out_ratio']))
-                array.append(0 if float(row['favorites_ratio']) < 0 else float(row['favorites_ratio']))
-                array.append(0 if float(row['status_ratio']) < 0 else float(row['status_ratio']))
-                array.append(0 if float(row['account_rep']) < 0 else float(row['account_rep']))
-                array.append(0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']))
-                array.append(0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']))
-                array.append(0 if float(row['cce']) < 0 else float(row['cce']))
-                array.append(0 if float(row['spam_ratio']) < 0 else float(row['spam_ratio']))
+                array = [0 if float(row['age']) < 0 else float(row['age']),
+                         0 if float(row['in_out_ratio']) < 0 else float(row['in_out_ratio']),
+                         0 if float(row['favorites_ratio']) < 0 else float(row['favorites_ratio']),
+                         0 if float(row['status_ratio']) < 0 else float(row['status_ratio']),
+                         0 if float(row['account_rep']) < 0 else float(row['account_rep']),
+                         0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']),
+                         0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']),
+                         0 if float(row['user_mentions_ratio']) < 0 else float(row['user_mentions_ratio']),
+                         0 if float(row['url_ratio']) < 0 else float(row['url_ratio']),
+                         0 if float(row['cce']) < 0 else float(row['cce']),
+                         0 if float(row['spam_ratio']) < 0 else float(row['spam_ratio'])]
                 bot_array.append(deepcopy(array))
 
             else:
-                array = []
-                array.append(0 if float(row['age']) < 0 else float(row['age']))
-                array.append(0 if float(row['in_out_ratio']) < 0 else float(row['in_out_ratio']))
-                array.append(0 if float(row['favorites_ratio']) < 0 else float(row['favorites_ratio']))
-                array.append(0 if float(row['status_ratio']) < 0 else float(row['status_ratio']))
-                array.append(0 if float(row['account_rep']) < 0 else float(row['account_rep']))
-                array.append(0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']))
-                array.append(0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']))
-                array.append(0 if float(row['cce']) < 0 else float(row['cce']))
-                array.append(0 if float(row['spam_ratio']) < 0 else float(row['spam_ratio']))
+                array = [0 if float(row['age']) < 0 else float(row['age']),
+                         0 if float(row['in_out_ratio']) < 0 else float(row['in_out_ratio']),
+                         0 if float(row['favorites_ratio']) < 0 else float(row['favorites_ratio']),
+                         0 if float(row['status_ratio']) < 0 else float(row['status_ratio']),
+                         0 if float(row['account_rep']) < 0 else float(row['account_rep']),
+                         0 if float(row['avg_tpd']) < 0 else float(row['avg_tpd']),
+                         0 if float(row['hashtags_ratio']) < 0 else float(row['hashtags_ratio']),
+                         0 if float(row['user_mentions_ratio']) < 0 else float(row['user_mentions_ratio']),
+                         0 if float(row['url_ratio']) < 0 else float(row['url_ratio']),
+                         0 if float(row['cce']) < 0 else float(row['cce']),
+                         0 if float(row['spam_ratio']) < 0 else float(row['spam_ratio'])]
                 user_array.append(deepcopy(array))
 
     features = user_array + bot_array[:len(user_array)]
@@ -114,13 +127,13 @@ def read_dataset():
 
 
 def main():
-    # features, labels = read_dataset()
-    features, labels = read_dataset_with_feature()
+    features, labels = read_dataset()
+    #features, labels = read_dataset_with_feature()
     features_train, features_test, labels_train, labels_test = train_test_split(
         features,
         labels,
         test_size=0.1,  # use 10% for testing
-        random_state=50)
+        random_state=0)
 
     scaler = MinMaxScaler()
     scaler.fit(features_train)
