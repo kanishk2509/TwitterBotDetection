@@ -1,5 +1,6 @@
 from sklearn.model_selection import train_test_split
 import csv
+import os
 from copy import deepcopy
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -14,8 +15,10 @@ def read_dataset():
     print("Normal dataset\n")
     bot_array = []
     user_array = []
+    #file_path = '/home/chris/PycharmProjects/TwitterBotDetection/twitter_data/final_training_datasets/final_merged.csv'
+    file_path = os.path.abspath('../twitter_data/final_training_datasets/final_merged.csv')
     with \
-            open('final_merged.csv',
+            open(file_path,
                  'r+',
                  encoding="utf-8") as inp:
         reader = csv.DictReader(inp)
@@ -76,8 +79,10 @@ def read_dataset_feature():
                'things', 'curated', 'see', 'us', 'people', 'every', 'love', 'please']
     bot_array = []
     user_array = []
+    #file_path = '/home/chris/PycharmProjects/TwitterBotDetection/twitter_data/final_training_datasets/final_merged.csv'
+    file_path = os.path.abspath('../twitter_data/final_training_datasets/final_merged.csv')
     with \
-            open('final_merged.csv',
+            open(file_path,
                  'r+',
                  encoding="utf-8") as inp:
         reader = csv.DictReader(inp)
@@ -137,8 +142,11 @@ def read_dataset_feature():
 
 
 def main():
-    #features, labels = read_dataset()
-    features, labels = read_dataset_feature()
+    # Uncomment the following line for non feature engineered dataset
+    features, labels = read_dataset()
+
+    # Comment this line for using feature engineering dataset
+    #features, labels = read_dataset_feature()
     features_train, features_test, labels_train, labels_test = train_test_split(
         features,
         labels,
@@ -151,13 +159,15 @@ def main():
     test_transformed = scaler.transform(features_test)
 
     clf_mnb = MultinomialNB(alpha=0.0009)
-    clf_rf = RandomForestClassifier(random_state=53)
-    clf_dt = DecisionTreeClassifier(random_state=10)
+    clf_rf = RandomForestClassifier(random_state=0)
+    clf_dt = DecisionTreeClassifier(random_state=0)
 
+    # Use features_train, transformed features for training with normal data or scaled data respectively
     clf_mnb.fit(transformed_features, labels_train)
     clf_rf.fit(transformed_features, labels_train)
     clf_dt.fit(transformed_features, labels_train)
 
+    # Use features_test, test_transformed for testing with normal data or scaled data respectively
     predicted_mnb = clf_mnb.predict(test_transformed)
     predicted_rf = clf_rf.predict(test_transformed)
     predicted_dt = clf_dt.predict(test_transformed)
