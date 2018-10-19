@@ -358,10 +358,13 @@ def main():
     print('Accuracy Decision Tree with scaling and feature engineering and random state 53: ' + str(accuracy_dt))
 
     # Pandas dataframes for displaying consolidated results
+    print('========================ACCURACY GROUPED BY CLASSIFIER============================')
     d = {'MNB': mnb_accuracy, 'Random Forest': rf_accuracy, 'Decision Tree': dt_accuracy}
     df = pd.DataFrame(data=d)
     print(df)
+    print('==================================================================================')
 
+    print('========================ACCURACY GROUPED BY METHOD============================')
     d_transpose = {'Normal Data:RS-0': norm_feature_0, 'Scaled Data:RS-0': scaled_feature_0,
                    'Normal Data:RS-53': norm_feature_53, 'Scaled Data:RS-53': scaled_feature_53,
                    'FE Data:RS-0:': fe_norm_feature_0, 'FE Scaled Data:RS-0': fe_scaled_feature_0,
@@ -370,7 +373,9 @@ def main():
     pd.set_option('display.max_columns', None)
     df_transpose = pd.DataFrame(data=d_transpose)
     print(df_transpose)
+    print('==================================================================================')
 
+    print('Row 0: MNB, Row 1: Random Forest, Row 2: Decision Tree')
 
 if __name__ == '__main__':
     main()
