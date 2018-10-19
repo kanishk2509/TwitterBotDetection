@@ -1,6 +1,7 @@
 from sklearn.model_selection import train_test_split
 import csv
 import os
+import pandas as pd
 from copy import deepcopy
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -141,50 +142,41 @@ def read_dataset_feature():
     return features, labels
 
 
-def main():
-    # Uncomment the following line for non feature engineered dataset
-    features, labels = read_dataset()
+def classify(train_features, train_labels, test_features, test_labels, randomstate=0):
+    """
+    This function classifies the features and labels on the Multinomial Naive Bayes, Random Forest and Decision Tree
 
-    # Comment this line for using feature engineering dataset
-    #features, labels = read_dataset_feature()
-    features_train, features_test, labels_train, labels_test = train_test_split(
-        features,
-        labels,
-        test_size=0.1,  # use 10% for testing
-        random_state=0)
+    :param train_features: Training features
+    :param train_labels: Training labels
+    :param test_features: Test features
+    :param test_labels: Test labels
+    :param randomstate: Random state value to be passed to the decision tree and random forest for consistency in results
 
-    scaler = MinMaxScaler()
-    scaler.fit(features_train)
-    transformed_features = scaler.transform(features_train)
-    test_transformed = scaler.transform(features_test)
+    :return: Accuracy value
+    """
 
     clf_mnb = MultinomialNB(alpha=0.0009)
-    clf_rf = RandomForestClassifier(random_state=0)
-    clf_dt = DecisionTreeClassifier(random_state=0)
+    clf_rf = RandomForestClassifier(random_state=randomstate)
+    clf_dt = DecisionTreeClassifier(random_state=randomstate)
 
-    # Use features_train, transformed features for training with normal data or scaled data respectively
-    clf_mnb.fit(transformed_features, labels_train)
-    clf_rf.fit(transformed_features, labels_train)
-    clf_dt.fit(transformed_features, labels_train)
+    clf_mnb.fit(train_features, train_labels)
+    clf_rf.fit(train_features, train_labels)
+    clf_dt.fit(train_features, train_labels)
 
     # Use features_test, test_transformed for testing with normal data or scaled data respectively
-    predicted_mnb = clf_mnb.predict(test_transformed)
-    predicted_rf = clf_rf.predict(test_transformed)
-    predicted_dt = clf_dt.predict(test_transformed)
+    predicted_mnb = clf_mnb.predict(test_features)
+    predicted_rf = clf_rf.predict(test_features)
+    predicted_dt = clf_dt.predict(test_features)
 
-    accuracy_mnb = metrics.accuracy_score(labels_test, predicted_mnb)
-    accuracy_rf = metrics.accuracy_score(labels_test, predicted_rf)
-    accuracy_dt = metrics.accuracy_score(labels_test, predicted_dt)
+    accuracy_mnb = metrics.accuracy_score(test_labels, predicted_mnb)
+    accuracy_rf = metrics.accuracy_score(test_labels, predicted_rf)
+    accuracy_dt = metrics.accuracy_score(test_labels, predicted_dt)
 
-    print('Accuracy Naive Bayes' + str(accuracy_mnb))
-    print('Accuracy Random Forest' + str(accuracy_rf))
-    print('Accuracy Decision Tree' + str(accuracy_dt))
-
-    fpr_rf, tpr_rf, threshold_rf = roc_curve(labels_test, predicted_rf)
+    fpr_rf, tpr_rf, threshold_rf = roc_curve(test_labels, predicted_rf)
     roc_auc_rf = auc(fpr_rf, tpr_rf)
-    fpr_dt, tpr_dt, threshold_dt = roc_curve(labels_test, predicted_dt)
+    fpr_dt, tpr_dt, threshold_dt = roc_curve(test_labels, predicted_dt)
     roc_auc_dt = auc(fpr_dt, tpr_dt)
-    fpr_nb, tpr_nb, threshold_nb = roc_curve(labels_test, predicted_mnb)
+    fpr_nb, tpr_nb, threshold_nb = roc_curve(test_labels, predicted_mnb)
     roc_auc_nb = auc(fpr_nb, tpr_nb)
     plt.title('Receiver Operating Characteristic')
     plt.plot(fpr_rf, tpr_rf, 'b', label='Random Forest AUC = %0.2f' % roc_auc_rf)
@@ -197,6 +189,187 @@ def main():
     plt.ylabel('True Positive Rate')
     plt.xlabel('False Positive Rate')
     plt.show()
+
+    return accuracy_mnb, accuracy_rf, accuracy_dt
+
+
+def main():
+    """
+    In this function the prefix fe stands for feature engineered, mnb for multinomial bayes,
+    rf for random forest, dt for decision tree. Scaled stands for variables related to scaled data.
+    :return:
+    """
+
+    # Accuracy by classifier
+    mnb_accuracy = []
+    rf_accuracy = []
+    dt_accuracy = []
+
+    # accuracy arrays
+    # no feature engineering with random state 0
+    norm_feature_0 = []
+    scaled_feature_0 = []
+
+    norm_feature_53 = []
+    scaled_feature_53 = []
+
+    fe_norm_feature_0 = []
+    fe_scaled_feature_0 = []
+
+    fe_norm_feature_53 = []
+    fe_scaled_feature_53 = []
+
+    # Uncomment the followin line for using non feature engineering dataset
+    features, labels = read_dataset()
+    features_train, features_test, labels_train, labels_test = train_test_split(
+        features,
+        labels,
+        test_size=0.1,  # use 10% for testing
+        random_state=0)
+
+    # Uncomment the following line for using feature engineered dataset
+    fe_features, fe_labels = read_dataset_feature()
+
+    fe_features_train, fe_features_test, fe_labels_train, fe_labels_test = train_test_split(
+        fe_features,
+        fe_labels,
+        test_size=0.1,  # use 10% for testing
+        random_state=0)
+
+    scaler = MinMaxScaler()
+    scaler.fit(features_train)
+    transformed_train_features = scaler.transform(features_train)
+    transformed_test_features = scaler.transform(features_test)
+
+    fe_scaler = MinMaxScaler()
+    fe_scaler.fit(fe_features)
+    fe_transformed_train_features = fe_scaler.transform(fe_features_train)
+    fe_transformed_test_features =fe_scaler.transform(fe_features_test)
+
+
+
+
+    # Use features_train, transformed features for training with normal data or scaled data respectively
+
+    accuracy_mnb, accuracy_rf, accuracy_dt = classify(features_train, labels_train,
+                                                      features_test, labels_test,
+                                                      randomstate=0)
+    mnb_accuracy.append(accuracy_mnb)
+    rf_accuracy.append(accuracy_rf)
+    dt_accuracy.append(accuracy_dt)
+    norm_feature_0.append(accuracy_mnb)
+    norm_feature_0.append(accuracy_rf)
+    norm_feature_0.append(accuracy_dt)
+    print('Accuracy Naive Bayes with normal features and random state 0: ' + str(accuracy_mnb))
+    print('Accuracy Random Forest with normal features and random state 0: ' + str(accuracy_rf))
+    print('Accuracy Decision Tree with normal features and random state 0' + str(accuracy_dt))
+
+    accuracy_mnb, accuracy_rf, accuracy_dt = classify(transformed_train_features, labels_train,
+                                                      transformed_test_features, labels_test,
+                                                      randomstate=0)
+    mnb_accuracy.append(accuracy_mnb)
+    rf_accuracy.append(accuracy_rf)
+    dt_accuracy.append(accuracy_dt)
+    scaled_feature_0.append(accuracy_mnb)
+    scaled_feature_0.append(accuracy_rf)
+    scaled_feature_0.append(accuracy_dt)
+    print('Accuracy Naive Bayes with scaled features and random state 0: ' + str(accuracy_mnb))
+    print('Accuracy Random Forest with scaled features and random state 0: ' + str(accuracy_rf))
+    print('Accuracy Decision Tree with scaled features and random state 0: ' + str(accuracy_dt))
+
+
+    accuracy_mnb, accuracy_rf, accuracy_dt = classify(features_train, labels_train,
+                                                      features_test,  labels_test,
+                                                      randomstate=53)
+    mnb_accuracy.append(accuracy_mnb)
+    rf_accuracy.append(accuracy_rf)
+    dt_accuracy.append(accuracy_dt)
+    norm_feature_53.append(accuracy_mnb)
+    norm_feature_53.append(accuracy_rf)
+    norm_feature_53.append(accuracy_dt)
+    print('Accuracy Naive Bayes with normal features and random state 53: ' + str(accuracy_mnb))
+    print('Accuracy Random Forest with normal features and random state 53: ' + str(accuracy_rf))
+    print('Accuracy Decision Tree with normal features and random state 53' + str(accuracy_dt))
+
+    accuracy_mnb, accuracy_rf, accuracy_dt = classify(transformed_train_features, labels_train,
+                                                      transformed_test_features, labels_test,
+                                                      randomstate=53)
+    mnb_accuracy.append(accuracy_mnb)
+    rf_accuracy.append(accuracy_rf)
+    dt_accuracy.append(accuracy_dt)
+    scaled_feature_53.append(accuracy_mnb)
+    scaled_feature_53.append(accuracy_rf)
+    scaled_feature_53.append(accuracy_dt)
+    print('Accuracy Naive Bayes with scaled features and random state 53: ' + str(accuracy_mnb))
+    print('Accuracy Random Forest with scaled features and random state 53: ' + str(accuracy_rf))
+    print('Accuracy Decision Tree with scaled features and random state 53: ' + str(accuracy_dt))
+
+    # Accuracies with feature engineered data
+    accuracy_mnb, accuracy_rf, accuracy_dt = classify(fe_features_train, labels_train,
+                                                      fe_features_test, labels_test,
+                                                      randomstate=0)
+    mnb_accuracy.append(accuracy_mnb)
+    rf_accuracy.append(accuracy_rf)
+    dt_accuracy.append(accuracy_dt)
+    fe_norm_feature_0.append(accuracy_mnb)
+    fe_norm_feature_0.append(accuracy_rf)
+    fe_norm_feature_0.append(accuracy_dt)
+    print('Accuracy Naive Bayes with feature engineering and random state 0: ' + str(accuracy_mnb))
+    print('Accuracy Random Forest with feature engineering and random state 0: ' + str(accuracy_rf))
+    print('Accuracy Decision Tree with feature engineering and random state 0' + str(accuracy_dt))
+
+    accuracy_mnb, accuracy_rf, accuracy_dt = classify(fe_transformed_train_features, labels_train,
+                                                      fe_transformed_test_features, labels_test,
+                                                      randomstate=0)
+    mnb_accuracy.append(accuracy_mnb)
+    rf_accuracy.append(accuracy_rf)
+    dt_accuracy.append(accuracy_dt)
+    fe_scaled_feature_0.append(accuracy_mnb)
+    fe_scaled_feature_0.append(accuracy_rf)
+    fe_scaled_feature_0.append(accuracy_dt)
+    print('Accuracy Naive Bayes with scaling and feature engineering and random state 0: ' + str(accuracy_mnb))
+    print('Accuracy Random Forest with scaling and feature engineering and random state 0: ' + str(accuracy_rf))
+    print('Accuracy Decision Tree with scaling and feature engineering and random state 0: ' + str(accuracy_dt))
+
+    accuracy_mnb, accuracy_rf, accuracy_dt = classify(fe_features_train, labels_train,
+                                                      fe_features_test, labels_test,
+                                                      randomstate=53)
+    mnb_accuracy.append(accuracy_mnb)
+    rf_accuracy.append(accuracy_rf)
+    dt_accuracy.append(accuracy_dt)
+    fe_norm_feature_53.append(accuracy_mnb)
+    fe_norm_feature_53.append(accuracy_rf)
+    fe_norm_feature_53.append(accuracy_dt)
+    print('Accuracy Naive Bayes with feature engineering and random state 53: ' + str(accuracy_mnb))
+    print('Accuracy Random Forest with feature engineering and random state 53: ' + str(accuracy_rf))
+    print('Accuracy Decision Tree with feature engineering and random state 53' + str(accuracy_dt))
+
+    accuracy_mnb, accuracy_rf, accuracy_dt = classify(fe_transformed_train_features, labels_train,
+                                                      fe_transformed_test_features, labels_test,
+                                                      randomstate=53)
+    mnb_accuracy.append(accuracy_mnb)
+    rf_accuracy.append(accuracy_rf)
+    dt_accuracy.append(accuracy_dt)
+    fe_scaled_feature_53.append(accuracy_mnb)
+    fe_scaled_feature_53.append(accuracy_rf)
+    fe_scaled_feature_53.append(accuracy_dt)
+    print('Accuracy Naive Bayes with scaling and feature engineering and random state 53: ' + str(accuracy_mnb))
+    print('Accuracy Random Forest with scaling and feature engineering and random state 53: ' + str(accuracy_rf))
+    print('Accuracy Decision Tree with scaling and feature engineering and random state 53: ' + str(accuracy_dt))
+
+    # Pandas dataframes for displaying consolidated results
+    d = {'MNB': mnb_accuracy, 'Random Forest': rf_accuracy, 'Decision Tree': dt_accuracy}
+    df = pd.DataFrame(data=d)
+    print(df)
+
+    d_transpose = {'Normal Data:RS-0': norm_feature_0, 'Scaled Data:RS-0': scaled_feature_0,
+                   'Normal Data:RS-53': norm_feature_53, 'Scaled Data:RS-53': scaled_feature_53,
+                   'FE Data:RS-0:': fe_norm_feature_0, 'FE Scaled Data:RS-0': fe_scaled_feature_0,
+                   'FE Data:RS-53': fe_norm_feature_53, 'FE Scaled Data:RS-53': fe_scaled_feature_53}
+
+    pd.set_option('display.max_columns', None)
+    df_transpose = pd.DataFrame(data=d_transpose)
+    print(df_transpose)
 
 
 if __name__ == '__main__':
