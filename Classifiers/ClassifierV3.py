@@ -11,6 +11,10 @@ from sklearn import metrics
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import roc_curve, auc
 import matplotlib.pyplot as plt
+import numpy as np
+
+from Classifiers.FeatureImportanceV3 import feature_importance_rf_new, feature_importance_rf_old, \
+    feature_importance_dt_new
 
 
 def read_dataset_with_feature():
@@ -141,12 +145,16 @@ def main():
     test_transformed = scaler.transform(features_test)
 
     clf_mnb = MultinomialNB(alpha=0.0009)
-    clf_rf = RandomForestClassifier(random_state=53)
-    clf_dt = DecisionTreeClassifier(random_state=10)
+    clf_rf = RandomForestClassifier(random_state=0)
+    clf_dt = DecisionTreeClassifier(random_state=0)
 
     clf_mnb.fit(transformed_features, labels_train)
     clf_rf.fit(transformed_features, labels_train)
     clf_dt.fit(transformed_features, labels_train)
+
+    # Finding out feature importance for each classifier
+    # feature_importance_rf_new(features_train, clf_rf)
+    # feature_importance_dt_new(features_train, clf_dt)
 
     predicted_mnb = clf_mnb.predict(test_transformed)
     predicted_rf = clf_rf.predict(test_transformed)

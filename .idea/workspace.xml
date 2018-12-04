@@ -2,20 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ba0c19f-8fea-41a3-b20d-ec773cbcd733" name="Default Changelist" comment="Modified AppendCCE to add spam ratio to existing training dataset.">
-      <change afterPath="$PROJECT_DIR$/ApproachV3/src/spam_metric/model.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ApproachV4/temp_datasets/balanced_dataset_v3_des.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Classifiers/diff.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Classifiers/fssf.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Classifiers/merge.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Classifiers/temp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/kanishksinha.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/kanishksinha.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Classifiers/FeatureImportanceV3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Classifiers/FeatureImportanceV4.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV3/src/BotClassifierV3.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/src/BotClassifierV3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV3/src/counter.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV3/src/counter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/src/BotClassifierV4.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/BotClassifierV4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApproachV4/src/TwitterDataMiner.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApproachV4/src/TwitterDataMiner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Classifiers/classify_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classifiers/ClassifierV3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Classifiers/classify_sentiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classifiers/ClassifierV4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Classifiers/ClassifierV3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classifiers/ClassifierV3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Classifiers/ClassifierV4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classifiers/ClassifierV4.py" afterDir="false" />
     </list>
     <ignored path="model.pkl" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -93,7 +84,7 @@
     <session id="1843260098">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.1" value="5" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.6" value="1" />
@@ -104,10 +95,10 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="csv" value="260" />
+          <entry key="csv" value="262" />
           <entry key="md" value="1" />
           <entry key="p" value="3" />
-          <entry key="py" value="165" />
+          <entry key="py" value="168" />
           <entry key="temp" value="1" />
           <entry key="tr_dataset_v3" value="1" />
           <entry key="txt" value="3" />
@@ -115,18 +106,18 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSV" value="261" />
+          <entry key="CSV" value="263" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="165" />
+          <entry key="Python" value="168" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="csv" value="7" />
-          <entry key="dummy" value="23" />
+          <entry key="dummy" value="25" />
           <entry key="md" value="539" />
-          <entry key="py" value="8795" />
+          <entry key="py" value="9202" />
           <entry key="txt" value="293" />
         </counts>
       </usages-collector>
@@ -134,19 +125,76 @@
         <counts>
           <entry key="CSV" value="7" />
           <entry key="Markdown" value="539" />
-          <entry key="PLAIN_TEXT" value="316" />
-          <entry key="Python" value="8795" />
+          <entry key="PLAIN_TEXT" value="318" />
+          <entry key="Python" value="9202" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="-1287283179">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="csv" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CSV" value="1" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classifiers/ClassifierV3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="130" column="5" selection-start-line="130" selection-start-column="5" selection-end-line="130" selection-end-column="5" />
+            <state relative-caret-position="-62">
+              <caret line="148" column="50" selection-start-line="148" selection-start-column="50" selection-end-line="148" selection-end-column="50" />
+              <folding>
+                <marker date="1539884508857" expanded="true" signature="9059:9062" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classifiers/final_merged.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="14467">
+              <caret line="629" column="10" selection-start-line="629" selection-end-line="629" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Classifiers/varol2017-d.csv">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classifiers/FeatureImportanceV3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1104">
+              <caret line="50" column="57" selection-start-line="50" selection-start-column="57" selection-end-line="50" selection-end-column="57" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classifiers/FeatureImportanceV4.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1150">
+              <caret line="52" column="109" selection-start-line="52" selection-start-column="109" selection-end-line="52" selection-end-column="109" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -157,8 +205,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classifiers/ClassifierV4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-597">
-              <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
+            <state relative-caret-position="3358">
+              <caret line="158" selection-start-line="158" selection-end-line="158" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
               </folding>
@@ -233,11 +281,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/kaggle_data/final_training_datasets/training-dataset-final-v4.csv" />
-        <option value="$PROJECT_DIR$/ApproachV3/src/BotClassifier.py" />
-        <option value="$PROJECT_DIR$/kaggle_data/final_training_datasets/ROC.py" />
-        <option value="$PROJECT_DIR$/requirements.txt" />
-        <option value="$PROJECT_DIR$/__init__.py" />
         <option value="$PROJECT_DIR$/ApproachV4/GetAccountProperties.py" />
         <option value="$PROJECT_DIR$/ApproachV4/BotClassifier.py" />
         <option value="$PROJECT_DIR$/ApproachV4/GetTweetProperties.py" />
@@ -284,6 +327,11 @@
         <option value="$PROJECT_DIR$/Classifiers/classify_dataset.py" />
         <option value="$PROJECT_DIR$/Classifiers/classify_sentiment.py" />
         <option value="$PROJECT_DIR$/ApproachV4/src/BotClassifierV4.py" />
+        <option value="$PROJECT_DIR$/Classifiers/FeatureImportance.py" />
+        <option value="$PROJECT_DIR$/Classifiers/FeatureImportanceV3.py" />
+        <option value="$PROJECT_DIR$/Classifiers/FeatureImportanceV4.py" />
+        <option value="$PROJECT_DIR$/Classifiers/ClassifierV4.py" />
+        <option value="$PROJECT_DIR$/Classifiers/ClassifierV3.py" />
       </list>
     </option>
   </component>
@@ -299,7 +347,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -310,41 +357,18 @@
             <path>
               <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
               <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
-              <item name="ApproachV3" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
-              <item name="ApproachV3" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
-              <item name="ApproachV3" type="462c0819:PsiDirectoryNode" />
-              <item name="temp_datasets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
-              <item name="ApproachV4" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
-              <item name="ApproachV4" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
-              <item name="ApproachV4" type="462c0819:PsiDirectoryNode" />
-              <item name="temp_datasets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
               <item name="Classifiers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
+              <item name="twitter_data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TwitterBotDetection" type="462c0819:PsiDirectoryNode" />
+              <item name="twitter_data" type="462c0819:PsiDirectoryNode" />
+              <item name="final_training_datasets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TwitterBotDetection" type="b2602c69:ProjectViewProjectNode" />
@@ -354,6 +378,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -370,10 +395,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/ApproachV4/temp_datasets" />
-      <recent name="$PROJECT_DIR$/ApproachV3/temp_datasets" />
       <recent name="$PROJECT_DIR$/Classifiers" />
       <recent name="$PROJECT_DIR$/twitter_data/final_training_datasets" />
+      <recent name="$PROJECT_DIR$/ApproachV4/temp_datasets" />
+      <recent name="$PROJECT_DIR$/ApproachV3/temp_datasets" />
       <recent name="$PROJECT_DIR$/twitter_data/final_test_datasets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -396,7 +421,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.BotClassifierV4">
+  <component name="RunManager" selected="Python.classify_dataset">
     <configuration name="BotClassifierV3" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="TwitterBotDetection" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -511,9 +536,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.BotClassifierV4" />
-        <item itemvalue="Python.classify_sentiment" />
         <item itemvalue="Python.classify_dataset" />
+        <item itemvalue="Python.classify_sentiment" />
+        <item itemvalue="Python.BotClassifierV4" />
         <item itemvalue="Python.BotClassifierV3" />
         <item itemvalue="Python.counter" />
       </list>
@@ -529,13 +554,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1536536200391</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Initial Version with Kaggle Data">
-      <created>1536537944426</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1536537944426</updated>
     </task>
     <task id="LOCAL-00003" summary="Initial Version with Kaggle Data">
       <created>1536539166171</created>
@@ -873,7 +891,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539739046765</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Feature engineering to improve classifier accuracy">
+      <created>1539830013221</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1539830013221</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TodoView">
@@ -894,7 +919,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49964765" weight="0.41084337" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49964765" weight="0.61084336" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -955,17 +980,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Feature engineering to improve classifier accuracy" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Classifiers/tr_dataset_v3" />
-    <entry file="file://$PROJECT_DIR$/twitter_data/final_training_datasets/completed_dataset_new_v3.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24242">
-          <caret line="1054" column="35" selection-start-line="1054" selection-start-column="22" selection-end-line="1054" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classifiers/tr_dataset_v3.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classifiers/completed_dataset.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1026,9 +1040,6 @@
     <entry file="file://$PROJECT_DIR$/twitter_data/varol2017-d.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classifiers/varol2017-d.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classifiers/des.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
@@ -1050,9 +1061,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ApproachV3/src/dt_trained_classifier.p">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ApproachV3/src/dt_trained_classifier.p" />
     <entry file="file://$PROJECT_DIR$/ApproachV3/src/FileSplitter.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1086,9 +1095,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="18" column="4" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="25" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1102,9 +1108,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
           <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1115,20 +1118,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classifiers/different.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-14003">
-          <caret line="80" column="28" selection-start-line="80" selection-start-column="22" selection-end-line="80" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classifiers/output_concat.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-31782">
-          <caret line="1" column="205" selection-start-line="1" selection-start-column="195" selection-end-line="1" selection-end-column="205" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Classifiers/different.csv" />
+    <entry file="file://$PROJECT_DIR$/Classifiers/output_concat.csv" />
     <entry file="file://$PROJECT_DIR$/Classifiers/diff.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1748">
@@ -1187,9 +1178,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1138">
           <caret line="96" column="21" selection-start-line="96" selection-start-column="21" selection-end-line="96" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1202,33 +1190,65 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6206">
           <caret line="281" column="17" selection-start-line="281" selection-start-column="17" selection-end-line="281" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classifiers/AppendDescription.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="934">
+          <caret line="52" column="64" selection-start-line="52" selection-start-column="64" selection-end-line="52" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/twitter_data/final_training_datasets/final_merged.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15433" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ApproachV3/src/BotClassifierV3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="28" column="89" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="89" />
+        <state relative-caret-position="437">
+          <caret line="58" column="15" lean-forward="true" selection-start-line="58" selection-start-column="15" selection-end-line="60" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classifiers/ClassifierV3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-62">
+          <caret line="148" column="50" selection-start-line="148" selection-start-column="50" selection-end-line="148" selection-end-column="50" />
+          <folding>
+            <marker date="1539884508857" expanded="true" signature="9059:9062" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classifiers/FeatureImportanceV3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1104">
+          <caret line="50" column="57" selection-start-line="50" selection-start-column="57" selection-end-line="50" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classifiers/FeatureImportanceV4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1150">
+          <caret line="52" column="109" selection-start-line="52" selection-start-column="109" selection-end-line="52" selection-end-column="109" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Classifiers/ClassifierV4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-597">
-          <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
+        <state relative-caret-position="3358">
+          <caret line="158" selection-start-line="158" selection-end-line="158" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classifiers/final_merged.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5296">
-          <caret line="629" column="10" selection-start-line="629" selection-end-line="629" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -1239,25 +1259,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classifiers/AppendDescription.py">
+    <entry file="file://$PROJECT_DIR$/Classifiers/final_merged.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="934">
-          <caret line="52" column="64" selection-start-line="52" selection-start-column="64" selection-end-line="52" selection-end-column="64" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="14467">
+          <caret line="629" column="10" selection-start-line="629" selection-end-line="629" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classifiers/ClassifierV3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="130" column="5" selection-start-line="130" selection-start-column="5" selection-end-line="130" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/Classifiers/varol2017-d.csv">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

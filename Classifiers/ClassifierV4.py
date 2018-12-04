@@ -9,6 +9,9 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import roc_curve, auc
 import matplotlib.pyplot as plt
 
+from Classifiers.FeatureImportanceV4 import feature_importance_rf_new, feature_importance_dt_new, \
+    feature_importance_rf_old, feature_importance_dt_old
+
 
 def read_dataset():
     print("Normal dataset\n")
@@ -157,6 +160,10 @@ def main():
     clf_mnb.fit(transformed_features, labels_train)
     clf_rf.fit(transformed_features, labels_train)
     clf_dt.fit(transformed_features, labels_train)
+
+    # Finding out feature importance for each classifier
+    feature_importance_rf_new(features_train, clf_rf)
+    feature_importance_dt_new(features_train, clf_dt)
 
     predicted_mnb = clf_mnb.predict(test_transformed)
     predicted_rf = clf_rf.predict(test_transformed)
