@@ -85,7 +85,7 @@ The timit corpus reader provides 4 functions and 4 data items.
      race       speaker race (WHT:white, BLK:black, AMR:american indian,
                 SPN:spanish-american, ORN:oriental,???:unknown)
      edu        speaker education level (HS:high school, AS:associate degree,
-                BS:bachelor's degree (BS or BA), MS:master's degree (MS or MA),
+                BS:bachelor's degree (BS or BA), MS:main's degree (MS or MA),
                 PHD:doctorate degree (PhD,JD,MD), ??:unknown)
      comments   comments by the recorder
 

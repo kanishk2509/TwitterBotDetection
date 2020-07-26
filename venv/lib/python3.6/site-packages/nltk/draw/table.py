@@ -58,11 +58,11 @@ class MultiListbox(Frame):
     # Constructor
     #/////////////////////////////////////////////////////////////////
 
-    def __init__(self, master, columns, column_weights=None, cnf={}, **kw):
+    def __init__(self, main, columns, column_weights=None, cnf={}, **kw):
         """
         Construct a new multi-column listbox widget.
 
-        :param master: The widget that should contain the new
+        :param main: The widget that should contain the new
             multi-column listbox.
 
         :param columns: Specifies what columns should be included in
@@ -76,7 +76,7 @@ class MultiListbox(Frame):
             Use ``label_*`` to configure all labels; and ``listbox_*``
             to configure all listboxes.  E.g.:
 
-                >>> mlb = MultiListbox(master, 5, label_foreground='red')
+                >>> mlb = MultiListbox(main, 5, label_foreground='red')
         """
         # If columns was specified as an int, convert it to a list.
         if isinstance(columns, int):
@@ -101,7 +101,7 @@ class MultiListbox(Frame):
         self._column_weights = column_weights
 
         # Configure our widgets.
-        Frame.__init__(self, master, **self.FRAME_CONFIG)
+        Frame.__init__(self, main, **self.FRAME_CONFIG)
         self.grid_rowconfigure(1, weight=1)
         for i, label in enumerate(self._column_names):
             self.grid_columnconfigure(i, weight=column_weights[i])
@@ -297,7 +297,7 @@ class MultiListbox(Frame):
         Configure this widget.  Use ``label_*`` to configure all
         labels; and ``listbox_*`` to configure all listboxes.  E.g.:
 
-                >>> mlb = MultiListbox(master, 5)
+                >>> mlb = MultiListbox(main, 5)
                 >>> mlb.configure(label_foreground='red')
                 >>> mlb.configure(listbox_foreground='red')
         """
@@ -572,15 +572,15 @@ class Table(object):
         table.  Each element of _rows is a row value, i.e., a list of
         cell values, one for each column in the row.
     """
-    def __init__(self, master, column_names, rows=None,
+    def __init__(self, main, column_names, rows=None,
                  column_weights=None,
                  scrollbar=True, click_to_sort=True,
                  reprfunc=None, cnf={}, **kw):
         """
         Construct a new Table widget.
 
-        :type master: Tkinter.Widget
-        :param master: The widget that should contain the new table.
+        :type main: Tkinter.Widget
+        :param main: The widget that should contain the new table.
         :type column_names: list(str)
         :param column_names: A list of names for the columns; these
             names will be used to create labels for each column;
@@ -609,7 +609,7 @@ class Table(object):
         """
         self._num_columns = len(column_names)
         self._reprfunc = reprfunc
-        self._frame = Frame(master)
+        self._frame = Frame(main)
 
         self._column_name_to_index = dict((c,i) for (i,c) in
                                           enumerate(column_names))

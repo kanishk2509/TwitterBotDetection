@@ -29,7 +29,7 @@ class FigureCanvasTkCairo(FigureCanvasCairo, FigureCanvasTk):
             [2, 1, 0, 3] if sys.byteorder == "little" else [1, 2, 3, 0],
             axis=2)
         tkagg.blit(self._tkphoto, buf, colormode=2)
-        self._master.update_idletasks()
+        self._main.update_idletasks()
 
 
 @_BackendTk.export

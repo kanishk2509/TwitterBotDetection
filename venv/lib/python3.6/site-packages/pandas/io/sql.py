@@ -1486,7 +1486,7 @@ class SQLiteDatabase(PandasSQL):
         # esc_name = escape(name)
 
         wld = '?'
-        query = ("SELECT name FROM sqlite_master "
+        query = ("SELECT name FROM sqlite_main "
                  "WHERE type='table' AND name=%s;") % wld
 
         return len(self.execute(query, [name, ]).fetchall()) > 0

@@ -11,7 +11,7 @@ Functions
 ## License for the Python wrapper
 ## ==============================
 
-## Copyright (c) 2004 David M. Cooke <cookedm@physics.mcmaster.ca>
+## Copyright (c) 2004 David M. Cooke <cookedm@physics.mcmain.ca>
 
 ## Permission is hereby granted, free of charge, to any person obtaining a
 ## copy of this software and associated documentation files (the "Software"),

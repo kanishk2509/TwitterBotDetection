@@ -401,9 +401,9 @@ class WordOccurrenceAccumulator(WindowedTextsAnalyzer):
 
 
 class PatchedWordOccurrenceAccumulator(WordOccurrenceAccumulator):
-    """Monkey patched for multiprocessing worker usage, to move some of the logic to the master process."""
+    """Monkey patched for multiprocessing worker usage, to move some of the logic to the main process."""
     def _iter_texts(self, texts):
-        return texts  # master process will handle this
+        return texts  # main process will handle this
 
 
 class ParallelWordOccurrenceAccumulator(WindowedTextsAnalyzer):
@@ -566,7 +566,7 @@ class AccumulatingWorker(mp.Process):
         except Exception:
             logger.exception("worker encountered unexpected exception")
         finally:
-            self.reply_to_master()
+            self.reply_to_main()
 
     def _run(self):
         batch_num = -1
@@ -588,8 +588,8 @@ class AccumulatingWorker(mp.Process):
             "finished all batches; %d documents processed (%d virtual)",
             n_docs, self.accumulator.num_docs)
 
-    def reply_to_master(self):
-        logger.info("serializing accumulator to return to master...")
+    def reply_to_main(self):
+        logger.info("serializing accumulator to return to main...")
         self.output_q.put(self.accumulator, block=False)
         logger.info("accumulator serialized")
 

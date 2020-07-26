@@ -975,14 +975,14 @@ class Path(object):
 
 
 def get_path_collection_extents(
-        master_transform, paths, transforms, offsets, offset_transform):
+        main_transform, paths, transforms, offsets, offset_transform):
     """
     Given a sequence of :class:`Path` objects,
     :class:`~matplotlib.transforms.Transform` objects and offsets, as
     found in a :class:`~matplotlib.collections.PathCollection`,
     returns the bounding box that encapsulates all of them.
 
-    *master_transform* is a global transformation to apply to all paths
+    *main_transform* is a global transformation to apply to all paths
 
     *paths* is a sequence of :class:`Path` instances.
 
@@ -1005,7 +1005,7 @@ def get_path_collection_extents(
     if len(paths) == 0:
         raise ValueError("No paths provided")
     return Bbox.from_extents(*_path.get_path_collection_extents(
-        master_transform, paths, np.atleast_3d(transforms),
+        main_transform, paths, np.atleast_3d(transforms),
         offsets, offset_transform))
 
 

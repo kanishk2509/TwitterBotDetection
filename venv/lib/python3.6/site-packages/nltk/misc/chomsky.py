@@ -3,7 +3,7 @@
 
 """
 CHOMSKY is an aid to writing linguistic papers in the style
-of the great master.  It is based on selected phrases taken
+of the great main.  It is based on selected phrases taken
 from actual books and articles written by Noam Chomsky.
 Upon request, it assembles the phrases in the elegant
 stylistic patterns that Chomsky is noted for.

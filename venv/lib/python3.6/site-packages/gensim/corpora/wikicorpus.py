@@ -427,7 +427,7 @@ def init_to_ignore_interrupt():
 
     Warnings
     --------
-    Should only be used when master is prepared to handle termination of
+    Should only be used when main is prepared to handle termination of
     child processes.
 
     """

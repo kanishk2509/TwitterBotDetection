@@ -835,10 +835,10 @@ def typecheck(expressions, signature=None):
     :param signature: dict that maps variable names to types (or string
     representations of types)
     """
-    #typecheck and create master signature
+    #typecheck and create main signature
     for expression in expressions:
         signature = expression.typecheck(signature)
-    #apply master signature to all expressions
+    #apply main signature to all expressions
     for expression in expressions[:-1]:
         expression.typecheck(signature)
     return signature

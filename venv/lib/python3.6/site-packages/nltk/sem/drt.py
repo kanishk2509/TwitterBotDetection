@@ -930,31 +930,31 @@ class DrsDrawer(object):
         :param size_canvas: bool, True if the canvas size should be the exact size of the DRS
         :param canvas: ``Canvas`` The canvas on which to draw the DRS.  If none is given, create a new canvas.
         """
-        master = None
+        main = None
         if not canvas:
-            master = Tk()
-            master.title("DRT")
+            main = Tk()
+            main.title("DRT")
 
             font = Font(family='helvetica', size=12)
 
             if size_canvas:
-                canvas = Canvas(master, width=0, height=0)
+                canvas = Canvas(main, width=0, height=0)
                 canvas.font = font
                 self.canvas = canvas
                 (right, bottom) = self._visit(drs, self.OUTERSPACE, self.TOPSPACE)
 
                 width = max(right+self.OUTERSPACE, 100)
                 height = bottom+self.OUTERSPACE
-                canvas = Canvas(master, width=width, height=height)#, bg='white')
+                canvas = Canvas(main, width=width, height=height)#, bg='white')
             else:
-                canvas = Canvas(master, width=300, height=300)
+                canvas = Canvas(main, width=300, height=300)
 
             canvas.pack()
             canvas.font = font
 
         self.canvas = canvas
         self.drs = drs
-        self.master = master
+        self.main = main
 
     def _get_text_height(self):
         """Get the height of a line of text"""
@@ -964,8 +964,8 @@ class DrsDrawer(object):
         """Draw the DRS"""
         self._handle(self.drs, self._draw_command, x, y)
 
-        if self.master and not in_idle():
-            self.master.mainloop()
+        if self.main and not in_idle():
+            self.main.mainloop()
         else:
             return self._visit(self.drs, x, y)
 

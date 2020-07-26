@@ -2257,7 +2257,7 @@ class ColorizedList(object):
 ##//////////////////////////////////////////////////////
 
 class MutableOptionMenu(Menubutton):
-    def __init__(self, master, values, **options):
+    def __init__(self, main, values, **options):
         self._callback = options.get('command')
         if 'command' in options: del options['command']
 
@@ -2270,7 +2270,7 @@ class MutableOptionMenu(Menubutton):
               "indicatoron": 1, "relief": RAISED, "anchor": "c",
               "highlightthickness": 2}
         kw.update(options)
-        Widget.__init__(self, master, "menubutton", kw)
+        Widget.__init__(self, main, "menubutton", kw)
         self.widgetName = 'tk_optionMenu'
         self._menu = Menu(self, name="menu", tearoff=0,)
         self.menuname = self._menu._w

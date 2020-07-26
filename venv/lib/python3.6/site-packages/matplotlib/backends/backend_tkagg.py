@@ -11,12 +11,12 @@ class FigureCanvasTkAgg(FigureCanvasAgg, FigureCanvasTk):
     def draw(self):
         super(FigureCanvasTkAgg, self).draw()
         tkagg.blit(self._tkphoto, self.renderer._renderer, colormode=2)
-        self._master.update_idletasks()
+        self._main.update_idletasks()
 
     def blit(self, bbox=None):
         tkagg.blit(
             self._tkphoto, self.renderer._renderer, bbox=bbox, colormode=2)
-        self._master.update_idletasks()
+        self._main.update_idletasks()
 
 
 @cbook.deprecated("2.2")

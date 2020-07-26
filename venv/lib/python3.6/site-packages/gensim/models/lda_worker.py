@@ -4,7 +4,7 @@
 # Copyright (C) 2011 Radim Rehurek <radimrehurek@seznam.cz>
 # Licensed under the GNU LGPL v2.1 - http://www.gnu.org/licenses/lgpl.html
 
-"""Worker ("slave") process used in computing distributed Latent Dirichlet Allocation
+"""Worker ("subordinate") process used in computing distributed Latent Dirichlet Allocation
 (LDA, :class:`~gensim.models.ldamodel.LdaModel`).
 
 Run this script on every node in your cluster. If you wish, you may even run it multiple times on a single machine,

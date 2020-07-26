@@ -1710,7 +1710,7 @@ class RendererPdf(RendererBase):
             gc.get_sketch_params())
         self.file.output(self.gc.paint())
 
-    def draw_path_collection(self, gc, master_transform, paths, all_transforms,
+    def draw_path_collection(self, gc, main_transform, paths, all_transforms,
                              offsets, offsetTrans, facecolors, edgecolors,
                              linewidths, linestyles, antialiaseds, urls,
                              offset_position):
@@ -1752,7 +1752,7 @@ class RendererPdf(RendererBase):
 
         if (not can_do_optimization) or (not should_do_optimization):
             return RendererBase.draw_path_collection(
-                self, gc, master_transform, paths, all_transforms,
+                self, gc, main_transform, paths, all_transforms,
                 offsets, offsetTrans, facecolors, edgecolors,
                 linewidths, linestyles, antialiaseds, urls,
                 offset_position)
@@ -1760,7 +1760,7 @@ class RendererPdf(RendererBase):
         padding = np.max(linewidths)
         path_codes = []
         for i, (path, transform) in enumerate(self._iter_collection_raw_paths(
-                master_transform, paths, all_transforms)):
+                main_transform, paths, all_transforms)):
             name = self.file.pathCollectionObject(
                 gc, path, transform, padding, filled, stroked)
             path_codes.append(name)
@@ -1769,7 +1769,7 @@ class RendererPdf(RendererBase):
         output(*self.gc.push())
         lastx, lasty = 0, 0
         for xo, yo, path_id, gc0, rgbFace in self._iter_collection(
-                gc, master_transform, all_transforms, path_codes, offsets,
+                gc, main_transform, all_transforms, path_codes, offsets,
                 offsetTrans, facecolors, edgecolors, linewidths, linestyles,
                 antialiaseds, urls, offset_position):
 
